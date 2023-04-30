@@ -10,6 +10,8 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment.prod';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { environment } from 'src/environments/environment.prod';
     IconComponent,
     MainComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    CategoriesComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
