@@ -1,0 +1,23 @@
+@import "../../../styles";
+
+@mixin setWidthHeight($size) {
+  width: $size + rem;
+  height: $size + rem;
+}
+
+.icon {
+  cursor: pointer;
+  display: inline-block;
+
+  &--small {
+    @include setWidthHeight(2);
+  }
+
+  &--medium {
+    @include setWidthHeight(2.8);
+  }
+
+  &--big {
+    @include setWidthHeight(3.6);
+  }
+}

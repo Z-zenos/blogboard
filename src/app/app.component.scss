@@ -1,0 +1,8 @@
+@import "../styles";
+
+.board {
+  &__body {
+    display: grid;
+    grid-template-columns: 10% 90%;
+  }
+}

@@ -1,1 +1,210 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,700&display=swap');
+
+/* COLOR */
+$primary-color: #1fbc0e;
+$secondary-color: #dff7dc;
+$tertiary-color: #f9f9f9;
+$text-color: #3c3c3b;
+
+$green-1: rgb(0, 255, 0);
+
+$black-color: #000;
+
+/* TEXT */
+$huge-text: 6.4rem;
+$big-text: 3.2rem;
+$medium-text: 2rem;
+$small-text: 1.6rem;
+$tip-text: 1.2rem;
+
+$border: 1.5px solid $black-color;
+$transition: all .3s ease;
+
+body {
+  font-family: "Space Mono", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+a {
+  font-size: 1.5rem;
+}
+
+.img-icon {
+  width: 2rem;
+  height: auto;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.tool-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+  cursor: pointer;
+}
+
+.bl__heading {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  &--big {
+    font-weight: 700;
+    font-size: $big-text;
+    text-transform: uppercase;
+  }
+
+  &--medium {
+    font-size: $small-text;
+    opacity: .6;
+  }
+}
+
+@mixin center-item {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin limit-line($line) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $line; /* number of lines to show */
+  line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+html, body { height: 100%; }
+
+.primary-text {
+  font-weight: 600;
+  color: $primary-color;
+}
+
+.bl__logo {
+  font-size: $big-text;
+  font-weight: 700;
+  color: $primary-color;
+}
+
+.btn {
+  color: white;
+  font-weight: 600;
+  font-size: $small-text;
+  border: 2px solid $primary-color;
+  transition: $transition;
+  cursor: pointer !important;
+  padding: 1rem 2rem;
+  margin: 0 10px;
+
+  border-radius: 30px;
+  box-shadow: $green-1 4px 4px 0 0;
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+
+  &:hover {
+    background-color: white !important;
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+
+  &:active {
+    box-shadow: $green-1 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  &--green {
+    background-color: $primary-color;
+  }
+
+  &--yellow {
+    background-color: orange;
+    border-color: orange;
+    box-shadow: yellow 4px 4px 0 0;
+  
+    &:hover {
+      color: orange;
+      border-color: orange;
+    }
+  }
+}
+
+.text-half-highlight {
+  display: inline-block;
+  background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
+  transition: all 120ms ease-in-out 0s;
+  background-size: 100% 200%;
+  background-position: 0px 0px;
+  word-break: break-word;
+
+  &:hover {
+    background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
+    background-position: 0px 100%;
+  }
+}
+
+.text-two-line {
+  overflow: hidden;
+  text-align: center;
+  font-size: $big-text;
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.text-two-line::before,
+.text-two-line::after {
+  background-color: rgba($primary-color, 0.7);
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.text-two-line::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.text-two-line::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+input {
+  border: 1px solid #ccc;
+  background-color: white;
+  color: $text-color;
+  display: block;
+  line-height: 1.6rem;
+  outline: none;
+  padding: .7rem 2rem;
+  border-radius: 4px;
+  
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: $green-1 0px 0px 0px 4px;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
