@@ -13,6 +13,7 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('dragText', { static: false }) dragText!: ElementRef;
 
   file!: File | undefined;
+  imgUrl: string = '';
   form!: FormGroup;
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
@@ -20,6 +21,7 @@ export class CategoryFormComponent implements OnInit {
   constructor(private _fb: FormBuilder) { }
 
   ngOnInit(): void {
+    // logo of image will be saved based 64
     this.form = this._fb.group({
       logo: ['', Validators.required],
       name: ['', Validators.required]
@@ -27,10 +29,11 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
-
+    if (!this.form.valid) return;
+    this.form.value.logo = this.imgUrl ?? this.file?.name;
     // Clear input
     this.form.reset();
+    this.file = undefined;
   }
 
   onClose(): void {
@@ -45,7 +48,6 @@ export class CategoryFormComponent implements OnInit {
     // Getting user select file and [0] this means if user select multiple files then we'll select only the first one
     // @ts-ignore
     this.file = (e.target as HTMLInputElement).files[0];
-    console.log(this.file);
     this.dropArea.nativeElement.classList.add('active');
     this.showFile();
   }
@@ -70,14 +72,10 @@ export class CategoryFormComponent implements OnInit {
     // Getting user select file and [0] means if user select multiple files then we'll  select only the first one.
     // @ts-ignore
     this.file = e.dataTransfer.files[0];
-
     this.showFile();
   }
 
-
   showFile() {
-    console.log(this.file);
-
     // Getting selected file type
     let fileType = this.file?.type;
 
@@ -90,12 +88,7 @@ export class CategoryFormComponent implements OnInit {
       fileReader.onload = () => {
         // Passing user file source in fileURL variable
         let fileURL = fileReader.result;
-
-        // Creating an img tag and passing user selected file source inside src attr
-        let imgTag = `<img class="ctgr-logo" src="${fileURL}" alt="image" style="height: 90%; width: 90%; border-radius: 6px; object-fit: cover; border-radius: 5px;">`;
-
-        // Adding that created img tag inside dropArea container
-        this.dropArea.nativeElement.innerHTML = imgTag;
+        this.imgUrl = fileURL as string;
       }
       fileReader.readAsDataURL(this.file as File);
     }

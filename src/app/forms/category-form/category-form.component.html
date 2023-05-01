@@ -7,11 +7,14 @@
       <label class="form__label">Logo</label>
       <div class="form__drag-area" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
         (drop)="onDrop($event)">
-        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-        <header #dragText>Drag & Drop</header>
-        <span>OR</span>
-        <button #btnFileImg (click)="browseFileImg()">Browse File</button>
-        <input type="file" hidden #inputFileImg (change)="onChange($event)">
+        <div *ngIf="!file" class="drag">
+          <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <header #dragText>Drag & Drop</header>
+          <span>OR</span>
+          <button #btnFileImg (click)="browseFileImg()">Browse File</button>
+          <input type="file" hidden #inputFileImg (change)="onChange($event)" formControlName="logo">
+        </div>
+        <img *ngIf="file" class="ctgr-logo" [src]="imgUrl" alt="image" class="ctgr-logo">
       </div>
       <p class="hint-text mt-10"><i class="fas fa-circle-info"></i> Drag and drop a new image or click the change
         button to replace the current image.</p>

@@ -46,7 +46,7 @@
     padding: 2rem 0;
     border-top: 1px solid $green-1;
     background-color: $secondary-color;
-    margin-top: 20rem;
+    margin-top: 10rem;
   }
 
   &__drag-area {
@@ -55,7 +55,13 @@
     width: 20rem;
     border-radius: 5px;
     @include center-item();
-    flex-direction: column;
+
+    .drag {
+      width: 100%;
+      height: 100%;
+      @include center-item();
+      flex-direction: column;
+    }
 
     &.active {
       border: 2px solid $green-2;
@@ -104,6 +110,14 @@
     font-weight: 600;
     display: block;
   }
+}
+
+.ctgr-logo {
+  height: 90%; 
+  width: 90%; 
+  border-radius: 6px; 
+  object-fit: cover; 
+  border-radius: 5px;
 }
 
 .ctgr-name {
