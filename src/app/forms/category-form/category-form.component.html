@@ -25,7 +25,9 @@
       <label *ngIf="file" class="form__label mt-10 mb-0" style="margin-bottom: 0;">Info:</label>
       <div *ngIf="file" class="grid grid-cols-2 gap-3 place-items-center place-items-start">
         <div>
-          <p class="indent"><span class="info-text">file</span>: {{ file!.name }},</p>
+          <p class="indent flex items-center"><span class="info-text">file</span>: <span class="limited-text"
+              style="margin-left: .5rem;">{{
+              file!.name }}</span>,</p>
           <p class="indent">
             <span class="info-text">size</span>:
             {{ byteConverter(file!.size, 2) }}

@@ -29,9 +29,10 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.form.valid) return;
     this.form.value.logo = this.imgUrl ?? this.file?.name;
-    // Clear input
+
+    if (!(this.form.value.logo && this.form.value.name)) return;
+
     this.form.reset();
     this.file = undefined;
   }
@@ -56,13 +57,13 @@ export class CategoryFormComponent implements OnInit {
   onDragOver(e: Event) {
     e.preventDefault();
     this.dropArea.nativeElement.classList.add('active');
-    this.dragText.nativeElement.textContent = 'Release';
+    if (this.dragText) this.dragText.nativeElement.textContent = 'Release';
   }
 
   // If user leave dragged file from droparea
   onDragLeave() {
     this.dropArea.nativeElement.classList.remove("active");
-    this.dragText.nativeElement.textContent = "Drag & Drop";
+    if (this.dragText) this.dragText.nativeElement.textContent = "Drag & Drop";
   }
 
   // If user drop file on drop area

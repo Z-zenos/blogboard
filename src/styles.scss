@@ -111,6 +111,14 @@ html, body { height: 100%; }
   font-size: $tip-text;
 }
 
+.limited-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10rem;
+  display: inline-block;
+}
+
 
 
 .bl__logo {
