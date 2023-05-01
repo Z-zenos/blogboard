@@ -1,0 +1,12 @@
+<div class="badge inline-block">
+  <span class="badge__logo">
+    <img class="badge__img" [src]="src">
+  </span>
+  <span class="badge__title" [ngStyle]="{ 
+      'color': getColor(title),
+      'font-weight': 600 
+    }
+  ">
+    {{ title }}
+  </span>
+</div>

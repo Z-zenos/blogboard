@@ -20,7 +20,9 @@
         button to replace the current image.</p>
     </div>
     <div class="ctgr-name">
-      <label class="form__label">New category name</label>
+      <label class="form__label form__label--color">Color</label>
+      <input type="color" placeholder="Color..." formControlName="color" (input)="pickColor($any($event))" />
+      <label class="form__label mt-2">New category name</label>
       <input type="text" placeholder="Python, Dash, Redux..." formControlName="name" />
       <label *ngIf="file" class="form__label mt-10 mb-0" style="margin-bottom: 0;">Info:</label>
       <div *ngIf="file" class="grid grid-cols-2 gap-3 place-items-center place-items-start">
@@ -38,9 +40,10 @@
     </div>
   </div>
   <div class="form__preview">
-    <label class="form__label">Preview</label>
+    <label class="form__label">Preview &lt; Badge | Tag &gt;</label>
     <div class="preview">
-      Test
+      <blog-badge [src]="imgUrl" [title]="form.value.name" [color]="color"></blog-badge>
+      <blog-tag [tagName]="form.value.name" [color]="color"></blog-tag>
     </div>
   </div>
   <div class="form__btns">

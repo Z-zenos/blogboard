@@ -14,6 +14,7 @@ export class CategoryFormComponent implements OnInit {
 
   file!: File | undefined;
   imgUrl: string = '';
+  color: string = '';
   form!: FormGroup;
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
@@ -24,21 +25,27 @@ export class CategoryFormComponent implements OnInit {
     // logo of image will be saved based 64
     this.form = this._fb.group({
       logo: ['', Validators.required],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      color: ['white', Validators.required]
     });
   }
 
   onSubmit(): void {
     this.form.value.logo = this.imgUrl ?? this.file?.name;
 
-    if (!(this.form.value.logo && this.form.value.name)) return;
+    if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) return;
 
     this.form.reset();
     this.file = undefined;
+    this.color = '';
   }
 
   onClose(): void {
     this.closeFormEvent.emit(false);
+  }
+
+  pickColor(e: InputEvent) {
+    this.color = (e.target as HTMLInputElement).value;
   }
 
   browseFileImg() {

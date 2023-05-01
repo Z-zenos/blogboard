@@ -1,0 +1,34 @@
+@import "../../../styles";
+
+.badge {
+  width: 20rem;
+  height: 7rem;
+  border: $border;
+  border-color: $green-1;
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: 30% 65%;
+  column-gap: 5%;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: rgba($green-1, 0.4) 5px 5px;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: rgba($green-1, 0.4) -5px -5px;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &__img {
+    height: 4rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    text-align: left;
+  }
+}

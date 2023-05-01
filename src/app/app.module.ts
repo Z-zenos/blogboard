@@ -14,6 +14,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { SettingComponent } from './components/setting/setting.component';
 import { CategoryFormComponent } from './forms/category-form/category-form.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { BadgeComponent } from './components/badge/badge.component';
+import { TagComponent } from './components/tag/tag.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     SidebarComponent,
     CategoriesComponent,
     SettingComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    BadgeComponent,
+    TagComponent
   ],
   imports: [
     BrowserModule,
