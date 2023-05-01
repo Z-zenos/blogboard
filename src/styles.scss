@@ -14,6 +14,8 @@ $text-color: #3c3c3b;
 $green-1: rgb(0, 255, 0);
 $green-2: rgb(55, 230, 19);
 
+$blue-1: rgb(14, 165, 233);
+
 $black-color: #000;
 
 /* TEXT */
@@ -88,16 +90,39 @@ a {
 
 html, body { height: 100%; }
 
+
+/* ================================================== */
+/*                       TEXT                         */
+/* ================================================== */
+
 .primary-text {
   font-weight: 600;
   color: $primary-color;
 }
+
+.info-text {
+  font-weight: 600;
+  color: $blue-1;
+}
+
+.hint-text {
+  color: $text-color;
+  opacity: .7;
+  font-size: $tip-text;
+}
+
+
 
 .bl__logo {
   font-size: $big-text;
   font-weight: 700;
   color: $primary-color;
 }
+
+
+/* ================================================== */
+/*                       BUTTON                       */
+/* ================================================== */
 
 .btn {
   color: white;
@@ -143,6 +168,17 @@ html, body { height: 100%; }
     &:hover {
       color: orange;
       border-color: orange;
+    }
+  }
+
+  &--blue {
+    background-color: $blue-1;
+    border-color: $blue-1;
+    box-shadow: aquamarine 4px 4px 0 0;
+  
+    &:hover {
+      color: $blue-1;
+      border-color: $blue-1;
     }
   }
 }

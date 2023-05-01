@@ -12,7 +12,7 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('dragArea', { static: false }) dropArea!: ElementRef<HTMLDivElement>;
   @ViewChild('dragText', { static: false }) dragText!: ElementRef;
 
-  file!: File;
+  file!: File | undefined;
   form!: FormGroup;
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
@@ -76,14 +76,16 @@ export class CategoryFormComponent implements OnInit {
 
 
   showFile() {
+    console.log(this.file);
+
     // Getting selected file type
-    let fileType = this.file.type;
+    let fileType = this.file?.type;
 
     // adding some valid image extensions in array
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
 
     // If user selected file is an image file
-    if (validExtensions.includes(fileType)) {
+    if (validExtensions.includes(fileType ?? '')) {
       let fileReader = new FileReader();
       fileReader.onload = () => {
         // Passing user file source in fileURL variable
@@ -95,12 +97,26 @@ export class CategoryFormComponent implements OnInit {
         // Adding that created img tag inside dropArea container
         this.dropArea.nativeElement.innerHTML = imgTag;
       }
-      fileReader.readAsDataURL(this.file);
+      fileReader.readAsDataURL(this.file as File);
     }
     else {
       alert("This is not an image file !");
       this.dropArea.nativeElement.classList.remove("active");
       this.dragText.nativeElement.textContent = "Drag & Drop";
     }
+  }
+
+  byteConverter(bytes: number, decimals: number, only?: string) {
+    const K_UNIT = 1024;
+    const SIZES = ["Bytes", "KB", "MB", "GB", "TB", "PB"];
+
+    if (bytes == 0) return "0 Byte";
+
+    if (only === "MB") return (bytes / (K_UNIT * K_UNIT)).toFixed(decimals) + " MB";
+
+    let i = Math.floor(Math.log(bytes) / Math.log(K_UNIT));
+    let resp = parseFloat((bytes / Math.pow(K_UNIT, i)).toFixed(decimals)) + " " + SIZES[i];
+
+    return resp;
   }
 }

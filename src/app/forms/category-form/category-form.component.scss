@@ -76,7 +76,7 @@
       font-size: $small-text;
       font-weight: 500;
       color: $text-color;
-      margin-top: 2rem;
+      margin-top: 1.2rem;
     }
 
     button {
@@ -89,20 +89,22 @@
       color: $green-2 ;
       border-radius: 5px;
       cursor: pointer;
+      transition: $transition;
+
+      &:hover {
+        background-color: $secondary-color;
+      }
     }
-
-
   }
 
   &__label {
     font-size: $small-text;
-    color: $green-2 ;
+    color: $primary-color ;
     margin-bottom: 1rem;
     font-weight: 600;
     display: block;
   }
 }
-
 
 .ctgr-name {
   place-self: center;
@@ -119,12 +121,4 @@
   height: 20rem;
   border-radius: 10px;
   padding: 2rem;
-}
-
-.ctgr-logo {
-  height: 90%;
-  width: 90%;
-  border-radius: 6px;
-  object-fit: cover;
-  border-radius: 5px;
 }

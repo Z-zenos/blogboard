@@ -3,17 +3,33 @@
     Category Form
   </h2>
   <div class="form__input">
-    <div class="form__drag-area" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
-      (drop)="onDrop($event)">
-      <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-      <header #dragText>Drag & Drop</header>
-      <span>OR</span>
-      <button #btnFileImg (click)="browseFileImg()">Browse File</button>
-      <input type="file" hidden #inputFileImg (change)="onChange($event)">
+    <div>
+      <label class="form__label">Logo</label>
+      <div class="form__drag-area" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+        (drop)="onDrop($event)">
+        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+        <header #dragText>Drag & Drop</header>
+        <span>OR</span>
+        <button #btnFileImg (click)="browseFileImg()">Browse File</button>
+        <input type="file" hidden #inputFileImg (change)="onChange($event)">
+      </div>
+      <p class="hint-text mt-10"><i class="fas fa-circle-info"></i> Drag and drop a new image or click the change
+        button to replace the current image.</p>
     </div>
     <div class="ctgr-name">
       <label class="form__label">New category name</label>
       <input type="text" placeholder="Python, Dash, Redux..." formControlName="name" />
+      <label *ngIf="file" class="form__label mt-10 mb-0" style="margin-bottom: 0;">Info:</label>
+      <div *ngIf="file" class="grid grid-cols-2 gap-3 place-items-center place-items-start">
+        <div>
+          <p class="indent"><span class="info-text">file</span>: {{ file!.name }},</p>
+          <p class="indent">
+            <span class="info-text">size</span>:
+            {{ byteConverter(file!.size, 2) }}
+          </p>
+        </div>
+        <button class="btn btn--blue" (click)="browseFileImg()">Change</button>
+      </div>
     </div>
   </div>
   <div class="form__preview">
