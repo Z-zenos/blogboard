@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+  isDisplayForm: boolean = true;
+
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openForm() {
+    this.isDisplayForm = true;
+  }
+
+  closeForm(isClose: boolean) {
+    this.isDisplayForm = isClose;
   }
 
 }

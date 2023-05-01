@@ -208,3 +208,14 @@ input {
     outline: none;
   }
 }
+
+.form {
+  width: 100rem;
+  height: 60rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 100rem rgba($black-color, .3);
+  padding: 4rem 3rem;
+}

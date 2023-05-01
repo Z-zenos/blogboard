@@ -12,6 +12,8 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment.prod';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { CategoryFormComponent } from './forms/category-form/category-form.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -22,13 +24,15 @@ import { SettingComponent } from './components/setting/setting.component';
     HeaderComponent,
     SidebarComponent,
     CategoriesComponent,
-    SettingComponent
+    SettingComponent,
+    CategoryFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,5 @@
-<p>categories works!</p>
+<div class="category">
+  <button class="btn btn--green" (click)="openForm()">Create new</button>
+
+  <board-category-form *ngIf="isDisplayForm" (closeFormEvent)="closeForm($event)"></board-category-form>
+</div>
