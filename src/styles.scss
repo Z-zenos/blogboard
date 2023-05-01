@@ -12,6 +12,7 @@ $tertiary-color: #f9f9f9;
 $text-color: #3c3c3b;
 
 $green-1: rgb(0, 255, 0);
+$green-2: rgb(55, 230, 19);
 
 $black-color: #000;
 
@@ -210,12 +211,22 @@ input {
 }
 
 .form {
-  width: 100rem;
-  height: 60rem;
+  width: 80rem;
+  height: 80rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 0 100rem rgba($black-color, .3);
-  padding: 4rem 3rem;
+  z-index: 10;
+  background-color: white;
+  border-radius: 10px;
+  overflow: scroll;
+
+  scrollbar-width: none !important;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
 }

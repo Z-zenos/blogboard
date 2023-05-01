@@ -2,7 +2,129 @@
 
 .form {
   &__input {
+    margin-top: 4rem;
     display: grid;
     grid-template-columns: 40% 60%;
+    padding: 8rem 8rem 0;
   }
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $green-2;
+    color: white;
+    font-weight: 600;
+    font-size: 2.4rem;
+    height: 6rem;
+    width: 30rem;
+    @include center-item();
+    border-bottom-right-radius: 20rem;
+  }
+
+  &--ctgr {
+    border: 10px;
+  }
+
+  &__preview {
+    margin: 2rem 0;
+    padding: 0 8rem;
+
+    span {
+      font-weight: 600;
+      font-size: 2rem;
+      color: $green-2 ;
+    }
+  }
+
+  &__btns {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid $green-1;
+    background-color: $secondary-color;
+    margin-top: 20rem;
+  }
+
+  &__drag-area {
+    border: 2px dashed $green-1;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 5px;
+    @include center-item();
+    flex-direction: column;
+
+    &.active {
+      border: 2px solid $green-2;
+    }
+
+    .icon {
+      font-size: $big-text;
+      color: $green-2 ;
+    }
+
+    header {
+      font-size: $small-text;
+      font-weight: 600;
+      color: $green-2 ;
+    }
+
+    span {
+      font-size: $small-text;
+      font-weight: 500;
+      color: $text-color;
+      margin-top: 2rem;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: $small-text;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: $green-2 ;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+  }
+
+  &__label {
+    font-size: $small-text;
+    color: $green-2 ;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: block;
+  }
+}
+
+
+.ctgr-name {
+  place-self: center;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+}
+
+.preview {
+  margin-top: 1rem;
+  border: 2px solid $green-1;
+  height: 20rem;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.ctgr-logo {
+  height: 90%;
+  width: 90%;
+  border-radius: 6px;
+  object-fit: cover;
+  border-radius: 5px;
 }

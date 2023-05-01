@@ -1,14 +1,23 @@
 <form [formGroup]="form" class="form form--ctgr">
+  <h2 class="form__header">
+    Category Form
+  </h2>
   <div class="form__input">
-    <div class="form__upload--img">
-      <input type="file" formControlName="logo">
+    <div class="form__drag-area" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+      (drop)="onDrop($event)">
+      <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+      <header #dragText>Drag & Drop</header>
+      <span>OR</span>
+      <button #btnFileImg (click)="browseFileImg()">Browse File</button>
+      <input type="file" hidden #inputFileImg (change)="onChange($event)">
     </div>
-    <div>
-      <input type="text" placeholder="Enter new category name" formControlName="name" />
+    <div class="ctgr-name">
+      <label class="form__label">New category name</label>
+      <input type="text" placeholder="Python, Dash, Redux..." formControlName="name" />
     </div>
   </div>
   <div class="form__preview">
-    <span>Preview</span>
+    <label class="form__label">Preview</label>
     <div class="preview">
       Test
     </div>
