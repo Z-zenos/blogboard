@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OverlayService } from 'src/app/services/overlay.service';
 
 @Component({
   selector: 'board-category-form',
@@ -19,7 +20,7 @@ export class CategoryFormComponent implements OnInit {
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _overlayService: OverlayService) { }
 
   ngOnInit(): void {
     // logo of image will be saved based 64
@@ -38,6 +39,7 @@ export class CategoryFormComponent implements OnInit {
     this.form.reset();
     this.file = undefined;
     this.color = '';
+    this.onClose();
   }
 
   onClose(): void {

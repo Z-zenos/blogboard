@@ -16,6 +16,7 @@ import { CategoryFormComponent } from './forms/category-form/category-form.compo
 import { ReactiveFormsModule } from "@angular/forms";
 import { BadgeComponent } from './components/badge/badge.component';
 import { TagComponent } from './components/tag/tag.component';
+import { OverlayComponent } from './layouts/overlay/overlay.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TagComponent } from './components/tag/tag.component';
     SettingComponent,
     CategoryFormComponent,
     BadgeComponent,
-    TagComponent
+    TagComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule,

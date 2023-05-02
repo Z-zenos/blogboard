@@ -21,7 +21,6 @@ export class TagComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // @ts-ignore
     this.bgColor = changes.color.currentValue;
-    console.log(this.bgColor);
   }
 
   hover(e: Event, enter: boolean = true) {
