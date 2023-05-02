@@ -19,10 +19,17 @@ export class ToastComponent implements OnInit {
     this._toastService.displayToast$
       .subscribe((toast: IToast) => {
         this.toast = toast;
+        this.toastEl?.nativeElement.classList.add('active', `toast--${toast.type}`);
+        console.log(this.toast);
+
         setTimeout(() => {
           this.toastEl?.nativeElement.classList.remove('active', `toast--${toast.type}`);
-        }, 5000);
+        }, 5100);
       });
+  }
+
+  onClose() {
+    this.toastEl?.nativeElement.classList.remove('active', `toast--${this.toast?.type}`);
   }
 
   // @HostListener('window:beforeunload', ['$event'])

@@ -38,14 +38,22 @@ export class CategoryFormComponent implements OnInit {
 
   async onSubmit() {
     this.form.value.logo = this.imgUrl ?? this.file?.name;
-    if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) return;
 
     try {
+      if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) {
+        throw new Error("Please fill all field.");
+      }
+
+      if ((this.file?.size as number) > (1024 * 1024)) {
+        throw new Error("File size greater 2 MB");
+      };
+
       await this._categoryService.create(this.form.value);
       this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
     }
     catch (e: any) {
-      this._toastService.error("Failure", `Can't add new category. ${e.message}`);
+      console.log(e);
+      this._toastService.error("Failure", `Can't add new category. Message: ${e.message}`);
     }
     finally {
       this.form.reset();
