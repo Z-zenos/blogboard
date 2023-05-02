@@ -19,6 +19,8 @@ export class ToastComponent implements OnInit {
     this._toastService.displayToast$
       .subscribe((toast: IToast) => {
         this.toast = toast;
+        if (!this.toast.type) return;
+
         this.toastEl?.nativeElement.classList.add('active', `toast--${toast.type}`);
 
         setTimeout(() => {

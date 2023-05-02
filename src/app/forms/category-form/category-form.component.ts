@@ -30,17 +30,15 @@ export class CategoryFormComponent implements OnInit {
   ngOnInit(): void {
     // logo of image will be saved based 64
     this.form = this._fb.group({
-      logo: ['', [Validators.required]],
+      logo: ['', Validators.required],
       name: ['', Validators.required],
       color: ['white', Validators.required]
     });
   }
 
   async onSubmit() {
-    this.form.value.logo = this.imgUrl ?? this.file?.name;
-
     try {
-      if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) {
+      if (!this.form.valid) {
         throw new Error("Please fill all field.");
       }
 
@@ -50,16 +48,16 @@ export class CategoryFormComponent implements OnInit {
 
       await this._categoryService.create(this.form.value);
       this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
+      this.onClose();
     }
     catch (e: any) {
-      console.log(e);
       this._toastService.error("Failure", `Can't add new category. Message: ${e.message}`);
     }
     finally {
       this.form.reset();
       this.file = undefined;
       this.color = '';
-      this.onClose();
+      this.imgUrl = '';
     }
   }
 

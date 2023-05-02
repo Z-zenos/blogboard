@@ -52,6 +52,7 @@ $colors: (
   margin: 20px;
   border-radius: 6px;
   column-gap: 4%;
+  z-index: 11;
 
   &.active {
     visibility: visible;
