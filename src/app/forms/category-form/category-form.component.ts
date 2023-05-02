@@ -36,6 +36,10 @@ export class CategoryFormComponent implements OnInit {
     });
   }
 
+  get ctgrFormControl() {
+    return this.form.controls;
+  }
+
   async onSubmit() {
     try {
       if (!this.form.valid) {
