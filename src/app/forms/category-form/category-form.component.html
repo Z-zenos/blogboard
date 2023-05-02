@@ -16,7 +16,7 @@
         </div>
         <img *ngIf="file" class="ctgr-logo" [src]="imgUrl" alt="image" class="ctgr-logo">
       </div>
-      <p class="hint-text mt-10"><i class="fas fa-circle-info"></i> Allowed Extensions: jpeg, jpg, png.</p>
+      <p class="hint-text mt-10"><i class="fas fa-circle-info"></i> Allowed: jpeg, jpg, png.</p>
 
     </div>
     <div class="ctgr-name">
@@ -38,8 +38,7 @@
         <button class="btn btn--blue" (click)="browseFileImg()">Change</button>
       </div>
       <p class="hint-text mt-10" *ngIf="file"><i class="fas fa-circle-info"></i> Drag and drop a new image or click the
-        change
-        button to replace the current image.</p>
+        change button to replace the current image.</p>
     </div>
   </div>
   <div class="form__preview">

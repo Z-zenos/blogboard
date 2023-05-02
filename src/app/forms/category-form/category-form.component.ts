@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'board-category-form',
@@ -19,7 +20,7 @@ export class CategoryFormComponent implements OnInit {
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
     // logo of image will be saved based 64
@@ -30,10 +31,12 @@ export class CategoryFormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit() {
     this.form.value.logo = this.imgUrl ?? this.file?.name;
 
     if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) return;
+
+    this._categoryService.create(this.form.value);
 
     this.form.reset();
     this.file = undefined;
