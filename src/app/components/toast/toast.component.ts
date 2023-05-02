@@ -20,7 +20,6 @@ export class ToastComponent implements OnInit {
       .subscribe((toast: IToast) => {
         this.toast = toast;
         this.toastEl?.nativeElement.classList.add('active', `toast--${toast.type}`);
-        console.log(this.toast);
 
         setTimeout(() => {
           this.toastEl?.nativeElement.classList.remove('active', `toast--${toast.type}`);

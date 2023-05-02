@@ -7,7 +7,7 @@
       <label class="form__label">Logo</label>
       <div class="form__drag-area" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
         (drop)="onDrop($event)">
-        <input type="file" hidden #inputFileImg (change)="onChange($event)" formControlName="logo">
+        <input type="file" hidden #inputFileImg (change)="onChange($event)">
         <div *ngIf="!file" class="drag">
           <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
           <header #dragText>Drag & Drop</header>

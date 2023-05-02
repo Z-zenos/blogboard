@@ -30,7 +30,7 @@ export class CategoryFormComponent implements OnInit {
   ngOnInit(): void {
     // logo of image will be saved based 64
     this.form = this._fb.group({
-      logo: ['', Validators.required],
+      logo: ['', [Validators.required]],
       name: ['', Validators.required],
       color: ['white', Validators.required]
     });
@@ -45,7 +45,7 @@ export class CategoryFormComponent implements OnInit {
       }
 
       if ((this.file?.size as number) > (1024 * 1024)) {
-        throw new Error("File size greater 2 MB");
+        throw new Error("File size greater than 2 MB");
       };
 
       await this._categoryService.create(this.form.value);
@@ -107,6 +107,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   showFile() {
+
     // Getting selected file type
     let fileType = this.file?.type;
 
@@ -120,6 +121,9 @@ export class CategoryFormComponent implements OnInit {
         // Passing user file source in fileURL variable
         let fileURL = fileReader.result;
         this.imgUrl = fileURL as string;
+        this.form.patchValue({
+          logo: this.imgUrl
+        });
       }
       fileReader.readAsDataURL(this.file as File);
     }
