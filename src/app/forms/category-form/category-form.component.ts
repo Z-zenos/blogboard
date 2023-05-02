@@ -41,12 +41,11 @@ export class CategoryFormComponent implements OnInit {
     if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) return;
 
     try {
-      const res = await this._categoryService.create(this.form.value);
-      console.log(res);
-      this._toastService.success("Create new category successfullry", `Welcome to category family: ${this.form.value.name}`);
+      await this._categoryService.create(this.form.value);
+      this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
     }
-    catch (e) {
-      console.log(e);
+    catch (e: any) {
+      this._toastService.error("Failure", `Can't add new category. ${e.message}`);
     }
     finally {
       this.form.reset();
