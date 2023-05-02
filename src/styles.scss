@@ -179,6 +179,17 @@ html, body { height: 100%; }
     }
   }
 
+  &--red {
+    background-color: red;
+    border-color: red;
+    box-shadow: #fb3640 4px 4px 0 0;
+  
+    &:hover {
+      color: red;
+      border-color: red;
+    }
+  }
+
   &--blue {
     background-color: $blue-1;
     border-color: $blue-1;
@@ -251,6 +262,13 @@ input {
 
   &:focus-visible {
     outline: none;
+  }
+
+  &[type="checkbox"] {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    accent-color: $green-1;
   }
 }
 

@@ -1,5 +1,76 @@
 <div class="category">
-  <button class="btn btn--green" (click)="openForm()">Create new</button>
+  <div class="category__actions">
+    <button class="btn btn--green" (click)="openForm()">Create new</button>
+
+    <div class="category__sort-box">
+      <button class="btn btn--green" (click)="isDropDown = !isDropDown">Sort By <i class="fas fa-chevron-down"
+          style="margin-left: 5px;"></i></button>
+      <div class="dropdown" *ngIf="isDropDown">
+        <ul>
+          <li>Name</li>
+          <li>Date</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category__search-box">
+      <input type="text" placeholder="Search category name..." />
+      <button class="btn btn--green"><i class="fas fa-search" style="margin-right: 5px;"></i> Search</button>
+    </div>
+  </div>
 
   <board-category-form *ngIf="isDisplayForm" (closeFormEvent)="closeForm($event)"></board-category-form>
+
+  <div class="relative overflow-x-auto sm:rounded-lg">
+    <!-- CTGR Table -->
+    <table class="category__table w-full">
+      <thead class="uppercase">
+        <tr>
+          <th style="width: 5%;">
+            <div class="center-checkbox">
+              <input id="checkbox-all-search" type="checkbox">
+              <label for="checkbox-all-search" class="sr-only">checkbox</label>
+            </div>
+          </th>
+          <th style="width: 20%;">
+            Name
+          </th>
+          <th style="width: 20%;">
+            Logo
+          </th>
+          <th style="width: 15%;">
+            Color
+          </th>
+          <th style="width: 40%;">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <td style="width: 5%;">
+            <div class="center-checkbox">
+              <input id="checkbox-all-search" type="checkbox">
+              <label for="checkbox-all-search" class="sr-only">checkbox</label>
+            </div>
+          </td>
+          <td style="width: 20%;">
+            Node.js
+          </td>
+          <td style="width: 20%;">
+            <div class="table__img">
+              <img src="assets/images/special.png" alt="nodejs logo">
+            </div>
+          </td>
+          <td style="width: 15%;">
+            <span class="color" [ngStyle]="{ 'background-color': '#123fff' }">#123fff</span>
+          </td>
+          <td style="width: 40%;">
+            <button class="btn btn--red">Destroy</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
 </div>
