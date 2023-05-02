@@ -1,0 +1,19 @@
+<div *ngIf="toast!.type" class="toast" [ngClass]="[
+  'toast--' + toast!.type, 
+  toast ? 'active' : ''
+  ]
+" #toastEl>
+  <div class="toast__logo">
+    <img [src]="'assets/images/' + toast!.type + '.png'" alt="logo" />
+  </div>
+  <div class="toast__main">
+    <h3 class="toast__title">{{ toast!.title }}</h3>
+    <p class="toast__content">{{ toast!.content }}</p>
+    <p class="toast__tip">Click here to see details.</p>
+  </div>
+  <button class="toast__close">
+    <i class="fas fa-xmark"></i>
+  </button>
+
+  <div class="toast__progress"></div>
+</div>

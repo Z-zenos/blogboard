@@ -1,0 +1,171 @@
+@import "../../../styles";
+
+$colors: (
+  green-main: #4fca9d,
+  green-light: #f1faf7,
+  green-dark: #068463,
+
+  blue-main: #92b9f9,
+  blue-light: #ebf5ff,
+  blue-dark: #2e64de,
+
+  yellow-main: #ebbb4b,
+  yellow-light: #fefdeb,
+  yellow-dark: #c8640e,
+
+  red-main: #e1777a,
+  red-light: #fdf1f1,
+  red-dark: #df1111,
+
+  grey-main: #2c2c2c,
+  gre-light: #3f3f3f,
+
+  black: #090e24,
+  white: #ffffff,
+);
+
+@function color($cl) {
+  @return map-get($colors, $cl);
+}
+
+@mixin set-bg($type, $cl) {
+  &--#{$type} {
+    background: map-get($colors, $cl + '-light');
+    border-left: 3px solid map-get($colors, $cl + '-main');
+    border-top: 2px solid map-get($colors, $cl + '-main');
+    color: map-get($colors, $cl + '-dark');
+    mat-icon { color: map-get($colors, $cl + '-dark'); }
+    .toast__progress { background: map-get($colors, $cl + '-main'); }
+  }
+}
+
+.toast {
+  width: 45rem;
+  display: grid;
+  grid-template-columns: 10% 86%;
+  padding: 1.5rem;
+  position: absolute;
+  top: 20px;
+  right: -52rem;
+  opacity: 0;
+  visibility: hidden;
+  margin: 20px;
+  border-radius: 6px;
+  column-gap: 4%;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    animation: appear 5s linear;
+
+
+    .toast__progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      animation: run 3s linear .9s;
+    }
+  }
+
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+  overflow: hidden;
+
+  @include set-bg("success", "green");
+  @include set-bg("error", "red");
+  @include set-bg("warning", "yellow");
+  @include set-bg("info", "blue");
+
+  &--special {
+    background: map-get($colors, black);
+    border-left: 3px solid map-get($colors, black);
+    border-top: 2px solid map-get($colors, black);
+    color: map-get($colors, white);
+
+    .toast__tip, i { color: map-get($colors, white); }
+    .toast__content { opacity: .8 }
+    .toast__progress { background: map-get($colors, white); }
+  }
+
+  &__logo {
+    margin-top: 10px;
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-overflow: ellipsis;
+    width: 30rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__content {
+    font-size: 1.4rem;
+    margin: 8px 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-right: 3rem;
+  }
+
+  &__tip {
+    opacity: .5;
+    font-size: 1.2rem;
+    color: map-get($colors, black);
+  }
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 2rem;
+  }
+
+  i {
+    cursor: pointer;
+    &:hover {
+      transform: rotate(360deg);
+      transition: all 1s ease;
+    }
+  }
+}
+
+@keyframes run {
+  0% {  width: 100%; }
+  20% { width: 80%; }
+  40% { width: 60%; }
+  60% { width: 40%; }
+  80% { width: 20%; }
+  100% { width: 0; }
+}
+
+@keyframes appear {
+  0% {
+    right: -52rem;
+    opacity: 0;
+  }
+
+  20% {
+    right: 20px;
+    opacity: 1;
+  }
+
+  40%, 60%, 80% { right: 20px; }
+
+  100% {
+    right: -52rem;
+    opacity: 0.5;
+  }
+}

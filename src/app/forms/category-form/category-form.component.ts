@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'board-category-form',
@@ -20,7 +21,11 @@ export class CategoryFormComponent implements OnInit {
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
 
-  constructor(private _fb: FormBuilder, private _categoryService: CategoryService) { }
+  constructor(
+    private _fb: FormBuilder,
+    private _categoryService: CategoryService,
+    private _toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     // logo of image will be saved based 64
@@ -31,17 +36,24 @@ export class CategoryFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.form.value.logo = this.imgUrl ?? this.file?.name;
-
     if (!(this.form.value.logo && this.form.value.name && this.form.value.color)) return;
 
-    this._categoryService.create(this.form.value);
-
-    this.form.reset();
-    this.file = undefined;
-    this.color = '';
-    this.onClose();
+    try {
+      const res = await this._categoryService.create(this.form.value);
+      console.log(res);
+      this._toastService.success("Create new category successfullry", `Welcome to category family: ${this.form.value.name}`);
+    }
+    catch (e) {
+      console.log(e);
+    }
+    finally {
+      this.form.reset();
+      this.file = undefined;
+      this.color = '';
+      this.onClose();
+    }
   }
 
   onClose(): void {
