@@ -1,7 +1,7 @@
 <span [ngStyle]="{
-    'background-color': bgColor,
-    'color': color,
-    'border': '1px solid ' + bgColor
+    'background-color': color,
+    'color': bgColor,
+    'border': '1px solid ' + color
   }" (mouseenter)="hover($event)" (mouseleave)="hover($event, false)">
   {{ tagName }}
 </span>

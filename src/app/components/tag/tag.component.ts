@@ -1,26 +1,25 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'blog-tag',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss']
 })
-export class TagComponent implements OnInit, OnChanges {
+export class TagComponent implements OnInit {
   @Input() tagName = "";
-  @Input() color: string = "white";
-
-  bgColor: string = "black";
+  bgColor: string = "white";
+  private _color: string = 'black';
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.bgColor = "black";
-    this.color = "white";
+  ngOnInit(): void { }
+
+  @Input() set color(value: string) {
+    this._color = value;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // @ts-ignore
-    this.bgColor = changes.color.currentValue;
+  get color(): string {
+    return this._color;
   }
 
   hover(e: Event, enter: boolean = true) {
