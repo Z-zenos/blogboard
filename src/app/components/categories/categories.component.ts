@@ -7,7 +7,7 @@ import { OverlayService } from 'src/app/services/overlay.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  isDisplayForm: boolean = true;
+  isDisplayForm: boolean = false;
 
   constructor(private _overlayService: OverlayService) { }
 
