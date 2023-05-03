@@ -12,7 +12,7 @@ export class CategoriesComponent implements OnInit {
   isDisplayCtgrForm: boolean = false;
   isDisplayDestroyForm: boolean = false;
   valueWillBeDestroyed: string = '';
-  selectedCategory: ICategory = { name: '', logo: '', color: '#ffffff' };
+  selectedCategory: ICategory = { name: '', logo: '', color: '#000000' };
   isDropDown: boolean = false;
   categories: ICategory[] = [];
 
@@ -28,7 +28,7 @@ export class CategoriesComponent implements OnInit {
     switch (type) {
       case 'ctgr':
         this.isDisplayCtgrForm = true;
-        this.selectedCategory = value;
+        if (value?.name) this.selectedCategory = value;
         break;
 
       case 'destroy':
@@ -50,6 +50,7 @@ export class CategoriesComponent implements OnInit {
         break;
     }
 
+    this.selectedCategory = { name: '', logo: '', color: '#000000' };
     this._overlayService.control(false);
   }
 

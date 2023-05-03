@@ -19,7 +19,8 @@
     </div>
   </div>
 
-  <board-category-form *ngIf="isDisplayCtgrForm" (closeFormEvent)="closeForm($event, 'ctgr')"></board-category-form>
+  <board-category-form *ngIf="isDisplayCtgrForm" [category]="selectedCategory"
+    (closeFormEvent)="closeForm($event, 'ctgr')"></board-category-form>
   <board-destroy-form *ngIf="isDisplayDestroyForm" [value]="valueWillBeDestroyed" title="Category Destroy"
     (closeFormEvent)="closeForm($event, 'destroy')"></board-destroy-form>
 

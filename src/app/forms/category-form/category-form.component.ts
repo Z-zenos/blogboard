@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ICategory } from 'src/app/models/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -14,9 +15,9 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('dragArea', { static: false }) dropArea!: ElementRef<HTMLDivElement>;
   @ViewChild('dragText', { static: false }) dragText!: ElementRef;
 
+  @Input() category: ICategory = { name: '', color: '#000000', logo: '' };
+
   file!: File | undefined;
-  imgUrl: string = '';
-  color: string = '';
   form!: FormGroup;
 
   @Output() closeFormEvent = new EventEmitter<boolean>();
@@ -28,11 +29,13 @@ export class CategoryFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.category);
+
     // logo of image will be saved based 64
     this.form = this._fb.group({
-      logo: ['', Validators.required],
-      name: ['', Validators.required],
-      color: ['#ffffff', Validators.required]
+      logo: [this.category?.logo ?? '', Validators.required],
+      name: [this.category?.name ?? '', Validators.required],
+      color: [this.category?.color ?? '#000000', Validators.required]
     });
   }
 
@@ -60,8 +63,6 @@ export class CategoryFormComponent implements OnInit {
     finally {
       this.form.reset();
       this.file = undefined;
-      this.color = '';
-      this.imgUrl = '';
     }
   }
 
@@ -70,7 +71,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   pickColor(e: InputEvent) {
-    this.color = (e.target as HTMLInputElement).value;
+    this.category.color = (e.target as HTMLInputElement).value;
   }
 
   browseFileImg() {
@@ -122,9 +123,9 @@ export class CategoryFormComponent implements OnInit {
       fileReader.onload = () => {
         // Passing user file source in fileURL variable
         let fileURL = fileReader.result;
-        this.imgUrl = fileURL as string;
+        this.category.logo = fileURL as string;
         this.form.patchValue({
-          logo: this.imgUrl
+          logo: this.category.logo
         });
       }
       fileReader.readAsDataURL(this.file as File);

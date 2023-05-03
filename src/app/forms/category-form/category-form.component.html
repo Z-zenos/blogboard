@@ -15,7 +15,7 @@
           <span>OR</span>
           <button #btnFileImg (click)="browseFileImg()">Browse File</button>
         </div>
-        <img *ngIf="file" class="ctgr-logo" [src]="imgUrl" alt="image" class="ctgr-logo">
+        <img *ngIf="file" class="ctgr-logo" [src]="category.logo" alt="image" class="ctgr-logo">
       </div>
       <p class="hint-text mt-10"><i class="fas fa-circle-info"></i> Allowed: jpeg, jpg, png.</p>
 
@@ -63,8 +63,8 @@
   <div class="form__preview">
     <label class="form__label">Preview &lt; Badge | Tag &gt;</label>
     <div class="preview">
-      <blog-badge [src]="imgUrl" [title]="form.value.name" [color]="color"></blog-badge>
-      <blog-tag [tagName]="form.value.name" [color]="color"></blog-tag>
+      <blog-badge [src]="category.logo" [title]="form.value.name" [color]="category.color"></blog-badge>
+      <blog-tag [tagName]="form.value.name" [color]="category.color"></blog-tag>
     </div>
   </div>
   <div class="form__btns">
