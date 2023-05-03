@@ -12,7 +12,7 @@ export class CategoriesComponent implements OnInit {
   isDisplayCtgrForm: boolean = false;
   isDisplayDestroyForm: boolean = false;
   valueWillBeDestroyed: string = '';
-
+  selectedCategory: ICategory = { name: '', logo: '', color: '#ffffff' };
   isDropDown: boolean = false;
   categories: ICategory[] = [];
 
@@ -21,8 +21,6 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this._categoryService.getAll().subscribe((data: ICategory[]) => {
       this.categories = data;
-      console.log(this.categories);
-
     });
   }
 
@@ -30,6 +28,7 @@ export class CategoriesComponent implements OnInit {
     switch (type) {
       case 'ctgr':
         this.isDisplayCtgrForm = true;
+        this.selectedCategory = value;
         break;
 
       case 'destroy':

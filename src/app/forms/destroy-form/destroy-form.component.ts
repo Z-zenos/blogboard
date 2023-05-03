@@ -12,7 +12,7 @@ export class DestroyFormComponent implements OnInit {
   @Input() value: string = '';
 
   form!: FormGroup;
-  numberChars: number = this.value.length;
+  numberChars: number = 0;
   count: number = 0;
   formValid: boolean = false;
 
@@ -32,8 +32,6 @@ export class DestroyFormComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.count, this.formValid);
-
     try {
       if (!this.formValid) throw new Error("Please fill input.");
       this._toastService.success("Successfully", `${this.form.value.destroyedThing} destroyed.`);
@@ -61,7 +59,6 @@ export class DestroyFormComponent implements OnInit {
     else {
       this.count++;
     }
-    console.log(this.count, this.numberChars, (e.target as HTMLInputElement).value);
 
     if (this.count === this.numberChars && (e.target as HTMLInputElement).value === this.value) {
       this.formValid = true;
