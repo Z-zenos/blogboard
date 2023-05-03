@@ -64,8 +64,9 @@
             </div>
           </td>
           <td style="width: 15%;">
-            <span class="color" [ngStyle]="{ 'background-color': ctgr.color, 'color':  invertColor(ctgr.color, true) }"
-              (click)="copyColor($event)">{{ ctgr.color
+            <span class="color hovertext" data-hover="Click 2 copy"
+              [ngStyle]="{ 'background-color': ctgr.color, 'color':  invertColor(ctgr.color, true) }"
+              [copy2clipboard]="ctgr.color" (click)="copyColor($event)">{{ ctgr.color
               }}</span>
           </td>
           <td style="width: 40%;">

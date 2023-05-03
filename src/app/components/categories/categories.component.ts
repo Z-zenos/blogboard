@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/models/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { OverlayService } from 'src/app/services/overlay.service';

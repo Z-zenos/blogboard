@@ -18,6 +18,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { TagComponent } from './components/tag/tag.component';
 import { OverlayComponent } from './layouts/overlay/overlay.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ToastComponent } from './components/toast/toast.component';
     BadgeComponent,
     TagComponent,
     OverlayComponent,
-    ToastComponent
+    ToastComponent,
+    CopyClipboardDirective
   ],
   imports: [
     BrowserModule,
