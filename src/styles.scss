@@ -17,6 +17,8 @@ $green-2: rgb(55, 230, 19);
 $blue-1: rgb(14, 165, 233);
 $purple-1: #59009c;
 $gray-1: #777777;
+$yellow-1: #ffff00;
+$orange-1: orange;
 
 $black-color: #000;
 
@@ -170,7 +172,7 @@ html, body { height: 100%; }
     background-color: $primary-color;
   }
 
-  &--yellow {
+  &--orange {
     background-color: orange;
     border-color: orange;
     box-shadow: yellow 4px 4px 0 0;
@@ -178,6 +180,18 @@ html, body { height: 100%; }
     &:hover {
       color: orange;
       border-color: orange;
+    }
+  }
+
+  &--yellow {
+    background-color: $yellow-1;
+    border-color: $yellow-1;
+    box-shadow: #f48c06 4px 4px 0 0;
+    color: #f48c06;
+  
+    &:hover {
+      color: #f48c06;
+      border-color: $yellow-1;
     }
   }
 

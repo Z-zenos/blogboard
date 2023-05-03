@@ -71,6 +71,6 @@
     <button [ngClass]="'btn btn--' + (type === 'create' ? 'green' : 'blue')" (click)="onSubmit()"
       [disabled]="form.invalid">{{ type === 'create' ? 'Create' :
       'Update' }}</button>
-    <button class="btn btn--yellow" (click)="onClose()">Cancel</button>
+    <button class="btn btn--orange" (click)="onClose()">Cancel</button>
   </div>
 </form>
