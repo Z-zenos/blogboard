@@ -25,11 +25,14 @@ export class CategoriesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.retrieveAllCategories();
+  }
+
+  retrieveAllCategories() {
     this._loaderService.control(true);
 
     this._categoryService.getAll().subscribe((data: ICategory[]) => {
       this.categories = data;
-      console.log(this.categories);
       this._loaderService.control(false);
     });
   }
@@ -113,12 +116,18 @@ export class CategoriesComponent implements OnInit {
   }
 
   searchCategory(name: string) {
+    console.log("search: ", name);
+
     this._loaderService.control(true);
 
     this._categoryService.get(name).subscribe((data: ICategory[]) => {
       this.categories = data;
       this._loaderService.control(false);
     });
+  }
+
+  reset() {
+    this.retrieveAllCategories();
   }
 
 }
