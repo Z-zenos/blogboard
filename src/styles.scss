@@ -15,6 +15,8 @@ $green-1: rgb(0, 255, 0);
 $green-2: rgb(55, 230, 19);
 
 $blue-1: rgb(14, 165, 233);
+$purple-1: #59009c;
+$gray-1: #777777;
 
 $black-color: #000;
 
@@ -200,6 +202,28 @@ html, body { height: 100%; }
       border-color: $blue-1;
     }
   }
+
+  &--purple {
+    background-color: $purple-1;
+    border-color: $purple-1;
+    box-shadow: #c391e8 4px 4px 0 0;
+  
+    &:hover {
+      color: $purple-1;
+      border-color: $purple-1;
+    }
+  }
+
+  &--gray {
+    background-color: $gray-1;
+    border-color: $gray-1;
+    box-shadow: #c7c7c7 4px 4px 0 0;
+  
+    &:hover {
+      color: $gray-1;
+      border-color: $gray-1;
+    }
+  }
 }
 
 .text-half-highlight {
@@ -289,6 +313,45 @@ input {
   &::-webkit-scrollbar {
     display: none;
     width: 0 !important;
+  }
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $green-2;
+    color: white;
+    font-weight: 600;
+    font-size: 2.4rem;
+    height: 6rem;
+    width: 30rem;
+    @include center-item();
+    border-bottom-right-radius: 20rem;
+  }
+
+  &__btns {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid $green-1;
+    background-color: $secondary-color;
+    margin-top: 10rem;
+  }
+
+  &__label {
+    font-size: $small-text;
+    color: $primary-color ;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: block;
+
+    &--color {
+      display: inline-block;
+      margin-right: 1rem;
+    }
   }
 }
 

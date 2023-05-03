@@ -1,9 +1,9 @@
 <div class="category">
   <div class="category__actions">
-    <button class="btn btn--green" (click)="openForm()">Create new</button>
+    <button class="btn btn--green" (click)="openForm('ctgr')">Create new</button>
 
     <div class="category__sort-box">
-      <button class="btn btn--green" (click)="isDropDown = !isDropDown">Sort By <i class="fas fa-chevron-down"
+      <button class="btn btn--purple" (click)="isDropDown = !isDropDown">Sort By <i class="fas fa-chevron-down"
           style="margin-left: 5px;"></i></button>
       <div class="dropdown" *ngIf="isDropDown">
         <ul>
@@ -19,9 +19,11 @@
     </div>
   </div>
 
-  <board-category-form *ngIf="isDisplayForm" (closeFormEvent)="closeForm($event)"></board-category-form>
+  <board-category-form *ngIf="isDisplayCtgrForm" (closeFormEvent)="closeForm($event, 'ctgr')"></board-category-form>
+  <board-destroy-form *ngIf="isDisplayDestroyForm" [value]="valueWillBeDestroyed" title="Category"
+    (closeFormEvent)="closeForm($event, 'destroy')"></board-destroy-form>
 
-  <div class="relative overflow-x-auto sm:rounded-lg">
+  <div class="relative sm:rounded-lg">
     <!-- CTGR Table -->
     <table class="category__table w-full">
       <thead class="uppercase">
@@ -70,7 +72,8 @@
               }}</span>
           </td>
           <td style="width: 40%;">
-            <button class="btn btn--red">Destroy</button>
+            <button class="btn btn--blue mr-10" (click)="openForm('ctgr', ctgr)">Update</button>
+            <button class="btn btn--red" (click)="openForm('destroy', ctgr)">Destroy</button>
           </td>
         </tr>
 

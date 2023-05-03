@@ -8,20 +8,6 @@
     padding: 8rem 8rem 0;
   }
 
-  &__header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: $green-2;
-    color: white;
-    font-weight: 600;
-    font-size: 2.4rem;
-    height: 6rem;
-    width: 30rem;
-    @include center-item();
-    border-bottom-right-radius: 20rem;
-  }
-
   &--ctgr {
     border: 10px;
   }
@@ -35,18 +21,6 @@
       font-size: 2rem;
       color: $green-2 ;
     }
-  }
-
-  &__btns {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 2rem 0;
-    border-top: 1px solid $green-1;
-    background-color: $secondary-color;
-    margin-top: 10rem;
   }
 
   &__drag-area {
@@ -100,19 +74,6 @@
       &:hover {
         background-color: $secondary-color;
       }
-    }
-  }
-
-  &__label {
-    font-size: $small-text;
-    color: $primary-color ;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    display: block;
-
-    &--color {
-      display: inline-block;
-      margin-right: 1rem;
     }
   }
 }

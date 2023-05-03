@@ -9,7 +9,10 @@ import { OverlayService } from 'src/app/services/overlay.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  isDisplayForm: boolean = false;
+  isDisplayCtgrForm: boolean = false;
+  isDisplayDestroyForm: boolean = false;
+  valueWillBeDestroyed: string = '';
+
   isDropDown: boolean = false;
   categories: ICategory[] = [];
 
@@ -23,13 +26,31 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  openForm() {
-    this.isDisplayForm = true;
+  openForm(type: string, value?: any) {
+    switch (type) {
+      case 'ctgr':
+        this.isDisplayCtgrForm = true;
+        break;
+
+      case 'destroy':
+        this.isDisplayDestroyForm = true;
+        this.valueWillBeDestroyed = value.name;
+        break;
+    }
     this._overlayService.control(true);
   }
 
-  closeForm(isClose: boolean) {
-    this.isDisplayForm = isClose;
+  closeForm(isClose: boolean, type: string) {
+    switch (type) {
+      case 'ctgr':
+        this.isDisplayCtgrForm = isClose;
+        break;
+
+      case 'destroy':
+        this.isDisplayDestroyForm = isClose;
+        break;
+    }
+
     this._overlayService.control(false);
   }
 

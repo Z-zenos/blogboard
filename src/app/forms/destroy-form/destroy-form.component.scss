@@ -1,0 +1,17 @@
+@import "../../../styles";
+
+.form {
+  &--destroy {
+    width: 60rem;
+    height: 40rem;
+  }
+}
+
+.destroy-action {
+  padding: 5rem 4rem; 
+}
+
+.value-destroy {
+  color: red;
+  font-weight: 700;
+}

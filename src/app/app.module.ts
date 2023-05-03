@@ -19,6 +19,7 @@ import { TagComponent } from './components/tag/tag.component';
 import { OverlayComponent } from './layouts/overlay/overlay.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
+import { DestroyFormComponent } from './forms/destroy-form/destroy-form.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
     TagComponent,
     OverlayComponent,
     ToastComponent,
-    CopyClipboardDirective
+    CopyClipboardDirective,
+    DestroyFormComponent
   ],
   imports: [
     BrowserModule,
