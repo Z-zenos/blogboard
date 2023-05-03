@@ -27,7 +27,7 @@
       <thead class="uppercase">
         <tr>
           <th style="width: 5%;">
-            <div class="center-checkbox">
+            <div class="center-checkbox" style="margin-top: 5px;">
               <input id="checkbox-all-search" type="checkbox">
               <label for="checkbox-all-search" class="sr-only">checkbox</label>
             </div>
@@ -47,23 +47,26 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          *ngFor="let ctgr of categories;">
           <td style="width: 5%;">
-            <div class="center-checkbox">
+            <div class="center-checkbox" style="margin-top: 10px;">
               <input id="checkbox-all-search" type="checkbox">
               <label for="checkbox-all-search" class="sr-only">checkbox</label>
             </div>
           </td>
           <td style="width: 20%;">
-            Node.js
+            {{ ctgr.name }}
           </td>
           <td style="width: 20%;">
             <div class="table__img">
-              <img src="assets/images/special.png" alt="nodejs logo">
+              <img [src]="ctgr.logo" [alt]="ctgr.name + ' logo'">
             </div>
           </td>
           <td style="width: 15%;">
-            <span class="color" [ngStyle]="{ 'background-color': '#123fff' }">#123fff</span>
+            <span class="color" [ngStyle]="{ 'background-color': ctgr.color, 'color':  invertColor(ctgr.color, true) }"
+              (click)="copyColor($event)">{{ ctgr.color
+              }}</span>
           </td>
           <td style="width: 40%;">
             <button class="btn btn--red">Destroy</button>

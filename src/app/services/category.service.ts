@@ -26,7 +26,7 @@ export class CategoryService {
 
   getAll() {
     return collectionData(this.categories, {
-      idField: 'name'
+      idField: 'id'
     }) as Observable<ICategory[]>;
   }
 

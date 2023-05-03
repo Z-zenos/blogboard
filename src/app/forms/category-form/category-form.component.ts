@@ -32,7 +32,7 @@ export class CategoryFormComponent implements OnInit {
     this.form = this._fb.group({
       logo: ['', Validators.required],
       name: ['', Validators.required],
-      color: ['white', Validators.required]
+      color: ['#ffffff', Validators.required]
     });
   }
 
