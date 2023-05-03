@@ -30,9 +30,9 @@ export class CategoryService {
     }) as Observable<ICategory[]>;
   }
 
-  get(name: string) {
-    const ctgrDocRef = doc(this.firestore, `categories/${name}`);
-    return docData(ctgrDocRef, { idField: 'name' });
+  get(id: string) {
+    const ctgrDocRef = doc(this.firestore, `categories/${id}`);
+    return docData(ctgrDocRef, { idField: 'id' });
   }
 
   create(category: ICategory) {
@@ -47,8 +47,9 @@ export class CategoryService {
     return updateDoc(ctgrDocRef, { ...category });
   }
 
-  // delete(id: string) {
-  //   const pokemonDocumentReference = doc(this.firestore, `pokemon/${id}`);
-
-  // }
+  delete(id: string | undefined) {
+    if (!id) throw new Error("Id undefined");
+    const ctgrDocRef = doc(this.firestore, `categories/${id}`);
+    return deleteDoc(ctgrDocRef);
+  }
 }

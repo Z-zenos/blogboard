@@ -15,8 +15,17 @@
     <label class="form__label mt-2" style="font-size: 14px; color: #3c3c3b;">Confirm you want to delete this category by
       typing its ID:
       <span class="value-destroy">{{ value }}</span></label>
-    <input type="text" style="width: 100%;" (keyup)="checkDestroyedName($event)" [placeholder]="title"
-      formControlName="destroyedThing" required />
+    <input type="text" style="width: 100%;" (input)="checkDestroyedName($any($event))" [placeholder]="title"
+      formControlName="destroyedThing" required class="destroyedInput" />
+    <div *ngIf="form.controls['destroyedThing'].touched && !formValid"
+      class="flex p-4 border items-center rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+      role="alert" style="margin: .5rem 0; font-size: 13px; color: red; border-color: red;">
+      <i class="fas fa-skull mr-10"></i>
+      <span class="sr-only">Error</span>
+      <div>
+        You didn't enter the collection ID correctly
+      </div>
+    </div>
   </div>
   <div class="form__btns" style="margin-top: 4rem; background-color: #fef2f2; border-top-color: red;">
     <button class="btn btn--red" (click)="onSubmit()" [disabled]="!formValid">Destroy</button>

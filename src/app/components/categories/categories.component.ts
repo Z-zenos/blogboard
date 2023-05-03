@@ -34,7 +34,6 @@ export class CategoriesComponent implements OnInit {
         this.ctgrType = 'create';
         if (value?.name) {
           this.ctgrType = 'update';
-          this.selectedCategory = { ...value };
         }
         break;
 
@@ -43,6 +42,7 @@ export class CategoriesComponent implements OnInit {
         this.valueWillBeDestroyed = value.name;
         break;
     }
+    this.selectedCategory = { ...value };
     this._overlayService.control(true);
   }
 

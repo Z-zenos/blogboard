@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class DestroyFormComponent implements OnInit {
   @Input() title: string = '';
   @Input() value: string = '';
+  @Input() id: string | undefined = '';
 
   form!: FormGroup;
   numberChars: number = 0;
@@ -21,7 +23,8 @@ export class DestroyFormComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +37,7 @@ export class DestroyFormComponent implements OnInit {
   async onSubmit() {
     try {
       if (!this.formValid) throw new Error("Please fill input.");
+      await this._categoryService.delete(this.id);
       this._toastService.success("Successfully", `${this.form.value.destroyedThing} destroyed.`);
       this.onClose();
     }
@@ -52,17 +56,22 @@ export class DestroyFormComponent implements OnInit {
     this.closeFormEvent.emit(false);
   }
 
-  checkDestroyedName(e: KeyboardEvent) {
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-      this.count--;
+  checkDestroyedName(e: InputEvent) {
+    if (e.inputType === 'deleteByCut' || e.inputType === 'insertByPaste' || !(e.target as HTMLInputElement).value) {
+      this.count = 0;
     }
-    else {
+    else if (e.inputType === 'deleteContentForward' || e.inputType === 'deleteContentBackward') {
+      this.count--;
+      this.count = Math.max(0, this.count);
+    }
+    else if (e.inputType === 'insertText') {
       this.count++;
     }
 
     if (this.count === this.numberChars && (e.target as HTMLInputElement).value === this.value) {
       this.formValid = true;
     }
+    else this.formValid = false;
   }
 
 }
