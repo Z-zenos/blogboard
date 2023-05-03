@@ -112,4 +112,13 @@ export class CategoriesComponent implements OnInit {
     return "#" + this.padZero(r) + this.padZero(g) + this.padZero(b);
   }
 
+  searchCategory(name: string) {
+    this._loaderService.control(true);
+
+    this._categoryService.get(name).subscribe((data: ICategory[]) => {
+      this.categories = data;
+      this._loaderService.control(false);
+    });
+  }
+
 }

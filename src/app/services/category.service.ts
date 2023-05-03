@@ -7,7 +7,7 @@ import {
   doc,
   updateDoc,
 } from '@firebase/firestore';
-import { Firestore, collectionData, docData } from '@angular/fire/firestore';
+import { Firestore, collectionData, docData, query, setDoc, where } from '@angular/fire/firestore';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -30,12 +30,16 @@ export class CategoryService {
     }) as Observable<ICategory[]>;
   }
 
-  get(id: string) {
-    const ctgrDocRef = doc(this.firestore, `categories/${id}`);
-    return docData(ctgrDocRef, { idField: 'id' });
+  get(name: string) {
+    const appQuery = query(this.categories, where('name', '==', name));
+    return collectionData(appQuery) as Observable<ICategory[]>;
+
+    // const ctgrDocRef = doc(this.firestore, `categories/${id}`);
+    // return docData(ctgrDocRef, { idField: 'id' });
   }
 
   create(category: ICategory) {
+    // return setDoc(doc(this.categories, category.name), category)
     return addDoc(this.categories, category);
   }
 

@@ -14,8 +14,9 @@
     </div>
 
     <div class="category__search-box">
-      <input type="text" placeholder="Search category name..." />
-      <button class="btn btn--green"><i class="fas fa-search" style="margin-right: 5px;"></i> Search</button>
+      <input type="text" placeholder="Search category name..." #seachInput />
+      <button class="btn btn--green" (click)="searchCategory(seachInput.value)"><i class="fas fa-search"
+          style="margin-right: 5px;"></i> Search</button>
     </div>
   </div>
 
