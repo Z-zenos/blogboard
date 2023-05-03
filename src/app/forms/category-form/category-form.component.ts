@@ -59,7 +59,7 @@ export class CategoryFormComponent implements OnInit {
         this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
       }
       else {
-        await this._categoryService.update(this.form.value);
+        await this._categoryService.update({ id: this.category.id, ...this.form.value });
         this._toastService.success("Successfully", `Updated: ${this.form.value.name}`);
       }
       this.onClose();

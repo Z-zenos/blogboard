@@ -42,7 +42,7 @@ export class CategoryService {
   update(category: ICategory) {
     const ctgrDocRef = doc(
       this.firestore,
-      `categories/${category.name}`
+      `categories/${category.id}`
     );
     return updateDoc(ctgrDocRef, { ...category });
   }
