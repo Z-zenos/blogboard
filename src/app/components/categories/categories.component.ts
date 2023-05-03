@@ -28,7 +28,7 @@ export class CategoriesComponent implements OnInit {
     switch (type) {
       case 'ctgr':
         this.isDisplayCtgrForm = true;
-        if (value?.name) this.selectedCategory = value;
+        if (value?.name) this.selectedCategory = { ...value };
         break;
 
       case 'destroy':
