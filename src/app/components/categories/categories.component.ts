@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/models/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { OverlayService } from 'src/app/services/overlay.service';
 
 @Component({
@@ -17,13 +18,19 @@ export class CategoriesComponent implements OnInit {
   categories: ICategory[] = [];
   ctgrType: string = 'create';
 
-  constructor(private _overlayService: OverlayService, private _categoryService: CategoryService) { }
+  constructor(
+    private _overlayService: OverlayService,
+    private _categoryService: CategoryService,
+    private _loaderService: LoaderService
+  ) { }
 
   ngOnInit(): void {
+    this._loaderService.control(true);
+
     this._categoryService.getAll().subscribe((data: ICategory[]) => {
       this.categories = data;
       console.log(this.categories);
-
+      this._loaderService.control(false);
     });
   }
 

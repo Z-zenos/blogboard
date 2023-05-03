@@ -20,6 +20,7 @@ import { OverlayComponent } from './layouts/overlay/overlay.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
 import { DestroyFormComponent } from './forms/destroy-form/destroy-form.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { DestroyFormComponent } from './forms/destroy-form/destroy-form.componen
     OverlayComponent,
     ToastComponent,
     CopyClipboardDirective,
-    DestroyFormComponent
+    DestroyFormComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

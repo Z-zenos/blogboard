@@ -1,0 +1,224 @@
+@import "../../../styles";
+
+.loader {
+	display: block;
+	width: 20rem; 
+  height:20rem;
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+}
+
+/* ------------ Planets --------------*/ 
+
+.solar_system {
+	margin: 5rem auto;
+	position: relative;
+  width: 8rem;
+  box-shadow: 0 0 0 1000px rgba($color: #000000, $alpha: .15);
+  background-color: rgba($color: #000000, $alpha: .15);
+}
+
+.orbit1 {
+  width: 7.5rem; 
+  height: 10rem;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  -webkit-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.planet_holder {
+  width: 5rem; 
+  height: 5rem;
+  position: relative;
+  -webkit-animation: planet_holder 3s linear infinite;
+  animation: planet_holder 3s linear infinite;
+}	
+
+.planet {
+  width: 1rem; 
+  height: 1rem;
+  background: red;
+  border-radius: 50%;
+  -webkit-animation: planet 3s linear infinite;
+  animation: planet 3s linear infinite;
+  position: relative;
+  top: 4.5rem;
+  left: 3.2rem;
+}
+	
+@-webkit-keyframes planet_holder {
+  0% { left:-1rem; }
+  50% { left:1rem; }
+  100% { left:-1rem; }
+}
+  @keyframes planet_holder {
+  0% { left:-1rem; }
+  50% { left:1rem; }
+  100% { left:-1rem; }
+}
+	
+@-webkit-keyframes planet {
+  from {
+    -webkit-transform: rotate(0deg) translate(5rem) rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg) translate(5rem) rotate(-360deg);
+  }
+}
+
+@keyframes planet {
+  from { 
+    transform: rotate(0deg) translate(5rem) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translate(5rem) rotate(-360deg);
+  }
+}
+	
+.orbit2 {
+  width: 5.5rem; 
+  height: 8rem;
+  left: 1rem; 
+  top: 1rem;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  -webkit-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.planet_holder2 {
+  width: 4.5rem; 
+  height: 8rem;
+  position: relative;
+  -webkit-animation: planet_holder2 2s linear infinite;
+  animation: planet_holder2 2s linear infinite;
+}	
+
+.planet2 {
+  width: 1rem; 
+  height: 1rem;
+  background: $green-2;
+  border-radius: 50%;
+  -webkit-animation: planet2 2s linear infinite;
+  animation: planet2 2s linear infinite;
+  position: relative;
+  top: 3.5rem;
+  left: 2.5rem;
+}
+
+@-webkit-keyframes planet_holder2 {
+  0% { left: -1.5rem; }
+  50% { left: 1rem; }
+  100% { left: -1.5rem; }
+}
+
+@keyframes planet_holder2 {
+  0% { left:-1.5rem; }
+  50% { left: 1rem; }
+  100% { left:-1.5rem; }
+}
+
+@-webkit-keyframes planet2 {
+  from {
+    -webkit-transform: rotate(0deg) translate(4rem) rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg) translate(4rem) rotate(-360deg);
+  }
+}
+
+@keyframes planet2 {
+  from {
+    transform: rotate(0deg) translate(4rem) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translate(4rem) rotate(-360deg);
+  }
+}
+    
+.orbit3 {
+  width: 3.5rem; 
+  height: 6rem;
+  left: 2rem; 
+  top: 2rem;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  -webkit-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.planet_holder3 {
+  width: 4.5rem; 
+  height: 8rem;
+  position: relative;
+  -webkit-animation: planet_holder3 1s linear infinite;
+  animation: planet_holder3 1s linear infinite;  
+}	
+
+.planet3 {
+  width: 1rem; 
+  height: 1rem;
+  background: $blue-1;
+  border-radius: 50%;
+  -webkit-animation: planet3 1s linear infinite;
+  animation: planet3 1s linear infinite;
+  position: relative;
+  top: 2.5rem;
+  left: 1.5rem;
+}
+    
+@-webkit-keyframes planet_holder3 {
+  0% { left: -1.5rem; }
+  50% { left: 1rem; }
+  100% { left: -1.5rem; }
+}
+
+@keyframes planet_holder3 {
+  0% { left: -1.5rem; }
+  50% { left: 1rem; }
+  100% { left: -1.5rem; }
+}
+	
+@-webkit-keyframes planet3 {
+  from {
+    -webkit-transform: rotate(0deg) translate(3rem) rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg) translate(3rem) rotate(-360deg);
+  }
+}
+
+@keyframes planet3 {
+  from {
+    transform: rotate(0deg) translate(3rem) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translate(3rem) rotate(-360deg);
+  }
+}
+    
+.sun {
+  position: relative;
+  left: 2.8rem;
+  top: 4rem;
+  background:orange;
+  box-shadow: 0 0 10px orange,
+                0 0 60px orange,
+                0 0 200px yellow,
+                inset 0 0 80px yellow;
+  border-radius: 50%;
+  width: 2rem; 
+  height: 2rem;
+}
