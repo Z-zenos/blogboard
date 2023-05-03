@@ -15,12 +15,15 @@ export class CategoriesComponent implements OnInit {
   selectedCategory: ICategory = { name: '', logo: '', color: '#000000' };
   isDropDown: boolean = false;
   categories: ICategory[] = [];
+  ctgrType: string = 'create';
 
   constructor(private _overlayService: OverlayService, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this._categoryService.getAll().subscribe((data: ICategory[]) => {
       this.categories = data;
+      console.log(this.categories);
+
     });
   }
 
@@ -28,7 +31,11 @@ export class CategoriesComponent implements OnInit {
     switch (type) {
       case 'ctgr':
         this.isDisplayCtgrForm = true;
-        if (value?.name) this.selectedCategory = { ...value };
+        this.ctgrType = 'create';
+        if (value?.name) {
+          this.ctgrType = 'update';
+          this.selectedCategory = { ...value };
+        }
         break;
 
       case 'destroy':

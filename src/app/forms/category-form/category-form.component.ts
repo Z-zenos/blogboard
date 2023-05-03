@@ -15,6 +15,7 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('dragArea', { static: false }) dropArea!: ElementRef<HTMLDivElement>;
   @ViewChild('dragText', { static: false }) dragText!: ElementRef;
 
+  @Input() type: string = 'create';
   @Input() category: ICategory = { name: '', color: '#000000', logo: '' };
 
   file!: File | undefined;
@@ -53,15 +54,23 @@ export class CategoryFormComponent implements OnInit {
         throw new Error("File size greater than 2 MB");
       };
 
-      await this._categoryService.create(this.form.value);
-      this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
+      if (this.type === 'create') {
+        await this._categoryService.create(this.form.value);
+        this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
+      }
+      else {
+        await this._categoryService.update(this.form.value);
+        this._toastService.success("Successfully", `Updated: ${this.form.value.name}`);
+      }
       this.onClose();
     }
     catch (e: any) {
+      console.log(e);
+
       this._toastService.error("Failure", `Can't add new category. Message: ${e.message}`);
     }
     finally {
-      this.form.reset();
+      this.type === 'create' && this.form.reset();
       this.file = undefined;
     }
   }

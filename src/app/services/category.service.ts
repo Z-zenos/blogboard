@@ -39,13 +39,13 @@ export class CategoryService {
     return addDoc(this.categories, category);
   }
 
-  // update(pokemon: ICategory) {
-  //   const pokemonDocumentReference = doc(
-  //     this.firestore,
-  //     `pokemon/${pokemon.id}`
-  //   );
-  //   return updateDoc(pokemonDocumentReference, { ...pokemon });
-  // }
+  update(category: ICategory) {
+    const ctgrDocRef = doc(
+      this.firestore,
+      `categories/${category.name}`
+    );
+    return updateDoc(ctgrDocRef, { ...category });
+  }
 
   // delete(id: string) {
   //   const pokemonDocumentReference = doc(this.firestore, `pokemon/${id}`);
