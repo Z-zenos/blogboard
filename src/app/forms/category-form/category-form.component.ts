@@ -83,69 +83,6 @@ export class CategoryFormComponent implements OnInit {
     this.category.color = (e.target as HTMLInputElement).value;
   }
 
-  browseFileImg() {
-    this.inputFileImg.nativeElement.click();
-  }
-
-  onChange(e: Event) {
-    // Getting user select file and [0] this means if user select multiple files then we'll select only the first one
-    // @ts-ignore
-    this.file = (e.target as HTMLInputElement).files[0];
-    this.dropArea.nativeElement.classList.add('active');
-    this.showFile();
-  }
-
-  // If user drag file over drop area
-  onDragOver(e: Event) {
-    e.preventDefault();
-    this.dropArea.nativeElement.classList.add('active');
-    if (this.dragText) this.dragText.nativeElement.textContent = 'Release';
-  }
-
-  // If user leave dragged file from droparea
-  onDragLeave() {
-    this.dropArea.nativeElement.classList.remove("active");
-    if (this.dragText) this.dragText.nativeElement.textContent = "Drag & Drop";
-  }
-
-  // If user drop file on drop area
-  onDrop(e: Event) {
-    e.preventDefault();
-
-    // Getting user select file and [0] means if user select multiple files then we'll  select only the first one.
-    // @ts-ignore
-    this.file = e.dataTransfer.files[0];
-    this.showFile();
-  }
-
-  showFile() {
-
-    // Getting selected file type
-    let fileType = this.file?.type;
-
-    // adding some valid image extensions in array
-    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-
-    // If user selected file is an image file
-    if (validExtensions.includes(fileType ?? '')) {
-      let fileReader = new FileReader();
-      fileReader.onload = () => {
-        // Passing user file source in fileURL variable
-        let fileURL = fileReader.result;
-        this.category.logo = fileURL as string;
-        this.form.patchValue({
-          logo: this.category.logo
-        });
-      }
-      fileReader.readAsDataURL(this.file as File);
-    }
-    else {
-      alert("This is not an image file !");
-      this.dropArea.nativeElement.classList.remove("active");
-      this.dragText.nativeElement.textContent = "Drag & Drop";
-    }
-  }
-
   byteConverter(bytes: number, decimals: number, only?: string) {
     const K_UNIT = 1024;
     const SIZES = ["Bytes", "KB", "MB", "GB", "TB", "PB"];
@@ -158,5 +95,12 @@ export class CategoryFormComponent implements OnInit {
     let resp = parseFloat((bytes / Math.pow(K_UNIT, i)).toFixed(decimals)) + " " + SIZES[i];
 
     return resp;
+  }
+
+  retrieveImageSrc(src: string) {
+    this.category.logo = src;
+    this.form.patchValue({
+      logo: src
+    });
   }
 }

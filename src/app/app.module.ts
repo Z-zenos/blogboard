@@ -24,6 +24,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { PostFormComponent } from './forms/post-form/post-form.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { TipComponent } from './components/tip/tip.component';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { TipComponent } from './components/tip/tip.component';
     LoaderComponent,
     PostFormComponent,
     PostsComponent,
-    TipComponent
+    TipComponent,
+    ImageUploaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<div class="img-uploader" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)"
+  [ngStyle]="style">
+  <input type="file" hidden #inputFileImg (change)="onSelect($event)" required>
+
+  <div *ngIf="!file" class="img-uploader__drag">
+    <div class="img-uploader__icon"><i class="fas fa-cloud-upload-alt"></i></div>
+    <header #dragText>Drag & Drop</header>
+    <span>OR</span>
+    <button #btnFileImg (click)="browseFileImg()">Browse File</button>
+  </div>
+
+  <div *ngIf="file" class="img-uploader__img">
+    <img [src]="imgUrl" alt="image">
+    <button (click)="browseFileImg()"><i class="fas fa-repeat"></i></button>
+  </div>
+</div>

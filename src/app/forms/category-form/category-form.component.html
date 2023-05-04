@@ -6,17 +6,10 @@
     <div>
       <!-- LOGO Image -->
       <label class="form__label">Logo</label>
-      <div class="form__drag-area" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
-        (drop)="onDrop($event)">
-        <input type="file" hidden #inputFileImg (change)="onChange($event)" required>
-        <div *ngIf="!file" class="drag">
-          <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-          <header #dragText>Drag & Drop</header>
-          <span>OR</span>
-          <button #btnFileImg (click)="browseFileImg()">Browse File</button>
-        </div>
-        <img *ngIf="file" class="ctgr-logo" [src]="category.logo" alt="image" class="ctgr-logo">
-      </div>
+      <board-image-uploader [style]="{ 'width': '20rem', 'height': '20rem', 'margin-top': '1rem' }"
+        (changeImage)="retrieveImageSrc($event)">
+      </board-image-uploader>
+
       <p class="hint-text mt-10"><i class="fas fa-circle-info"></i> Allowed: jpeg, jpg, png.</p>
 
     </div>
@@ -52,7 +45,7 @@
             {{ byteConverter(file!.size, 2) }}
           </p>
         </div>
-        <button class="btn btn--blue" (click)="browseFileImg()">Change</button>
+        <!-- <button class="btn btn--blue" (click)="browseFileImg()">Change</button> -->
       </div>
       <p class="hint-text mt-10" *ngIf="file"><i class="fas fa-circle-info"></i> Drag and drop a new image or click the
         change button to replace the current image.</p>

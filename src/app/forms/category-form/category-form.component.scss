@@ -24,14 +24,6 @@
   }
 }
 
-.ctgr-logo {
-  height: 90%; 
-  width: 90%; 
-  border-radius: 6px; 
-  object-fit: cover; 
-  border-radius: 5px;
-}
-
 .ctgr-name {
   place-self: center;
   width: 100%;
@@ -63,7 +55,6 @@
     transform: translate(-50%, -50%);
     display: block;
   }
-
 }
 
 input[type="color"] {
