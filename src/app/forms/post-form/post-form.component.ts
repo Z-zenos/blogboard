@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import 'quill-emoji/dist/quill-emoji.js';
+
+import Quill from 'quill';
+import BlotFormatter from 'quill-blot-formatter';
+
+Quill.register('modules/blotFormatter', BlotFormatter);
 
 @Component({
   selector: 'board-post-form',
@@ -8,10 +14,40 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PostFormComponent implements OnInit {
 
+  config = {
+    'emoji-toolbar': true,
+    'emoji-textarea': true,
+    'emoji-shortname': true,
+    toolbar: {
+      container: [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['code-block'],
+        // [{header: 1}, {header: 2}], // custom button values
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        // [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+        [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+        [{ direction: 'rtl' }], // text direction
+        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ['image'],                                    // image
+        ['code-block'], // code block
+        [{ align: [] }],
+        ['emoji'],
+        ['clean'], // remove formatting button
+        ['link', 'image', 'video']
+      ]
+    },
+    blotFormatter: {}
+  };
+
   form!: FormGroup;
 
-  constructor(private _fb: FormBuilder) {
+  quillEditorModules = {};
 
+  constructor(private _fb: FormBuilder) {
+    this.quillEditorModules = {
+      ...this.config
+    }
   }
 
   ngOnInit(): void {

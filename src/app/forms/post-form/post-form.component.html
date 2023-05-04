@@ -62,8 +62,8 @@
           <h3 class="form__label">Post Content</h3>
           <board-tip [tipList]="['Easy to understand.']"></board-tip>
           <div style="margin-top: 1rem;">
-            <quill-editor [styles]="{height: '400px', backgroundColor:'#faf8f8'}"
-              formControlName="content"></quill-editor>
+            <quill-editor [styles]="{height: '400px', backgroundColor:'#faf8f8'}" formControlName="content"
+              [modules]="quillEditorModules"></quill-editor>
           </div>
         </div>
       </div>
