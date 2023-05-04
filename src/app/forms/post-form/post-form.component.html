@@ -1,1 +1,44 @@
-<p>post-form works!</p>
+<div class="wf">
+  <form class="wf__form">
+    <section class="wf__head">
+      <div class="wf__head--left">
+        <h3 class="wf__heading">
+          Required Info
+        </h3>
+        <div>
+          <div class="wf__input-group">
+            <h3 class="form__label">Title</h3>
+            <board-tip text="Be specific and imagine you’re a person who read this
+            content."></board-tip>
+            <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io" />
+          </div>
+        </div>
+      </div>
+      <div class="wf__head--right">
+        <h3 class="wf__heading">
+          Extra Info
+        </h3>
+        <div>
+          <div class="wf__input-group">
+            <h3 class="form__label">Select a post category</h3>
+            <board-tip text="Be specific and imagine you’re a person who read this
+            content."></board-tip>
+            <select>
+              <option value="Node.js">Node.js</option>
+              <option value="C">C</option>
+              <option value="JavaScript">JavaScript</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="wf__body">
+      <div class="wf__editor">
+
+      </div>
+      <div class="wf__content-info">
+
+      </div>
+    </section>
+  </form>
+</div>

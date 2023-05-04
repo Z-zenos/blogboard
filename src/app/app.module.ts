@@ -23,6 +23,7 @@ import { DestroyFormComponent } from './forms/destroy-form/destroy-form.componen
 import { LoaderComponent } from './components/loader/loader.component';
 import { PostFormComponent } from './forms/post-form/post-form.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { TipComponent } from './components/tip/tip.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { PostsComponent } from './components/posts/posts.component';
     DestroyFormComponent,
     LoaderComponent,
     PostFormComponent,
-    PostsComponent
+    PostsComponent,
+    TipComponent
   ],
   imports: [
     BrowserModule,
