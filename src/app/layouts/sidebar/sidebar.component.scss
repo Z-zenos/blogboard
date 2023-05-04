@@ -6,6 +6,7 @@
   box-shadow: rgba($green-1, 0.19) 0px 10px 20px, rgba($green-1, 0.23) 0px 6px 6px;
   position: relative;
   border-right: 1px solid $green-1;
+  font-size: $small-text;
 
   &::before {
     position: absolute;
@@ -28,13 +29,14 @@
   }
 
   &__item {
-    padding: 1rem 2rem;
-    font-weight: 600;
+    padding: 1rem 3rem;
+    font-weight: 700;
     display: flex;
     justify-content: flex-start;
     column-gap: 2rem;
     cursor: pointer;
     transition: $transition;
+    color: $primary-color;
 
     &:hover {
       background: $primary-color;

@@ -7,7 +7,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { MainComponent } from './layouts/main/main.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment.prod';
 import { CategoriesComponent } from './components/categories/categories.component';
@@ -21,6 +21,8 @@ import { ToastComponent } from './components/toast/toast.component';
 import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
 import { DestroyFormComponent } from './forms/destroy-form/destroy-form.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { PostFormComponent } from './forms/post-form/post-form.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     ToastComponent,
     CopyClipboardDirective,
     DestroyFormComponent,
-    LoaderComponent
+    LoaderComponent,
+    PostFormComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
