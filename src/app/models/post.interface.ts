@@ -1,6 +1,6 @@
 export interface Post {
   title: string;
-  permanlink: string;
+  permalink: string;
   content: string;
   categories: string[];
   image: string;

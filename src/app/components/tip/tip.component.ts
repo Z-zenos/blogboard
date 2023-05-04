@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tip.component.scss']
 })
 export class TipComponent implements OnInit {
-  @Input() text: string = '';
+  @Input() tipList: string[] = [];
 
   constructor() { }
 

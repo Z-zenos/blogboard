@@ -1,4 +1,16 @@
-<p class="tip">
-  <i class="fas fa-circle-info"></i>
-  {{ text }}
-</p>
+<ng-container *ngIf="tipList.length === 1; else moreTips">
+  <p class="tip">
+    <i class="fas fa-circle-info"></i>
+    {{ tipList[0] }}
+  </p>
+</ng-container>
+
+<ng-template #moreTips>
+  <div class="tip">
+    <i class="fas fa-circle-info"></i>
+    <span style="display: inline-block; margin-left: 10px; font-size: 13px;">A little hint</span>
+    <p style="margin-left: 15px;" *ngFor="let tip of tipList">
+      - {{ tip }}
+    </p>
+  </div>
+</ng-template>

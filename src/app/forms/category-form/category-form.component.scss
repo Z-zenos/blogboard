@@ -22,60 +22,6 @@
       color: $green-2 ;
     }
   }
-
-  &__drag-area {
-    border: 2px dashed $green-1;
-    height: 20rem;
-    width: 20rem;
-    border-radius: 5px;
-    @include center-item();
-
-    .drag {
-      width: 100%;
-      height: 100%;
-      @include center-item();
-      flex-direction: column;
-    }
-
-    &.active {
-      border: 2px solid $green-2;
-    }
-
-    .icon {
-      font-size: $big-text;
-      color: $green-2 ;
-    }
-
-    header {
-      font-size: $small-text;
-      font-weight: 600;
-      color: $green-2 ;
-    }
-
-    span {
-      font-size: $small-text;
-      font-weight: 500;
-      color: $text-color;
-      margin-top: 1.2rem;
-    }
-
-    button {
-      padding: 10px 25px;
-      font-size: $small-text;
-      font-weight: 600;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: $green-2 ;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: $transition;
-
-      &:hover {
-        background-color: $secondary-color;
-      }
-    }
-  }
 }
 
 .ctgr-logo {

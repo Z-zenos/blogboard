@@ -33,8 +33,17 @@
     margin-top: 1rem;
     width: 100%;
   }
+
+  &__input-group {
+    margin: 2rem 0;
+  }
 }
 
 .form__label {
   margin-bottom: .5rem;
+}
+
+.form__drag-area {
+  width: 100%;
+  height: 30rem;
 }

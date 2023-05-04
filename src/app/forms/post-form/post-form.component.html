@@ -8,9 +8,19 @@
         <div>
           <div class="wf__input-group">
             <h3 class="form__label">Title</h3>
-            <board-tip text="Be specific and imagine you’re a person who read this
-            content."></board-tip>
+            <board-tip [tipList]="['Be specific and imagine you’re a person who read this content.']"></board-tip>
             <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io" />
+          </div>
+          <div class="wf__input-group">
+            <h3 class="form__label">Permalink</h3>
+            <board-tip [tipList]="['Coming soon...']"></board-tip>
+            <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io" />
+          </div>
+          <div class="wf__input-group">
+            <h3 class="form__label">Excerpt</h3>
+            <board-tip
+              [tipList]="['Stay Within 20-30 Words.', 'Compliment the Headline, Don\'t Repeat It.', 'Tease Commentary From the Story', 'Introduce the Author']"></board-tip>
+            <textarea></textarea>
           </div>
         </div>
       </div>
@@ -21,13 +31,27 @@
         <div>
           <div class="wf__input-group">
             <h3 class="form__label">Select a post category</h3>
-            <board-tip text="Be specific and imagine you’re a person who read this
-            content."></board-tip>
+            <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
             <select>
               <option value="Node.js">Node.js</option>
               <option value="C">C</option>
               <option value="JavaScript">JavaScript</option>
             </select>
+          </div>
+          <div class="wf__input-group">
+            <h3 class="form__label">Post image</h3>
+            <board-tip [tipList]="['Allowed: jpeg, jpg, png.']"></board-tip>
+            <div class="form__drag-area mt-10" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+              (drop)="onDrop($event)">
+              <input type="file" hidden #inputFileImg (change)="onChange($event)" required>
+              <div *ngIf="!file" class="drag">
+                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <header #dragText>Drag & Drop</header>
+                <span>OR</span>
+                <button #btnFileImg (click)="browseFileImg()">Browse File</button>
+              </div>
+              <img *ngIf="file" class="ctgr-logo" [src]="imgUrl" alt="image">
+            </div>
           </div>
         </div>
       </div>

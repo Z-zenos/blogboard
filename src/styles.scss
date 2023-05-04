@@ -283,7 +283,7 @@ html, body { height: 100%; }
   margin-right: -50%;
 }
 
-input {
+input, select {
   border: 1px solid #ccc;
   background-color: white;
   color: $text-color;
@@ -307,6 +307,33 @@ input {
     height: 2rem;
     cursor: pointer;
     accent-color: $green-1;
+  }
+}
+
+textarea {
+  width: 100%;
+  height: 10rem;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border: $border;
+  background: none repeat scroll 0 0 rgba($green-2, 0.1);
+  border-radius: 6px 6px 6px 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+  color: #555555;
+  font-size: 1em;
+  line-height: 1.4em;
+  padding: 1.6rem 2rem;
+  resize: none;
+
+  transition: background-color 0.2s ease 0s;
+
+  &:focus {
+    outline: 1px solid $primary-color;
+  }
+
+  &:focus ~ span {
+    transform: translateY(-3rem);
+    background-color: white;
   }
 }
 
@@ -365,6 +392,60 @@ input {
     &--color {
       display: inline-block;
       margin-right: 1rem;
+    }
+  }
+
+  &__drag-area {
+    border: 2px dashed $green-1;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 5px;
+    @include center-item();
+
+    .drag {
+      width: 100%;
+      height: 100%;
+      @include center-item();
+      flex-direction: column;
+    }
+
+    &.active {
+      border: 2px solid $green-2;
+    }
+
+    .icon {
+      font-size: $big-text;
+      color: $green-2 ;
+    }
+
+    header {
+      font-size: $small-text;
+      font-weight: 600;
+      color: $green-2 ;
+    }
+
+    span {
+      font-size: $small-text;
+      font-weight: 500;
+      color: $text-color;
+      margin-top: 1.2rem;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: $small-text;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: $green-2 ;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: $transition;
+
+      &:hover {
+        background-color: $secondary-color;
+      }
     }
   }
 }
