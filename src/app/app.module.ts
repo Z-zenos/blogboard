@@ -25,6 +25,7 @@ import { PostFormComponent } from './forms/post-form/post-form.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { TipComponent } from './components/tip/tip.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { QuillModule } from 'ngx-quill'
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
