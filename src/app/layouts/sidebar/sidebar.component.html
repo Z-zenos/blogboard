@@ -1,8 +1,8 @@
 <div class="sidebar">
   <ul class="sidebar__list">
-    <li routerLink="/categories" class="sidebar__item"><board-icon name="category"></board-icon> Categories</li>
-    <li routerLink="/posts" class="sidebar__item"><board-icon name="post"></board-icon> Posts</li>
-    <li routerLink="/write" class="sidebar__item"><board-icon name="write"></board-icon> Write</li>
-    <li routerLink="/setting" class="sidebar__item"><board-icon name="setting"></board-icon> Setting</li>
+    <li *ngFor="let r of routes" [routerLink]="'/' + r" class="sidebar__item"
+      [ngClass]="{ 'sidebar__item--active': ('/' + r) === currentRoute }">
+      <board-icon [name]="r"></board-icon> {{ r }}
+    </li>
   </ul>
 </div>

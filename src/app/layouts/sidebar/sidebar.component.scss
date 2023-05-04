@@ -38,7 +38,7 @@
     transition: $transition;
     color: $primary-color;
 
-    &:hover {
+    &:hover, &--active {
       background: $primary-color;
       color: white;
     }

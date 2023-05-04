@@ -8,18 +8,20 @@
         <div>
           <div class="wf__input-group">
             <h3 class="form__label">Title</h3>
-            <board-tip [tipList]="['Be specific and imagine you’re a person who read this content.']"></board-tip>
+            <board-tip
+              [tipList]="['Should summarize the post.', 'You might find that you have a better idea of your title after writing out the rest of the question.']"></board-tip>
             <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io"
               formControlName="title" />
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Permalink</h3>
-            <board-tip [tipList]="['Coming soon...']"></board-tip>
-            <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io"
+            <board-tip
+              [tipList]="['A URL (of a specific blog post) that should remain unchanged once the page is published.', 'Always be SEO-friendly URLs that are both easy for people to remember and for search engines to make sense of.']"></board-tip>
+            <input type="text" placeholder="e.g. https://www.blogify.com/what-is-permalink/"
               formControlName="permalink" />
           </div>
           <div class="wf__input-group">
-            <h3 class="form__label">Excerpt</h3>
+            <h3 class="form__label">Excerpt | TL;DR</h3>
             <board-tip
               [tipList]="['Stay Within 20-30 Words.', 'Compliment the Headline, Don\'t Repeat It.', 'Tease Commentary From the Story', 'Introduce the Author']"></board-tip>
             <textarea formControlName="excerpt"></textarea>
@@ -42,8 +44,9 @@
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Post image</h3>
-            <board-tip [tipList]="['Allowed: jpeg, jpg, png.']"></board-tip>
-            <board-image-uploader formControlName="image" [style]="{ 'height': '35rem', 'margin-top': '1rem' }"
+            <board-tip
+              [tipList]="['Allowed: jpeg, jpg, png.', 'Image size must be less than 5MB.', 'Drag & Drop new image OR hover on image and click change icon at top right position for changing other one.']"></board-tip>
+            <board-image-uploader formControlName="image" [style]="{ 'height': '35rem', 'margin': '1rem 0' }"
               (changeImage)="onImageChange($event)">
             </board-image-uploader>
           </div>
