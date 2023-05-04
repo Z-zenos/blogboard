@@ -63,7 +63,28 @@
           <board-tip [tipList]="['Easy to understand.']"></board-tip>
           <div style="margin-top: 1rem;">
             <quill-editor [styles]="{height: '400px', backgroundColor:'#faf8f8'}" formControlName="content"
-              [modules]="quillEditorModules"></quill-editor>
+              [modules]="quillEditorModules">
+              <!-- <div quill-editor-toolbar>
+                <span class="ql-formats">
+                  <button class="ql-bold" [title]="'Bold'"></button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align" [title]="'Aligment'">
+                    <option selected></option>
+                    <option value="center"></option>
+                    <option value="right"></option>
+                    <option value="justify"></option>
+                  </select>
+                  <select class="ql-align" [title]="'Aligment2'">
+                    <option selected></option>
+                    <option value="center"></option>
+                    <option value="right"></option>
+                    <option value="justify"></option>
+                  </select>
+                </span>
+              </div> -->
+            </quill-editor>
+            <!-- <quill-view-html [content]="form.value.content" theme="snow"></quill-view-html> -->
           </div>
         </div>
       </div>
