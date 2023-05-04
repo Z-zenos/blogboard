@@ -6,10 +6,8 @@
   }
 
 
-  &__head {
+  &__head, &__body {
     display: grid;
-    grid-template-columns: 50% 48%;
-    place-items: center;
     column-gap: 2%;
 
     & > * {
@@ -20,6 +18,17 @@
       border-radius: .7rem;
       box-shadow: rgba($green-1, 0.27) 0px 3px 8px;
     }
+  }
+
+  &__head {
+    grid-template-columns: 50% 48%;
+    place-items: center;
+  }
+
+  &__body {
+    margin: 3rem 0;
+    grid-template-columns: 68% 30%;
+    place-items: start;
   }
 
   &__heading {
