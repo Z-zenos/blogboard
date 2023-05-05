@@ -45,6 +45,28 @@
     margin: 2rem 0;
   }
 
+  &__info-group {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1rem;
+    align-items: center;
+
+    .key {
+      font-size: 1.8rem;
+      color: $blue-1;
+      font-weight: 700;
+    }
+
+    .value {
+      font-size: 1.8rem;
+    }
+  }
+
+  .heading-key {
+    font-size: 1.8rem;
+    color: $blue-1;
+    font-weight: 700;
+  }
 
 }
 
@@ -110,4 +132,32 @@
   background-color: #000;
   color: $primary-color;
   overflow: visible;
+}
+
+.menu--heading, .menu--sub-heading, .menu--sub-sub-heading {
+  cursor: pointer;
+  display: block;
+  margin: .5rem 0;
+  color: black ;
+  
+
+  i {
+    color: $primary-color;
+    margin-right: .7rem;
+  }
+}
+
+.menu--heading {
+  font-size: $small-text;
+  font-size: 1.6rem;
+}
+
+.menu--sub-heading {
+  font-size: 1.4rem;
+  margin-left: 2rem;
+}
+
+.menu--sub-sub-heading {
+  font-size: 1.2rem;
+  margin-left: 4rem;
 }

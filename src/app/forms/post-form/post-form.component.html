@@ -9,14 +9,14 @@
           <div class="wf__input-group">
             <h3 class="form__label">Title</h3>
             <board-tip
-              [tipList]="['Should summarize the post.', 'You might find that you have a better idea of your title after writing out the rest of the question.']"></board-tip>
+              [tipList]="['You might find that you have a better idea of your title after writing out the rest of the question.']"></board-tip>
             <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io"
               formControlName="title" />
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Permalink</h3>
             <board-tip
-              [tipList]="['A URL (of a specific blog post) that should remain unchanged once the page is published.', 'Always be SEO-friendly URLs that are both easy for people to remember and for search engines to make sense of.']"></board-tip>
+              [tipList]="['Always be SEO-friendly URLs that are both easy for people to remember and for search engines to make sense of.']"></board-tip>
             <input type="text" placeholder="e.g. https://www.blogify.com/what-is-permalink/"
               formControlName="permalink" />
           </div>
@@ -26,13 +26,7 @@
               [tipList]="['Stay Within 20-30 Words.', 'Compliment the Headline, Don\'t Repeat It.', 'Tease Commentary From the Story', 'Introduce the Author']"></board-tip>
             <textarea formControlName="excerpt"></textarea>
           </div>
-        </div>
-      </div>
-      <div class="wf__head--right">
-        <h3 class="wf__heading">
-          Extra Info
-        </h3>
-        <div>
+
           <div class="wf__input-group">
             <h3 class="form__label">Select a post category</h3>
             <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
@@ -41,6 +35,19 @@
               <option value="C">C</option>
               <option value="JavaScript">JavaScript</option>
             </select>
+          </div>
+
+        </div>
+      </div>
+      <div class="wf__head--right">
+        <h3 class="wf__heading">
+          Extra Info
+        </h3>
+        <div>
+          <div class="wf__input-group">
+            <h3 class="form__label">References Links</h3>
+            <board-tip [tipList]="['Introduce the Author']"></board-tip>
+            <textarea formControlName="references"></textarea>
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Post image</h3>
@@ -63,7 +70,7 @@
           <board-tip [tipList]="['Easy to understand.']"></board-tip>
           <div style="margin-top: 1rem;">
             <quill-editor [styles]="{height: '400px', backgroundColor:'#faf8f8'}" formControlName="content"
-              [modules]="quillEditorModules">
+              [modules]="quillEditorModules" (onEditorCreated)="exportStats()" (onContentChanged)="exportStats()">
               <!-- <div quill-editor-toolbar>
                 <span class="ql-formats">
                   <button class="ql-bold" [title]="'Bold'"></button>
@@ -92,6 +99,24 @@
         <h3 class="wf__heading">
           Content Info
         </h3>
+        <div class="wf__info" *ngFor="let s of getFieldsInStats()">
+          <div class="wf__info-group" *ngIf="s !== 'headingList'; else headingListTemplate">
+            <span class="key">{{ s }}: </span>
+            <span class="value">{{ stats[s] }}</span>
+          </div>
+
+          <ng-template #headingListTemplate>
+            <span class="heading-key">{{ s }}: </span>
+            <ng-container *ngFor="let hd of stats[s]">
+              <p
+                [ngClass]="{'menu--heading': hd.nodeName === 'H1', 'menu--sub-heading': hd.nodeName === 'H2', 'menu--sub-sub-heading': hd.nodeName === 'H3'}">
+                <span><i
+                    [ngClass]="'fas ' + (hd.nodeName === 'H1' ?  'fa-plus' : (hd.nodeName !== 'H2' ? 'fa-caret-right' : 'fa-stop'))"></i></span>
+                <span [innerHTML]="hd.innerHTML"></span>
+              </p>
+            </ng-container>
+          </ng-template>
+        </div>
       </div>
     </section>
 

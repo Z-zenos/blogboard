@@ -28,16 +28,15 @@ export class PostFormComponent implements OnInit {
       [{ list: 'ordered' }, { list: 'bullet' }],
       // [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
       [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-      [{ direction: 'rtl' }], // text direction
       [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ header: [1, 2, 3, false] }],
       ['code-block'], // code block
       [{ align: [] }],
       ['emoji'],
       ['clean'], // remove formatting button
       ['link', 'image', 'video']
     ],
-    blotFormatter: {}
+    // blotFormatter: {}
   };
 
   form!: FormGroup;
@@ -57,17 +56,45 @@ export class PostFormComponent implements OnInit {
       excerpt: ['', Validators.required],
       categories: ['', Validators.required],
       image: ['', Validators.required],
+      references: [[], Validators.required],
       content: ['Test content', Validators.required],
     });
+
   }
 
   onSubmit() {
     console.log(this.form.value);
+
   }
 
   onImageChange(src: string) {
     // this.form.patchValue({
     //   image: src
     // });
+  }
+
+  stats: any = {};
+
+  exportStats(): void {
+    const temp = document.createElement('div');
+    temp.innerHTML = this.form.value.content;
+
+    this.stats.words = temp.innerText.trim().split(/\s+/).length;
+    this.stats.images = temp.querySelectorAll('img').length;
+    this.stats.links = temp.querySelectorAll('a').length;
+    this.stats['reading-time'] = this.caculateTimeReading(temp.innerText.trim()) + ' min';
+
+    this.stats.headingList = Array.from(document.querySelectorAll('.ql-editor h1, .ql-editor h2, .ql-editor h3'));
+
+  }
+
+  caculateTimeReading(content: string): number {
+    const wpm = 225;
+    const words = content.trim().split(/\s+/).length;
+    return Math.ceil(words / wpm);
+  }
+
+  getFieldsInStats(): string[] {
+    return Object.keys(this.stats);
   }
 }
