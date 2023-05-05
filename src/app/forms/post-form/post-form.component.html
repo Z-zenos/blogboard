@@ -30,11 +30,10 @@
           <div class="wf__input-group">
             <h3 class="form__label">Select a post category</h3>
             <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
-            <select formControlName="categories">
-              <option value="Node.js">Node.js</option>
-              <option value="C">C</option>
-              <option value="JavaScript">JavaScript</option>
-            </select>
+            <ng-select [multiple]="true" (add)="addCategory($event)" (clear)="deleteCategory($event)"
+              (remove)="deleteCategory($event)">
+              <ng-option *ngFor="let ctgr of categories" [value]="ctgr.name">{{ctgr.name}}</ng-option>
+            </ng-select>
           </div>
 
         </div>
@@ -130,4 +129,6 @@
 
     <button [ngClass]="'btn btn--green'" (click)="onSubmit()">Publish <i class="fas fa-upload"></i></button>
   </form>
+
+  <board-loader></board-loader>
 </div>

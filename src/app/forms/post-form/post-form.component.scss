@@ -196,3 +196,21 @@
     outline: none;
   }
 }
+
+:host ::ng-deep .ng-select.ng-select-focused .ng-select-container::after {
+  border-color: $primary-color;
+}
+
+:host ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: $primary-color;
+}
+
+:host ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  font-weight: 600;
+}
+
+:host ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  color: $primary-color;
+  background-color: $secondary-color;
+  font-weight: 600;
+}

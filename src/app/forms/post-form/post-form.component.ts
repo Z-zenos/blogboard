@@ -7,6 +7,9 @@ import 'quill-emoji/dist/quill-emoji.js';
 
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
+import { CategoryService } from 'src/app/services/category.service';
+import { ICategory } from 'src/app/models/category.interface';
+import { LoaderService } from 'src/app/services/loader.service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -41,9 +44,15 @@ export class PostFormComponent implements OnInit {
 
   form!: FormGroup;
   references: string[] = [];
+  selectedCategories: string[] = [];
+  categories: ICategory[] = [];
   quillEditorModules = {};
 
-  constructor(private _fb: FormBuilder) {
+  constructor(
+    private _fb: FormBuilder,
+    private _categoryService: CategoryService,
+    private _loaderService: LoaderService
+  ) {
     this.quillEditorModules = {
       ...this.config
     }
@@ -54,12 +63,21 @@ export class PostFormComponent implements OnInit {
       title: ['', Validators.required],
       permalink: ['', Validators.required],
       excerpt: ['', Validators.required],
-      categories: ['', Validators.required],
+      categories: [[], Validators.required],
       image: ['', Validators.required],
       references: [[], Validators.required],
       content: ['Test content', Validators.required],
     });
 
+    this.retrieveAllCategories();
+  }
+
+  retrieveAllCategories() {
+    this._loaderService.control(true);
+    this._categoryService.getAll().subscribe((data: ICategory[]) => {
+      this.categories = data;
+      this._loaderService.control(false);
+    });
   }
 
   onSubmit() {
@@ -115,5 +133,19 @@ export class PostFormComponent implements OnInit {
 
   removeLink(index: number) {
     this.references.splice(index, 1);
+  }
+
+  addCategory(category: any) {
+    this.selectedCategories = [...this.selectedCategories, category];
+    this.form.patchValue({
+      categories: this.selectedCategories
+    });
+  }
+
+  deleteCategory(data: any) {
+    this.selectedCategories = !data ? [] : this.selectedCategories.filter(c => c !== data.label);
+    this.form.patchValue({
+      categories: this.selectedCategories
+    });
   }
 }

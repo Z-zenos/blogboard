@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.prod';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { CategoryFormComponent } from './forms/category-form/category-form.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BadgeComponent } from './components/badge/badge.component';
 import { TagComponent } from './components/tag/tag.component';
 import { OverlayComponent } from './layouts/overlay/overlay.component';
@@ -25,7 +25,8 @@ import { PostFormComponent } from './forms/post-form/post-form.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { TipComponent } from './components/tip/tip.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -56,7 +57,9 @@ import { QuillModule } from 'ngx-quill'
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     ReactiveFormsModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    NgSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
