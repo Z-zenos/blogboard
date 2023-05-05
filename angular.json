@@ -18,6 +18,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "quill",
+              "quill-blot-formatter",
+              "quill-emoji/dist/quill-emoji.js"
+            ],
             "outputPath": "dist/blogboard",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -33,7 +38,7 @@
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.bubble.css",
               "./node_modules/quill/dist/quill.snow.css",
-              "node_modules/quill-emoji/dist/quill-emoji.css"
+              "./node_modules/quill-emoji/dist/quill-emoji.css"
             ],
             "scripts": [
               "./node_modules/quill/dist/quill.min.js"

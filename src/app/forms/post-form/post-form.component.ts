@@ -18,13 +18,11 @@ Quill.register('modules/blotFormatter', BlotFormatter);
 
 export class PostFormComponent implements OnInit {
 
-
-
   // emojiIcon = '<svg class="i" viewBox="0 0 24 24"><use href="#emoticon-happy"></use></svg>';
 
   config = {
     'emoji-toolbar': true,
-    'emoji-textarea': true,
+    // 'emoji-textarea': true,
     'emoji-shortname': true,
 
     // "emoji-shortname": {
