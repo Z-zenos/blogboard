@@ -52,18 +52,18 @@
     align-items: center;
 
     .key {
-      font-size: 1.8rem;
+      font-size: $small-text;
       color: $blue-1;
       font-weight: 700;
     }
 
     .value {
-      font-size: 1.8rem;
+      font-size: $small-text;
     }
   }
 
   .heading-key {
-    font-size: 1.8rem;
+    font-size: $small-text;
     color: $blue-1;
     font-weight: 700;
   }
@@ -173,4 +173,26 @@
 .menu--sub-sub-heading {
   font-size: 1.2rem;
   margin-left: 5rem;
+}
+
+.urlarea {
+  border-radius: .7rem;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  &__link {
+    padding: 1rem;
+    background-color: $secondary-color;
+    margin: 0 1rem 1rem 0;
+  }
+
+  &__input {
+    padding: 1rem;
+    border: none;
+    outline: none;
+  }
 }

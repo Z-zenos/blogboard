@@ -46,8 +46,16 @@
         <div>
           <div class="wf__input-group">
             <h3 class="form__label">References Links</h3>
-            <board-tip [tipList]="['Introduce the Author']"></board-tip>
-            <textarea formControlName="references"></textarea>
+            <board-tip
+              [tipList]="['Cite the resource you referenced for the article (1 resource / 1 line).']"></board-tip>
+            <!-- <textarea formControlName="references" (input)="autoDetectLink()"></textarea> -->
+            <div class="urlarea">
+              <span *ngFor="let r of references; let i = index" class="urlarea__link"><a href="r"
+                  class="text-haft-highlight" target="_blank">{{ r }}</a> <i class="fas fa-close"
+                  style="margin-left: 5px; cursor: pointer; color: red;" (click)="removeLink(i)"></i></span>
+              <input class="urlarea__input" type="text" (input)="autoDetectLink($any($event))"
+                placeholder="Paste link here" (keydown.enter)="false">
+            </div>
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Post image</h3>
@@ -120,6 +128,6 @@
       </div>
     </section>
 
-    <button [ngClass]="'btn btn--green'" (click)="onSubmit()">Publish</button>
+    <button [ngClass]="'btn btn--green'" (click)="onSubmit()">Publish <i class="fas fa-upload"></i></button>
   </form>
 </div>

@@ -40,7 +40,7 @@ export class PostFormComponent implements OnInit {
   };
 
   form!: FormGroup;
-
+  references: string[] = [];
   quillEditorModules = {};
 
   constructor(private _fb: FormBuilder) {
@@ -96,5 +96,24 @@ export class PostFormComponent implements OnInit {
 
   getFieldsInStats(): string[] {
     return Object.keys(this.stats);
+  }
+
+  autoDetectLink(e: InputEvent) {
+    if (!e.data?.trim()) return;
+
+    if (!/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/.test(e.data.trim())) {
+      return;
+    }
+
+    this.references = [...this.references, e.data.trim()];
+    this.form.patchValue({
+      references: this.references
+    });
+
+    (e.target as HTMLInputElement).value = '';
+  }
+
+  removeLink(index: number) {
+    this.references.splice(index, 1);
   }
 }
