@@ -66,7 +66,7 @@ export class PostFormComponent implements OnInit {
       categories: [[], Validators.required],
       image: ['', Validators.required],
       references: [[], Validators.required],
-      content: ['Test content', Validators.required],
+      content: ['', Validators.required],
     });
 
     this.retrieveAllCategories();
@@ -82,7 +82,6 @@ export class PostFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form.value);
-
   }
 
   onImageChange(src: string) {
@@ -147,5 +146,9 @@ export class PostFormComponent implements OnInit {
     this.form.patchValue({
       categories: this.selectedCategories
     });
+  }
+
+  preview() {
+
   }
 }
