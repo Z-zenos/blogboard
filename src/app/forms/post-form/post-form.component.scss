@@ -44,6 +44,8 @@
   &__input-group {
     margin: 2rem 0;
   }
+
+
 }
 
 .form__label {
@@ -51,3 +53,55 @@
 }
 
 ::selection { background-color: $primary-color; color: white; }
+
+:host ::ng-deep .emoji_completions>li>button:hover {
+  background: $primary-color;
+  color: #fff;
+}
+
+:host ::ng-deep .emoji_completions>li>button:focus {
+  background: $primary-color;
+  color: #fff;
+  outline: none
+}
+
+:host ::ng-deep .emoji_completions>li>button.emoji-active {
+  background: red;
+  background: $primary-color;
+  color: #fff;
+  outline: none
+}
+
+:host ::ng-deep .emoji_completions > li > button {
+  background: #efefef;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  @include center-item();
+  justify-content: flex-start;
+  margin: 0;
+  padding: 8px 10px 8px;
+  text-align: left;
+  width: 100%;
+}
+
+:host ::ng-deep .emoji_completions > li > button .unmatched {
+  transform: translateY(2px);
+  margin-left: 4px;
+}
+
+:host ::ng-deep #tab-panel {
+  gap: 4px;
+  padding: 10px 2px;
+}
+
+:host ::ng-deep #emoji-palette {
+  border: 1px solid rgba($green-1, 0.27);
+  border-radius: 3px;
+  box-shadow: 0 5px 10px rgba($green-1, 0.27);
+  max-width: 250px;
+  position: absolute;
+  z-index: 999;
+  top: 22px;
+  left: 90px;
+}
