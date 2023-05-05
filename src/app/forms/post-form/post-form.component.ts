@@ -151,4 +151,10 @@ export class PostFormComponent implements OnInit {
   preview() {
 
   }
+
+  onTitleChanged(e: InputEvent) {
+    this.form.patchValue({
+      permalink: (e.target as HTMLInputElement).value?.trim()?.replace(/\s+/g, '-')
+    })
+  }
 }
