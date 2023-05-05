@@ -105,3 +105,9 @@
   top: 22px;
   left: 90px;
 }
+
+:host ::ng-deep .ql-snow .ql-editor pre.ql-syntax {
+  background-color: #000;
+  color: $primary-color;
+  overflow: visible;
+}
