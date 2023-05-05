@@ -67,7 +67,6 @@
     color: $blue-1;
     font-weight: 700;
   }
-
 }
 
 .form__label {
@@ -134,12 +133,26 @@
   overflow: visible;
 }
 
+:host ::ng-deep .ql-editor a, :host ::ng-deep .wf__info a {
+  display: inline-block;
+  background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
+  transition: all 120ms ease-in-out 0s;
+  background-size: 100% 200%;
+  background-position: 0px 0px;
+  word-break: break-word;
+
+  &:hover {
+    background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
+    background-position: 0px 100%;
+  }
+}
+
 .menu--heading, .menu--sub-heading, .menu--sub-sub-heading {
   cursor: pointer;
   display: block;
   margin: .5rem 0;
   color: black ;
-  
+  margin-left: 1rem;
 
   i {
     color: $primary-color;
@@ -154,10 +167,10 @@
 
 .menu--sub-heading {
   font-size: 1.4rem;
-  margin-left: 2rem;
+  margin-left: 3rem;
 }
 
 .menu--sub-sub-heading {
   font-size: 1.2rem;
-  margin-left: 4rem;
+  margin-left: 5rem;
 }

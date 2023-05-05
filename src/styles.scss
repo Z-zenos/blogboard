@@ -126,14 +126,54 @@ html, body { height: 100%; }
   display: inline-block;
 }
 
-
-
 .bl__logo {
   font-size: $big-text;
   font-weight: 700;
   color: $primary-color;
 }
 
+.text-half-highlight {
+  display: inline-block;
+  background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
+  transition: all 120ms ease-in-out 0s;
+  background-size: 100% 200%;
+  background-position: 0px 0px;
+  word-break: break-word;
+
+  &:hover {
+    background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
+    background-position: 0px 100%;
+  }
+}
+
+.text-two-line {
+  overflow: hidden;
+  text-align: center;
+  font-size: $big-text;
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.text-two-line::before,
+.text-two-line::after {
+  background-color: rgba($primary-color, 0.7);
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.text-two-line::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.text-two-line::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
 
 /* ================================================== */
 /*                       BUTTON                       */
@@ -241,49 +281,6 @@ html, body { height: 100%; }
       border-color: $gray-1;
     }
   }
-}
-
-.text-half-highlight {
-  display: inline-block;
-  background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
-  transition: all 120ms ease-in-out 0s;
-  background-size: 100% 200%;
-  background-position: 0px 0px;
-  word-break: break-word;
-
-  &:hover {
-    background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
-    background-position: 0px 100%;
-  }
-}
-
-.text-two-line {
-  overflow: hidden;
-  text-align: center;
-  font-size: $big-text;
-  color: $primary-color;
-  font-weight: 600;
-}
-
-.text-two-line::before,
-.text-two-line::after {
-  background-color: rgba($primary-color, 0.7);
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 50%;
-}
-
-.text-two-line::before {
-  right: 0.5em;
-  margin-left: -50%;
-}
-
-.text-two-line::after {
-  left: 0.5em;
-  margin-right: -50%;
 }
 
 input, select {
