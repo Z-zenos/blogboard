@@ -27,6 +27,7 @@ import { TipComponent } from './components/tip/tip.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { QuillModule } from 'ngx-quill';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PostFormComponent,
     PostsComponent,
     TipComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

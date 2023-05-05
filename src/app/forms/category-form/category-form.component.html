@@ -21,17 +21,8 @@
       <!-- CTGR NAME -->
       <label class="form__label mt-2">New category name</label>
       <input type="text" placeholder="Python, Dash, Redux..." formControlName="name" required />
-
-      <div
-        class="flex p-4 border items-center rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
-        role="alert" *ngIf="ctgrFormControl['name'].touched && ctgrFormControl['name'].invalid"
-        style="margin: 1rem 0; font-size: 13px; color: red; border-color: red;">
-        <i class="fas fa-skull" style="margin-right: 5px;"></i>
-        <span class="sr-only">Error</span>
-        <div>
-          Name is required!.
-        </div>
-      </div>
+      <board-alert *ngIf="ctgrFormControl['name'].touched && ctgrFormControl['name'].invalid"
+        message="Name is required!."></board-alert>
 
       <!-- File Info -->
       <label *ngIf="file" class="form__label mt-10 mb-0" style="margin-bottom: 0;">Info:</label>

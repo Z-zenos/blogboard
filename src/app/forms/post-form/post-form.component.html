@@ -12,6 +12,8 @@
               [tipList]="['You might find that you have a better idea of your title after writing out the rest of the question.']"></board-tip>
             <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io"
               formControlName="title" (input)="onTitleChanged($any($event))" />
+            <board-alert *ngIf="fc['title'].touched && fc['title'].invalid" message="Title is required!"
+              type="error"></board-alert>
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Permalink</h3>

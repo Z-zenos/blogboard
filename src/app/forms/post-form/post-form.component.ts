@@ -60,16 +60,20 @@ export class PostFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._fb.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
       permalink: ['', Validators.required],
-      excerpt: ['', Validators.required],
+      excerpt: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
       categories: [[], Validators.required],
-      image: ['', Validators.required],
-      references: [[], Validators.required],
-      content: ['', Validators.required],
+      image: [''],
+      references: [[]],
+      content: ['', [Validators.required, Validators.minLength(50)]],
     });
 
     this.retrieveAllCategories();
+  }
+
+  get fc() {
+    return this.form.controls;
   }
 
   retrieveAllCategories() {

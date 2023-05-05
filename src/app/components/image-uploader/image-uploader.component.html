@@ -1,6 +1,7 @@
 <div class="img-uploader" #dragArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)"
   [ngStyle]="style">
-  <input type="file" hidden #inputFileImg (change)="onSelect($event)" required>
+  <input type="file" hidden #inputFileImg (change)="onSelect($event)" required
+    accept="image/png, image/jpg, image/jpeg">
 
   <div *ngIf="!file" class="img-uploader__drag">
     <div class="img-uploader__icon"><i class="fas fa-cloud-upload-alt"></i></div>
