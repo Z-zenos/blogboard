@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import Emoji from 'quill-emoji'; -> Error, use below line
 // import "quill-emoji/dist/quill-emoji.css"; -> Error
@@ -10,6 +10,7 @@ import BlotFormatter from 'quill-blot-formatter';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory } from 'src/app/models/category.interface';
 import { LoaderService } from 'src/app/services/loader.service';
+import { ImageValidator } from 'src/app/validators/imageValidator';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -64,7 +65,7 @@ export class PostFormComponent implements OnInit {
       permalink: ['', Validators.required],
       excerpt: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
       categories: [[], Validators.required],
-      image: [''],
+      image: ['', [ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
       references: [[]],
       content: ['', [Validators.required, Validators.minLength(50)]],
     });
@@ -72,7 +73,7 @@ export class PostFormComponent implements OnInit {
     this.retrieveAllCategories();
   }
 
-  get fc() {
+  get fc(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 

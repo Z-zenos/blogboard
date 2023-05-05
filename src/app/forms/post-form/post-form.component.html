@@ -12,21 +12,23 @@
               [tipList]="['You might find that you have a better idea of your title after writing out the rest of the question.']"></board-tip>
             <input type="text" placeholder="e.g. How to implement socket in Node.js using Socket.io"
               formControlName="title" (input)="onTitleChanged($any($event))" />
-            <board-alert *ngIf="fc['title'].touched && fc['title'].invalid" message="Title is required!"
-              type="error"></board-alert>
+            <board-alert *ngIf="fc['title'].touched && fc['title'].invalid"
+              message="Title is required and min_length = 10 && max_length = 100!"></board-alert>
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Permalink</h3>
             <board-tip
               [tipList]="['Always be SEO-friendly URLs that are both easy for people to remember and for search engines to make sense of.']"></board-tip>
             <input type="text" placeholder="e.g. https://www.blogify.com/what-is-permalink/" formControlName="permalink"
-              [disabled]="true" readonly class="input--disabled" />
+              readonly class="input--disabled" />
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Excerpt | TL;DR</h3>
             <board-tip
               [tipList]="['Stay Within 20-30 Words.', 'Compliment the Headline, Don\'t Repeat It.', 'Tease Commentary From the Story', 'Introduce the Author']"></board-tip>
             <textarea formControlName="excerpt"></textarea>
+            <board-alert *ngIf="fc['excerpt'].touched && fc['excerpt'].invalid"
+              message="Excerpt is required!"></board-alert>
           </div>
 
           <div class="wf__input-group">
@@ -36,6 +38,8 @@
               (remove)="deleteCategory($event)">
               <ng-option *ngFor="let ctgr of categories" [value]="ctgr.name">{{ctgr.name}}</ng-option>
             </ng-select>
+            <board-alert *ngIf="fc['categories'].touched && fc['categories'].invalid"
+              message="Category is required!"></board-alert>
           </div>
 
         </div>
@@ -65,6 +69,8 @@
             <board-image-uploader formControlName="image" [style]="{ 'height': '35rem', 'margin': '1rem 0' }"
               (changeImage)="onImageChange($event)">
             </board-image-uploader>
+            <board-alert *ngIf="fc['image'].errors?.['maxSize'] || fc['image'].errors?.['extension']"
+              message="Image is invalid!"></board-alert>
           </div>
         </div>
       </div>
@@ -81,6 +87,8 @@
             <quill-editor [styles]="{height: '400px', backgroundColor:'#faf8f8'}" formControlName="content"
               [modules]="quillEditorModules" (onEditorCreated)="exportStats()" (onContentChanged)="exportStats()">
             </quill-editor>
+            <board-alert *ngIf="fc['content'].touched && fc['content'].invalid"
+              message="Content is required!"></board-alert>
             <!-- <quill-view-html [content]="form.value.content" theme="snow"></quill-view-html> -->
           </div>
         </div>

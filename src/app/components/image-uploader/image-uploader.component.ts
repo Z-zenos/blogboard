@@ -87,7 +87,7 @@ export class ImageUploaderComponent implements ControlValueAccessor {
     else {
       alert("This is not an image file !");
       this.dropArea.nativeElement.classList.remove("active");
-      this.dragText.nativeElement.textContent = "Drag & Drop";
+      if (this.dragText) this.dragText.nativeElement.textContent = "Drag & Drop";
     }
   }
 
