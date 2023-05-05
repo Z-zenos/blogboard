@@ -17,8 +17,8 @@
             <h3 class="form__label">Permalink</h3>
             <board-tip
               [tipList]="['Always be SEO-friendly URLs that are both easy for people to remember and for search engines to make sense of.']"></board-tip>
-            <input type="text" placeholder="e.g. https://www.blogify.com/what-is-permalink/"
-              formControlName="permalink" />
+            <input type="text" placeholder="e.g. https://www.blogify.com/what-is-permalink/" formControlName="permalink"
+              [disabled]="true" readonly class="input--disabled" />
           </div>
           <div class="wf__input-group">
             <h3 class="form__label">Excerpt | TL;DR</h3>
