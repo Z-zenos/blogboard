@@ -24,6 +24,5 @@
     </div>
   </div>
 
-  <board-post-card *ngFor="let p of posts" [image_url]="p.image" [title]="p.title" [excerpt]="p.excerpt"
-    [categories]="p.categories" [view]="p.view" [like]="p.like" [published]="p.created_at"></board-post-card>
+  <board-post-card *ngFor="let p of posts" [post]="p"></board-post-card>
 </div>
