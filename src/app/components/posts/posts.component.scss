@@ -1,1 +1,9 @@
 @import "../../../styles";
+
+.posts {
+  display: flex;
+  justify-content: flex-start;
+  gap: .7rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+}

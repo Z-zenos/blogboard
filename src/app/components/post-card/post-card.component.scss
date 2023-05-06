@@ -1,28 +1,32 @@
 @import "../../../styles";
 
 .post-card {
-  width: 31rem;
-  height: 45rem;
+  width: 48rem;
   font-size: $small-text;
-  border: 2px solid $black-color;
+  border: 1px solid $primary-color;
   background-color: $secondary-color;
-  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  box-shadow: rgba($green-1, 0.25) 0px 2px 5px -1px, rgba($green-2, 0.3) 0px 1px 3px -1px;
   border-radius: 8px;
   cursor: pointer;
+  margin: .7rem;
+  display: grid;
+  grid-template-columns: 16% 82%;
+  column-gap: 2%;
+  padding: 1rem;
 
   i {
     margin: 0 .5rem;
   }
 
   &__img {
-    width: 100%;
-    height: 18rem;
+    width: 7rem;
+    height: 100%;
     margin-bottom: 1rem;
     overflow: hidden;
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 7rem;
+      height: 7rem;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       transition: $transition;
@@ -35,15 +39,13 @@
 
   &__info {
     width: 100%;
-    height: 24rem;
-    padding: 2px 2rem;
-    display: grid;
-    grid-template-rows: 25% 10% 30% 35%;
-    row-gap: 2%;
+    padding: 0;
+    height: 100%;
+    text-align: left;
   }
 
   &__title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: $primary-color;
     line-height: 2rem;
@@ -53,32 +55,33 @@
     }
   }
 
-  &__action {
-    height: 2rem;
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    opacity: .7;
-
-    span {
-      @include center-item();
-    }
+  span {
+    @include center-item();
   }
 
-  &__short-desc {
-    font-size: 1.4rem;
+  &__experpt {
+    font-size: 1.3rem;
     color: $black-color;
     height: 6rem;
-
-    @include limit-line(3);
   }
 
   &__tags {
-    margin: .5rem 0;
-    display: flex;
+    display: inline-flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
+
+    .tag {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      color: blue;
+      margin-right: 3px;
+    }
+  }
+
+  &__stats {
+    font-size: $tip-text;
+    margin-top: 2rem;
   }
 }
