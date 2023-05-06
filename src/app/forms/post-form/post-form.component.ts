@@ -68,13 +68,13 @@ export class PostFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._fb.group({
-      title: ['Uncaught TypeError: Cannot read property "value" of null [duplicate]', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+      title: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
       permalink: ['', Validators.required],
-      excerpt: ['Hanoi University of Science & Technology (HUST)...', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
+      excerpt: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
       categories: [[], Validators.required],
-      image: ['', [Validators.required, ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
+      image: ['', [ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
       references: [[]],
-      content: ["I'm getting error in this code, I'm trying to do an event where in when the page is load, it will do the event. But the problem is when I go to other function, but same page, it gets a error of null on that variable. It has no problem when I execute this code, but when I'm on other part of my code this error occurs.", [Validators.required, Validators.minLength(50)]],
+      content: ['', [Validators.required, Validators.minLength(50)]],
     });
 
     this.retrieveAllCategories();

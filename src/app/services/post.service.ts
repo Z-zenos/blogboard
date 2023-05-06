@@ -29,8 +29,6 @@ export class PostService {
     await uploadBytesResumable(storageRef, image.file);
     const downloadImageURL = await getDownloadURL(storageRef);
     postData.image = downloadImageURL;
-    // addDoc(this._posts, postData);
-    console.log(postData);
-
+    addDoc(this._posts, postData);
   }
 }
