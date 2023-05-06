@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IImage } from 'src/app/models/image.interface';
 
 @Component({
   selector: 'board-image-uploader',
@@ -21,7 +22,7 @@ export class ImageUploaderComponent implements ControlValueAccessor {
 
   @Input() style: { [klass: string]: any; } | null | undefined = {};
 
-  @Output() changeImage = new EventEmitter<string>();
+  @Output() changeImage = new EventEmitter<IImage>();
 
   imgUrl: string = '';
   file!: File | null;
@@ -80,7 +81,7 @@ export class ImageUploaderComponent implements ControlValueAccessor {
         // Passing user file source in fileURL variable
         let fileURL = fileReader.result;
         this.imgUrl = fileURL as string;
-        this.changeImage.emit(this.imgUrl);
+        this.changeImage.emit({ file: this.file, base64: this.imgUrl });
       }
       fileReader.readAsDataURL(this.file as File);
     }

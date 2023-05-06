@@ -1,10 +1,10 @@
-export interface Post {
+export interface IPost {
   title: string;
   permalink: string;
   content: string;
+  references: string[];
   categories: { id: string, name: string }[];
-  image_url: string;
-  authors_id: string[];
+  image: string;
   excerpt: string;
 
   speakable: boolean;
@@ -17,7 +17,6 @@ export interface Post {
   isFeatured: boolean;
   status: string;
 
-  references: string[];
 
   created_at: Date;
   updated_at: Date;

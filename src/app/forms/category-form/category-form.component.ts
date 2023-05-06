@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICategory } from 'src/app/models/category.interface';
+import { IImage } from 'src/app/models/image.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -97,10 +98,12 @@ export class CategoryFormComponent implements OnInit {
     return resp;
   }
 
-  retrieveImageSrc(src: string) {
-    this.category.logo = src;
+  retrieveImageSrc(image: IImage) {
+    console.log(image);
+
+    this.category.logo = image.base64;
     this.form.patchValue({
-      logo: src
+      logo: image.base64
     });
   }
 }

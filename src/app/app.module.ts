@@ -28,7 +28,7 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 import { QuillModule } from 'ngx-quill';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AlertComponent } from './components/alert/alert.component';
-
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { AlertComponent } from './components/alert/alert.component';
     ReactiveFormsModule,
     QuillModule.forRoot(),
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    provideStorage(() => getStorage()),
   ],
   providers: [],
   bootstrap: [AppComponent]

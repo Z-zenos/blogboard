@@ -11,6 +11,9 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ICategory } from 'src/app/models/category.interface';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ImageValidator } from 'src/app/validators/imageValidator';
+import { IPost } from 'src/app/models/post.interface';
+import { PostService } from 'src/app/services/post.service';
+import { IImage } from 'src/app/models/image.interface';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -48,11 +51,13 @@ export class PostFormComponent implements OnInit {
   selectedCategories: {}[] = [];
   categories: ICategory[] = [];
   quillEditorModules = {};
+  selectedImage: IImage = { file: null, base64: '' };
 
   constructor(
     private _fb: FormBuilder,
     private _categoryService: CategoryService,
-    private _loaderService: LoaderService
+    private _loaderService: LoaderService,
+    private _postService: PostService
   ) {
     this.quillEditorModules = {
       ...this.config
@@ -87,13 +92,36 @@ export class PostFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.invalid) return;
-    console.log(this.form.value);
+
+    const postData: IPost = {
+      ...this.form.value,
+      speakable: false,
+      comment_id: '',
+      view: 0,
+      awards: [],
+      like: 0,
+      isFeatured: false,
+      status: '',
+      created_at: new Date(),
+      updated_at: new Date(),
+      deleted: false,
+    }
+
+    this._loaderService.control(true);
+    this._postService.uploadImage(this.selectedImage)?.then(() => {
+      this._loaderService.control(false);
+    });
+
+    console.log(postData);
   }
 
-  onImageChange(src: string) {
-    // this.form.patchValue({
-    //   image: src
-    // });
+  onImageChange(image: IImage) {
+    console.log(image);
+
+    this.selectedImage = image;
+    this.form.patchValue({
+      image: image.base64
+    });
   }
 
   stats: any = {};
@@ -161,6 +189,6 @@ export class PostFormComponent implements OnInit {
   onTitleChanged(e: InputEvent) {
     this.form.patchValue({
       permalink: (e.target as HTMLInputElement).value?.trim()?.replace(/\s+/g, '-')
-    })
+    });
   }
 }
