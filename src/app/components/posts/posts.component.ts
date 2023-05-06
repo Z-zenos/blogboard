@@ -17,6 +17,10 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadAllPost();
+  }
+
+  loadAllPost() {
     this._loaderService.control(true);
     this._postService.getAll().subscribe(data => {
       this.posts = data;
@@ -24,4 +28,15 @@ export class PostsComponent implements OnInit {
     });
   }
 
+  searchPost(title: string) {
+    this._loaderService.control(true);
+    this._postService.getPost(title).subscribe((data: IPost[]) => {
+      this.posts = data;
+      this._loaderService.control(false);
+    });
+  }
+
+  reset() {
+    this.loadAllPost();
+  }
 }

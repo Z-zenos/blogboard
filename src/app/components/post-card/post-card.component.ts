@@ -14,9 +14,28 @@ export class PostCardComponent implements OnInit {
   @Input() like: number = 0;
   @Input() published?: Date;
 
+  isDisplayAction: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  displayAction() {
+    this.isDisplayAction = true;
+    console.log(this.isDisplayAction);
+  }
+
+  hideAction() {
+    this.isDisplayAction = false;
+    console.log(this.isDisplayAction);
+  }
+
+  editPost() {
+
+  }
+
+  removePost() {
+
+  }
 }

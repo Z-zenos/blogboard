@@ -6,13 +6,15 @@
   border: 1px solid $primary-color;
   background-color: $secondary-color;
   box-shadow: rgba($green-1, 0.25) 0px 2px 5px -1px, rgba($green-2, 0.3) 0px 1px 3px -1px;
-  border-radius: 8px;
+  border-radius: 7px;
   cursor: pointer;
   margin: .7rem;
   display: grid;
   grid-template-columns: 16% 82%;
   column-gap: 2%;
   padding: 1rem;
+  position: relative;
+  overflow: hidden;
 
   i {
     margin: 0 .5rem;
@@ -83,5 +85,57 @@
   &__stats {
     font-size: $tip-text;
     margin-top: 2rem;
+  }
+}
+
+
+.action {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4rem;
+  height: 100%;
+  background-color: red;
+  transform: translateX(4rem);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 2;
+  transition: $transition;
+
+  .action--edit, .action--remove {
+    width: 4rem;
+    height: 50%;
+    padding: 1rem;
+    @include center-item();
+    transition: $transition;
+  }
+
+  &--edit {
+    background-color: $yellow-1;
+    border-top-right-radius: 7px;
+    border: 1px solid $yellow-1;
+
+    &:hover {
+      color: $yellow-1;
+      background-color: white;
+    }
+  }
+
+  &--remove {
+    background-color: red;
+    border-bottom-right-radius: 7px;
+    color: white;
+    border: 1px solid red;
+
+    &:hover {
+      color: red;
+      background-color: white;
+    }
+  }
+
+  &.active {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
   }
 }

@@ -1,4 +1,29 @@
 <div class="posts">
+  <div class="posts__actions">
+    <div>
+      <button class="btn btn--green" routerLink="/write">Write Post</button>
+      <button class="btn btn--yellow" (click)="reset()">Reset</button>
+
+      <!-- <div class="posts__sort-box">
+        <button class="btn btn--purple" (click)="isDropDown = !isDropDown">Sort By <i class="fas fa-chevron-down"
+            style="margin-left: 5px;"></i></button>
+        <div class="dropdown" *ngIf="isDropDown">
+          <ul>
+            <li>Name</li>
+            <li>Date</li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="posts__search-box">
+      <input type="text" placeholder="Search post name..." #seachInput (keyup.enter)="searchPost(seachInput.value)" />
+      <button class="btn btn--green" (click)="searchPost(seachInput.value)"><i class="fas fa-search"
+          style="margin-right: 5px;"></i>
+        Search</button>
+    </div>
+  </div>
+
   <board-post-card *ngFor="let p of posts" [image_url]="p.image" [title]="p.title" [excerpt]="p.excerpt"
     [categories]="p.categories" [view]="p.view" [like]="p.like" [published]="p.created_at"></board-post-card>
 </div>

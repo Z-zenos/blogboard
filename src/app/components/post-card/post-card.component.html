@@ -1,4 +1,4 @@
-<div class="post-card">
+<div class="post-card" (mouseenter)="displayAction()" (mouseleave)="hideAction()">
   <div class="post-card__img">
     <img [src]="image_url" />
     <div class="post-card__stats">
@@ -20,6 +20,10 @@
     <p class="post-card__experpt">
       {{ excerpt }}
     </p>
+  </div>
 
+  <div class="action" [ngClass]="{ 'active': isDisplayAction }">
+    <div class="action--edit" (click)="editPost()"><i class="fas fa-pen"></i></div>
+    <div class="action--remove" (click)="removePost()"><i class="fas fa-trash"></i></div>
   </div>
 </div>
