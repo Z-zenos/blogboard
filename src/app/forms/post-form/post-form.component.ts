@@ -14,6 +14,7 @@ import { ImageValidator } from 'src/app/validators/imageValidator';
 import { IPost } from 'src/app/models/post.interface';
 import { PostService } from 'src/app/services/post.service';
 import { IImage } from 'src/app/models/image.interface';
+import { ToastService } from 'src/app/services/toast.service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -57,7 +58,8 @@ export class PostFormComponent implements OnInit {
     private _fb: FormBuilder,
     private _categoryService: CategoryService,
     private _loaderService: LoaderService,
-    private _postService: PostService
+    private _postService: PostService,
+    private _toastService: ToastService
   ) {
     this.quillEditorModules = {
       ...this.config
@@ -90,7 +92,7 @@ export class PostFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) return;
 
     const postData: IPost = {
@@ -107,17 +109,21 @@ export class PostFormComponent implements OnInit {
       deleted: false,
     }
 
-    this._loaderService.control(true);
-    this._postService.uploadImage(this.selectedImage)?.then(() => {
+    try {
+      this._loaderService.control(true);
+      const status = await this._postService.uploadImage(this.selectedImage);
+      if (!status) throw new Error("Upload image failed");
+      this._toastService.success("Successfully", "Your post have been published.");
+    }
+    catch (err) {
+      this._toastService.error("Failure", `Something went wrong. Message: ${err}`);
+    }
+    finally {
       this._loaderService.control(false);
-    });
-
-    console.log(postData);
+    }
   }
 
   onImageChange(image: IImage) {
-    console.log(image);
-
     this.selectedImage = image;
     this.form.patchValue({
       image: image.base64

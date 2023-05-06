@@ -13,8 +13,7 @@ export class PostService {
 
   uploadImage(image: IImage): UploadTask | undefined {
     if (!image.file) {
-      console.log("File null");
-      return;
+      throw new Error("File null");
     }
     const nameSplitter = image.file?.name.split('.') ?? '';
     const filePath = `post/${nameSplitter[0]}_${Date.now()}`;
