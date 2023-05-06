@@ -1,0 +1,23 @@
+<div class="post-card">
+  <div class="post-card__img">
+    <img [src]="image_url" alt="ubuntu dictionary" />
+  </div>
+  <div class="post-card__info text-left">
+    <h3 class="post-card__title">{{ title }}</h3>
+    <div class="post-card__action">
+      <div>
+        <span>{{ published | date }} <i class="far fa-clock"></i></span>
+      </div>
+      <div>
+        <span>{{ view }} <i class="fas fa-eye"></i></span>
+        <span>{{ like }} <i class="fas fa-thumbs-up"></i></span>
+      </div>
+    </div>
+    <p class="post-card__short-desc">
+      {{ excerpt }}
+    </p>
+    <div class="post-card__tags">
+      <board-tag *ngFor="let tag of categories" [tagName]="tag.name"></board-tag>
+    </div>
+  </div>
+</div>

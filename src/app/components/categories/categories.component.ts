@@ -85,7 +85,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   invertColor(hex: string, bw: boolean) {
-    if (hex === 'white') hex = '#ffffff';
+    if (hex === 'white' || !hex) hex = '#ffffff';
     else if (hex === 'black') hex = '#000000';
 
     if (hex.indexOf('#') === 0) {

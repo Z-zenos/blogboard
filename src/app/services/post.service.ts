@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Storage, UploadTask, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { IImage } from '../models/image.interface';
 import { IPost } from '../models/post.interface';
-import { CollectionReference, DocumentData, Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,11 @@ export class PostService {
     const downloadImageURL = await getDownloadURL(storageRef);
     postData.image = downloadImageURL;
     addDoc(this._posts, postData);
+  }
+
+  getAll() {
+    return collectionData(this._posts, {
+      idField: 'id'
+    }) as Observable<IPost[]>;
   }
 }

@@ -107,8 +107,8 @@ export class PostFormComponent implements OnInit {
         like: 0,
         isFeatured: false,
         status: '',
-        created_at: new Date(),
-        updated_at: new Date(),
+        created_at: Date.now(),
+        updated_at: Date.now(),
         deleted: false,
       }
 
@@ -122,7 +122,8 @@ export class PostFormComponent implements OnInit {
     finally {
       this.form.reset();
       this.selectedImage = { file: null, base64: '' };
-      this.references = this.selectedCategories = [];
+      this.references = [];
+      this.deleteCategory(undefined);
       this._loaderService.control(false);
     }
   }

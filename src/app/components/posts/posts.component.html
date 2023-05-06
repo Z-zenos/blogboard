@@ -1,1 +1,4 @@
-<p>posts works!</p>
+<div class="post">
+  <board-post-card *ngFor="let p of posts" [image_url]="p.image" [title]="p.title" [excerpt]="p.excerpt"
+    [categories]="p.categories" [view]="p.view" [like]="p.like" [published]="p.created_at"></board-post-card>
+</div>

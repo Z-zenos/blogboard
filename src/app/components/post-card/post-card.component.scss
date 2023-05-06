@@ -1,0 +1,84 @@
+@import "../../../styles";
+
+.post-card {
+  width: 31rem;
+  height: 45rem;
+  font-size: $small-text;
+  border: 2px solid $black-color;
+  background-color: $secondary-color;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  i {
+    margin: 0 .5rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 18rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      transition: $transition;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__info {
+    width: 100%;
+    height: 24rem;
+    padding: 2px 2rem;
+    display: grid;
+    grid-template-rows: 25% 10% 30% 35%;
+    row-gap: 2%;
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $primary-color;
+    line-height: 2rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__action {
+    height: 2rem;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: .7;
+
+    span {
+      @include center-item();
+    }
+  }
+
+  &__short-desc {
+    font-size: 1.4rem;
+    color: $black-color;
+    height: 6rem;
+
+    @include limit-line(3);
+  }
+
+  &__tags {
+    margin: .5rem 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}

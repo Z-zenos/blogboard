@@ -29,6 +29,7 @@ import { QuillModule } from 'ngx-quill';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AlertComponent } from './components/alert/alert.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     PostsComponent,
     TipComponent,
     ImageUploaderComponent,
-    AlertComponent
+    AlertComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,

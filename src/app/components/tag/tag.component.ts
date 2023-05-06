@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'blog-tag',
+  selector: 'board-tag',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss']
 })
