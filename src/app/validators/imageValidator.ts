@@ -10,7 +10,7 @@ export class ImageValidator {
 
   static permitSize(maxSize: number) {
     return function (input: FormControl) {
-      if (input.value.size) {
+      if (input?.value?.size) {
         return byteConverter(input.value.size, 2) > maxSize ? { maxSize: true } : null;
       }
       return null;
@@ -19,7 +19,7 @@ export class ImageValidator {
 
   static acceptExtenstions(whiteListImageExtension: string[]) {
     return function (input: FormControl) {
-      if (input.value.type) {
+      if (input?.value?.type) {
         return whiteListImageExtension.includes(input.value.type) ? null : { extension: true };
       }
       return null;

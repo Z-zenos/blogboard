@@ -68,13 +68,13 @@ export class PostFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._fb.group({
-      title: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+      title: ['Uncaught TypeError: Cannot read property "value" of null [duplicate]', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
       permalink: ['', Validators.required],
-      excerpt: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
+      excerpt: ['Hanoi University of Science & Technology (HUST)...', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
       categories: [[], Validators.required],
-      image: ['', [ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
+      image: ['', [Validators.required, ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
       references: [[]],
-      content: ['', [Validators.required, Validators.minLength(50)]],
+      content: ["I'm getting error in this code, I'm trying to do an event where in when the page is load, it will do the event. But the problem is when I go to other function, but same page, it gets a error of null on that variable. It has no problem when I execute this code, but when I'm on other part of my code this error occurs.", [Validators.required, Validators.minLength(50)]],
     });
 
     this.retrieveAllCategories();
@@ -93,32 +93,36 @@ export class PostFormComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.form.invalid) return;
-
-    const postData: IPost = {
-      ...this.form.value,
-      speakable: false,
-      comment_id: '',
-      view: 0,
-      awards: [],
-      like: 0,
-      isFeatured: false,
-      status: '',
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted: false,
-    }
-
     try {
+      if (this.form.invalid) {
+        throw new Error("Please fill all field.");
+      }
+
+      const postData: IPost = {
+        ...this.form.value,
+        speakable: false,
+        comment_id: '',
+        view: 0,
+        awards: [],
+        like: 0,
+        isFeatured: false,
+        status: '',
+        created_at: new Date(),
+        updated_at: new Date(),
+        deleted: false,
+      }
+
       this._loaderService.control(true);
-      const status = await this._postService.uploadImage(this.selectedImage);
-      if (!status) throw new Error("Upload image failed");
+      await this._postService.publishPost(this.selectedImage, postData);
       this._toastService.success("Successfully", "Your post have been published.");
     }
-    catch (err) {
-      this._toastService.error("Failure", `Something went wrong. Message: ${err}`);
+    catch (err: any) {
+      this._toastService.error("Failure", `Something went wrong. Message: ${err.message}`);
     }
     finally {
+      this.form.reset();
+      this.selectedImage = { file: null, base64: '' };
+      this.references = this.selectedCategories = [];
       this._loaderService.control(false);
     }
   }
@@ -142,7 +146,6 @@ export class PostFormComponent implements OnInit {
     this.stats['reading-time'] = this.caculateTimeReading(temp.innerText.trim()) + ' min';
 
     this.stats.headingList = Array.from(document.querySelectorAll('.ql-editor h1, .ql-editor h2, .ql-editor h3'));
-
   }
 
   caculateTimeReading(content: string): number {
