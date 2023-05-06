@@ -2,8 +2,8 @@ export interface Post {
   title: string;
   permalink: string;
   content: string;
-  categories: string[];
-  image: string;
+  categories: { id: string, name: string }[];
+  image_url: string;
   authors_id: string[];
   excerpt: string;
 
@@ -14,6 +14,8 @@ export interface Post {
   view: number;
   awards: string[];
   like: number;
+  isFeatured: boolean;
+  status: string;
 
   references: string[];
 

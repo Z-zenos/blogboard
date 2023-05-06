@@ -10,8 +10,6 @@ export class ImageValidator {
 
   static permitSize(maxSize: number) {
     return function (input: FormControl) {
-      console.log(input);
-
       if (input.value.size) {
         return byteConverter(input.value.size, 2) > maxSize ? { maxSize: true } : null;
       }

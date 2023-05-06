@@ -45,7 +45,7 @@ export class PostFormComponent implements OnInit {
 
   form!: FormGroup;
   references: string[] = [];
-  selectedCategories: string[] = [];
+  selectedCategories: {}[] = [];
   categories: ICategory[] = [];
   quillEditorModules = {};
 
@@ -86,6 +86,7 @@ export class PostFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.form.invalid) return;
     console.log(this.form.value);
   }
 
@@ -139,7 +140,7 @@ export class PostFormComponent implements OnInit {
     this.references.splice(index, 1);
   }
 
-  addCategory(category: any) {
+  addCategory(category: { id: string, name: string }) {
     this.selectedCategories = [...this.selectedCategories, category];
     this.form.patchValue({
       categories: this.selectedCategories
@@ -147,7 +148,7 @@ export class PostFormComponent implements OnInit {
   }
 
   deleteCategory(data: any) {
-    this.selectedCategories = !data ? [] : this.selectedCategories.filter(c => c !== data.label);
+    this.selectedCategories = !data ? [] : this.selectedCategories.filter((c: any) => c.id !== data.value.id);
     this.form.patchValue({
       categories: this.selectedCategories
     });
