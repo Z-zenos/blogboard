@@ -20,21 +20,25 @@ export class PostService {
   }
 
   async publishPost(image: IImage, postData: IPost, type: string) {
-    if (!image.file) {
+    if (!image.base64) {
       throw new Error("File null");
     }
-    const nameSplitter = image.file?.name.split('.') ?? '';
-    const filePath = `post/${nameSplitter[0]}_${Date.now()}`;
 
-    const storageRef = ref(this._storage, filePath);
-    await uploadBytesResumable(storageRef, image.file);
-    const downloadImageURL = await getDownloadURL(storageRef);
-    postData.image = downloadImageURL;
+    if (image.file && image.base64) {
+      const nameSplitter = image.file?.name.split('.') ?? '';
+      const filePath = `post/${nameSplitter[0]}_${Date.now()}`;
+
+      const storageRef = ref(this._storage, filePath);
+      await uploadBytesResumable(storageRef, image.file);
+      const downloadImageURL = await getDownloadURL(storageRef);
+      postData.image = downloadImageURL;
+    }
 
     if (type === 'Publish') {
       addDoc(this._posts, postData);
     }
     else if (type === 'Update') {
+      // Current image was firebase image url
       const ctgrDocRef = doc(
         this._firestore,
         `posts/${postData.id}`

@@ -125,8 +125,7 @@ export class PostFormComponent implements OnInit {
         throw new Error("Please fill all field.");
       }
 
-      const postData: IPost = {
-        ...this.form.value,
+      const extra = {
         speakable: false,
         comment_id: '',
         view: 0,
@@ -138,6 +137,8 @@ export class PostFormComponent implements OnInit {
         updated_at: Date.now(),
         deleted: false,
       }
+
+      const postData: IPost = Object.assign({}, this.editPost ?? extra, this.form.value);
 
       this._loaderService.control(true);
       await this._postService.publishPost(this.selectedImage, postData, this.type);
