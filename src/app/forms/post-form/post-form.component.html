@@ -45,7 +45,11 @@
             <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
             <ng-select [multiple]="true" (add)="addCategory($event)" (clear)="deleteCategory($event)"
               (remove)="deleteCategory($event)" bindLabel="name" [items]="categories" formControlName="categories"
-              [addTag]="addNewCategory" addTagText="Create new category" [loading]="loadingSelect">
+              addTagText="Create new category" [loading]="loadingSelect" #ctgrSelect>
+              <ng-template ng-footer-tmp>
+                <p class="create-new" (click)="ctgrSelect.isOpen = false; addNewCategory()">Create new category <i
+                    class="fas fa-wrench"></i> </p>
+              </ng-template>
             </ng-select>
             <board-alert *ngIf="fc['categories'].touched && fc['categories'].invalid"
               message="Category is required!"></board-alert>

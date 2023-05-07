@@ -249,13 +249,11 @@ export class PostFormComponent implements OnInit {
     }
   }
 
-  addNewCategory(name: string) {
-    return new Promise(() => {
-      this._formService.controlForm(
-        'category',
-        { isDisplay: true, type: 'create', category: { logo: '', name: name, color: '' } }
-      );
-    });
+  addNewCategory() {
+    this._formService.controlForm(
+      'category',
+      { isDisplay: true, type: 'create', category: { logo: '', name: name, color: '' } }
+    );
   }
 
   deletePost() {
