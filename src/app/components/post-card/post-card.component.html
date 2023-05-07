@@ -25,6 +25,6 @@
 
   <div class="action" [ngClass]="{ 'active': isDisplayAction }">
     <div class="action--edit" routerLink="/write" [queryParams]="{ 'id': post?.id }"><i class="fas fa-pen"></i></div>
-    <div class="action--remove" (click)="removePost()"><i class="fas fa-trash"></i></div>
+    <div class="action--remove" (click)="deletePost()"><i class="fas fa-trash"></i></div>
   </div>
 </div>
