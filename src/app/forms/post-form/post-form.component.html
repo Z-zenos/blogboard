@@ -35,7 +35,7 @@
             <h3 class="form__label">Select a post category</h3>
             <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
             <ng-select [multiple]="true" (add)="addCategory($event)" (clear)="deleteCategory($event)"
-              (remove)="deleteCategory($event)">
+              (remove)="deleteCategory($event)" bindLabel="name" formControlName="categories">
               <ng-option *ngFor="let ctgr of categories"
                 [value]="{ name: ctgr.name, id: ctgr.id }">{{ctgr.name}}</ng-option>
             </ng-select>
@@ -68,7 +68,7 @@
             <board-tip
               [tipList]="['Allowed: jpeg, jpg, png.', 'Image size must be less than 5MB.', 'Drag & Drop new image OR hover on image and click change icon at top right position for changing other one.']"></board-tip>
             <board-image-uploader [style]="{ 'height': '35rem', 'margin': '1rem 0' }"
-              (changeImage)="onImageChange($event)" [imgUrl]="this.editPost.image">
+              (changeImage)="onImageChange($event)" [imgUrl]="this.selectedImage.base64">
             </board-image-uploader>
             <board-alert *ngIf="fc['image'].errors?.['maxSize'] || fc['image'].errors?.['extension']"
               message="Image is invalid!"></board-alert>
