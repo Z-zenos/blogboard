@@ -16,20 +16,6 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displayAction() {
-    this.isDisplayAction = true;
-    console.log(this.isDisplayAction);
-  }
-
-  hideAction() {
-    this.isDisplayAction = false;
-    console.log(this.isDisplayAction);
-  }
-
-  editPost() {
-
-  }
-
   removePost() {
 
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage, UploadTask, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { IImage } from '../models/image.interface';
 import { IPost } from '../models/post.interface';
-import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, query, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, doc, docData, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -39,8 +39,13 @@ export class PostService {
     }) as Observable<IPost[]>;
   }
 
-  getPost(title: string) {
+  getPostByTitle(title: string) {
     const appQuery = query(this._posts, where('title', '==', title));
     return collectionData(appQuery) as Observable<IPost[]>;
+  }
+
+  getPostById(id: string) {
+    const ctgrDocRef = doc(this._firestore, `posts/${id}`);
+    return docData(ctgrDocRef, { idField: 'id' }) as Observable<IPost>;
   }
 }

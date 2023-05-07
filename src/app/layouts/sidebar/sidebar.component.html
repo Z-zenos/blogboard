@@ -1,7 +1,7 @@
 <div class="sidebar">
   <ul class="sidebar__list">
     <li *ngFor="let r of routes" [routerLink]="'/' + r" class="sidebar__item"
-      [ngClass]="{ 'sidebar__item--active': ('/' + r) === currentRoute }">
+      [ngClass]="{ 'sidebar__item--active': currentRoute.includes('/' + r)}">
       <board-icon [name]="r"></board-icon> {{ r }}
     </li>
   </ul>

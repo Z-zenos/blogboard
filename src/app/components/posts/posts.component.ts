@@ -31,7 +31,7 @@ export class PostsComponent implements OnInit {
 
   searchPost(title: string) {
     this._loaderService.control(true);
-    this._postService.getPost(title).subscribe((data: IPost[]) => {
+    this._postService.getPostByTitle(title).subscribe((data: IPost[]) => {
       this.posts = data;
       this._loaderService.control(false);
     });

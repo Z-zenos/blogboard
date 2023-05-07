@@ -1,5 +1,5 @@
 <div class="wf">
-  <form [formGroup]="form" class="wf__form">
+  <form *ngIf="form" [formGroup]="form" class="wf__form">
     <section class="wf__head">
       <div class="wf__head--left">
         <h3 class="wf__heading">
@@ -68,7 +68,7 @@
             <board-tip
               [tipList]="['Allowed: jpeg, jpg, png.', 'Image size must be less than 5MB.', 'Drag & Drop new image OR hover on image and click change icon at top right position for changing other one.']"></board-tip>
             <board-image-uploader [style]="{ 'height': '35rem', 'margin': '1rem 0' }"
-              (changeImage)="onImageChange($event)">
+              (changeImage)="onImageChange($event)" [imgUrl]="this.editPost.image">
             </board-image-uploader>
             <board-alert *ngIf="fc['image'].errors?.['maxSize'] || fc['image'].errors?.['extension']"
               message="Image is invalid!"></board-alert>

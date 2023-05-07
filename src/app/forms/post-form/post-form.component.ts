@@ -15,6 +15,7 @@ import { IPost } from 'src/app/models/post.interface';
 import { PostService } from 'src/app/services/post.service';
 import { IImage } from 'src/app/models/image.interface';
 import { ToastService } from 'src/app/services/toast.service';
+import { ActivatedRoute } from '@angular/router';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -54,12 +55,28 @@ export class PostFormComponent implements OnInit {
   quillEditorModules = {};
   selectedImage: IImage = { file: null, base64: '' };
 
+  editPost: IPost = {
+    id: '',
+    title: '',
+    permalink: '',
+    content: '',
+    references: [],
+    categories: [],
+    image: '',
+    excerpt: '',
+    comment_id: '',
+    view: 0,
+    like: 0,
+    isFeatured: false,
+  };
+
   constructor(
     private _fb: FormBuilder,
     private _categoryService: CategoryService,
     private _loaderService: LoaderService,
     private _postService: PostService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _activatedRoute: ActivatedRoute
   ) {
     this.quillEditorModules = {
       ...this.config
@@ -67,14 +84,22 @@ export class PostFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this._fb.group({
-      title: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
-      permalink: ['', Validators.required],
-      excerpt: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
-      categories: [[], Validators.required],
-      image: ['', [ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
-      references: [[]],
-      content: ['', [Validators.required, Validators.minLength(50)]],
+    this._activatedRoute.queryParams.subscribe(query => {
+      this._postService.getPostById(query['id']).subscribe((post: any) => {
+        this.editPost = post;
+        this.form = this._fb.group({
+          title: [this.editPost?.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+          permalink: [this.editPost?.permalink, Validators.required],
+          excerpt: [this.editPost?.excerpt, [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
+          categories: [this.editPost?.categories, Validators.required],
+          image: [this.editPost?.image, [ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
+          references: [this.editPost?.references],
+          content: [this.editPost?.content, [Validators.required, Validators.minLength(50)]],
+        });
+
+        this.references = this.editPost.references;
+        this.selectedImage = { file: null, base64: this.editPost.image };
+      });
     });
 
     this.retrieveAllCategories();

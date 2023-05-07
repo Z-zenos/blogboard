@@ -21,10 +21,10 @@ export class ImageUploaderComponent implements ControlValueAccessor {
   @ViewChild('dragText', { static: false }) dragText!: ElementRef;
 
   @Input() style: { [klass: string]: any; } | null | undefined = {};
+  @Input() imgUrl: string = '';
 
   @Output() changeImage = new EventEmitter<IImage>();
 
-  imgUrl: string = '';
   file!: File | null;
 
   onChange = (value: any) => { };

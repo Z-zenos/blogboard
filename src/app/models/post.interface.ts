@@ -8,18 +8,18 @@ export interface IPost {
   image: string;
   excerpt: string;
 
-  speakable: boolean;
+  speakable?: boolean;
 
   comment_id: string;
 
   view: number;
-  awards: string[];
+  awards?: string[];
   like: number;
   isFeatured: boolean;
-  status: string;
+  status?: string;
 
 
-  created_at: Date;
-  updated_at: Date;
-  deleted: boolean;
+  created_at?: Date;
+  updated_at?: Date;
+  deleted?: boolean;
 }

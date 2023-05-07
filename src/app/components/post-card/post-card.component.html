@@ -1,4 +1,4 @@
-<div class="post-card" (mouseenter)="displayAction()" (mouseleave)="hideAction()">
+<div class="post-card" (mouseenter)="isDisplayAction = true" (mouseleave)="isDisplayAction = false">
   <div class="post-card__img">
     <img [src]="post?.image" />
     <div class="post-card__stats">
@@ -24,7 +24,7 @@
   </div>
 
   <div class="action" [ngClass]="{ 'active': isDisplayAction }">
-    <div class="action--edit" (click)="editPost()"><i class="fas fa-pen"></i></div>
+    <div class="action--edit" routerLink="/write" [queryParams]="{ 'id': post?.id }"><i class="fas fa-pen"></i></div>
     <div class="action--remove" (click)="removePost()"><i class="fas fa-trash"></i></div>
   </div>
 </div>
