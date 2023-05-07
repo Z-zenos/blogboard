@@ -85,6 +85,8 @@ export class PostFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.retrieveAllCategories();
+
     this._activatedRoute.queryParams.subscribe(query => {
       this._postService.getPostById(query['id']).subscribe((post: any) => {
         this.editPost = post ?? this.editPost;
@@ -97,14 +99,12 @@ export class PostFormComponent implements OnInit {
           references: [this.editPost?.references],
           content: [this.editPost?.content, [Validators.required, Validators.minLength(50)]],
         });
-
         this.references = this.editPost.references;
         this.selectedImage = { file: null, base64: this.editPost.image };
         if (post) this.type = 'Update';
       });
     });
 
-    this.retrieveAllCategories();
   }
 
   get fc(): { [key: string]: AbstractControl } {

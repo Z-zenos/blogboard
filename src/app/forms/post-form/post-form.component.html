@@ -1,7 +1,7 @@
 <div class="wf">
   <form *ngIf="form" [formGroup]="form" class="wf__form">
     <div class="wf__btns">
-      <button class="btn btn--yellow" (click)="reset()">Write <i class="fas fa-pen"></i></button>
+      <button class="btn btn--yellow" routerLink="/write" (click)="reset()">Write <i class="fas fa-pen"></i></button>
       <button class="btn" [ngClass]="{ 'btn--green': this.type === 'Publish', 'btn--blue': this.type === 'Update' }"
         type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ type === 'Publish'
         ? 'Publish' : 'Update' }} <i class="fas fa-upload"></i></button>
@@ -42,9 +42,9 @@
             <h3 class="form__label">Select a post category</h3>
             <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
             <ng-select [multiple]="true" (add)="addCategory($event)" (clear)="deleteCategory($event)"
-              (remove)="deleteCategory($event)" bindLabel="name" formControlName="categories">
-              <ng-option *ngFor="let ctgr of categories"
-                [value]="{ name: ctgr.name, id: ctgr.id }">{{ctgr.name}}</ng-option>
+              (remove)="deleteCategory($event)" bindLabel="name" [items]="categories" formControlName="categories">
+              <!-- <ng-option *ngFor="let ctgr of categories"
+                [value]="{ name: ctgr.name, id: ctgr.id }">{{ctgr.name}}</ng-option> -->
             </ng-select>
             <board-alert *ngIf="fc['categories'].touched && fc['categories'].invalid"
               message="Category is required!"></board-alert>
