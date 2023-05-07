@@ -1,5 +1,12 @@
 <div class="wf">
   <form *ngIf="form" [formGroup]="form" class="wf__form">
+    <div class="wf__btns">
+      <button class="btn btn--yellow" (click)="reset()">Write <i class="fas fa-pen"></i></button>
+      <button class="btn" [ngClass]="{ 'btn--green': this.type === 'Publish', 'btn--blue': this.type === 'Update' }"
+        type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ type === 'Publish'
+        ? 'Publish' : 'Update' }} <i class="fas fa-upload"></i></button>
+      <button ngClass="btn btn--purple" (click)="preview()">Preview <i class="fas fa-eye"></i></button>
+    </div>
     <section class="wf__head">
       <div class="wf__head--left">
         <h3 class="wf__heading">
@@ -117,10 +124,5 @@
         </div>
       </div>
     </section>
-
-    <button class="btn" [ngClass]="{ 'btn--green': this.type === 'Publish', 'btn--blue': this.type === 'Update' }"
-      type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ type === 'Publish'
-      ? 'Publish' : 'Update' }} <i class="fas fa-upload"></i></button>
-    <button ngClass="btn btn--purple" (click)="preview()">Preview <i class="fas fa-eye"></i></button>
   </form>
 </div>

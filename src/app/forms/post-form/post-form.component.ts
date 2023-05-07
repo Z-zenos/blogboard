@@ -55,7 +55,7 @@ export class PostFormComponent implements OnInit {
   quillEditorModules = {};
   selectedImage: IImage = { file: null, base64: '' };
   type: string = 'Publish';
-
+  stats: any = {};
   editPost: IPost = {
     id: '',
     title: '',
@@ -142,15 +142,12 @@ export class PostFormComponent implements OnInit {
       this._loaderService.control(true);
       await this._postService.publishPost(this.selectedImage, postData, this.type);
       this._toastService.success("Successfully", `Your post have been ${this.type === 'Publish' ? 'published' : 'updated'}.`);
+      this.reset();
     }
     catch (err: any) {
       this._toastService.error("Failure", `Something went wrong. Message: ${err.message}`);
     }
     finally {
-      this.form.reset();
-      this.selectedImage = { file: null, base64: '' };
-      this.references = [];
-      this.deleteCategory(undefined);
       this._loaderService.control(false);
     }
   }
@@ -161,8 +158,6 @@ export class PostFormComponent implements OnInit {
       image: image.base64
     });
   }
-
-  stats: any = {};
 
   exportStats(): void {
     const temp = document.createElement('div');
@@ -227,5 +222,26 @@ export class PostFormComponent implements OnInit {
     this.form.patchValue({
       permalink: (e.target as HTMLInputElement).value?.trim()?.replace(/\s+/g, '-')
     });
+  }
+
+  reset() {
+    this.form.reset();
+    this.selectedImage = { file: null, base64: '' };
+    this.references = [];
+    this.deleteCategory(undefined);
+    this.editPost = {
+      id: '',
+      title: '',
+      permalink: '',
+      content: '',
+      references: [],
+      categories: [],
+      image: '',
+      excerpt: '',
+      comment_id: '',
+      view: 0,
+      like: 0,
+      isFeatured: false,
+    }
   }
 }
