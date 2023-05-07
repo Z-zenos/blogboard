@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="form form--ctgr">
+<form *ngIf="isDisplay && form" [formGroup]="form" class="form form--ctgr">
   <h2 class="form__header">
     Category Form
   </h2>
@@ -21,25 +21,7 @@
       <!-- CTGR NAME -->
       <label class="form__label mt-2">New category name</label>
       <input type="text" placeholder="Python, Dash, Redux..." formControlName="name" required />
-      <board-alert *ngIf="ctgrFormControl['name'].touched && ctgrFormControl['name'].invalid"
-        message="Name is required!."></board-alert>
-
-      <!-- File Info -->
-      <label *ngIf="file" class="form__label mt-10 mb-0" style="margin-bottom: 0;">Info:</label>
-      <div *ngIf="file" class="grid grid-cols-2 gap-3 place-items-center place-items-start">
-        <div>
-          <p class="indent flex items-center"><span class="info-text">file</span>: <span class="limited-text"
-              style="margin-left: .5rem;">{{
-              file!.name }}</span>,</p>
-          <p class="indent">
-            <span class="info-text">size</span>:
-            {{ byteConverter(file!.size, 2) }}
-          </p>
-        </div>
-        <!-- <button class="btn btn--blue" (click)="browseFileImg()">Change</button> -->
-      </div>
-      <p class="hint-text mt-10" *ngIf="file"><i class="fas fa-circle-info"></i> Drag and drop a new image or click the
-        change button to replace the current image.</p>
+      <board-alert *ngIf="fc['name'].touched && fc['name'].invalid" message="Name is required!."></board-alert>
     </div>
   </div>
 

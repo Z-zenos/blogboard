@@ -7,7 +7,7 @@ import {
   doc,
   updateDoc,
 } from '@firebase/firestore';
-import { Firestore, collectionData, docData, query, setDoc, where } from '@angular/fire/firestore';
+import { Firestore, collectionData, query, where } from '@angular/fire/firestore';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -17,7 +17,6 @@ import { ICategory } from '../models/category.interface';
   providedIn: 'root'
 })
 export class CategoryService {
-
   private categories: CollectionReference<DocumentData>;
 
   constructor(private readonly firestore: Firestore) {

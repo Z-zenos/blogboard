@@ -1,7 +1,8 @@
 <div class="category">
   <div class="category__actions">
     <div>
-      <button class="btn btn--green" (click)="openForm('ctgr')">Create new</button>
+      <button class="btn btn--green" (click)="openForm('category', { name: '', color: '', logo: '' })">Create
+        new</button>
       <button class="btn btn--yellow" (click)="reset()">Reset</button>
 
       <div class="category__sort-box">
@@ -24,11 +25,6 @@
         Search</button>
     </div>
   </div>
-
-  <board-category-form *ngIf="isDisplayCtgrForm" [category]="selectedCategory"
-    (closeFormEvent)="closeForm($event, 'ctgr')" [type]="ctgrType"></board-category-form>
-  <board-destroy-form *ngIf="isDisplayDestroyForm" [value]="valueWillBeDestroyed" [id]="selectedCategory.id"
-    title="Category" (closeFormEvent)="closeForm($event, 'destroy')"></board-destroy-form>
 
   <div class="relative sm:rounded-lg">
     <!-- CTGR Table -->
@@ -75,12 +71,14 @@
           <td style="width: 15%;">
             <span class="color hovertext" data-hover="Click 2 copy"
               [ngStyle]="{ 'background-color': ctgr.color, 'color':  invertColor(ctgr.color, true) }"
-              [copy2clipboard]="ctgr.color" (click)="copyColor($event)">{{ ctgr.color
-              }}</span>
+              [copy2clipboard]="ctgr.color" (click)="copyColor($event)">
+              {{ ctgr.color }}
+            </span>
           </td>
           <td style="width: 40%;">
-            <button class="btn btn--blue mr-10" (click)="openForm('ctgr', ctgr)">Update</button>
-            <button class="btn btn--red" (click)="openForm('destroy', ctgr)">Destroy</button>
+            <button class="btn btn--blue mr-10" (click)="openForm('category', ctgr)">Update</button>
+            <button class="btn btn--red"
+              (click)="openForm('destroy', { value: ctgr.name, id: ctgr.id })">Destroy</button>
           </td>
         </tr>
 

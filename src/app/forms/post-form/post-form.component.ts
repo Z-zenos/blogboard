@@ -16,6 +16,7 @@ import { PostService } from 'src/app/services/post.service';
 import { IImage } from 'src/app/models/image.interface';
 import { ToastService } from 'src/app/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormService } from 'src/app/services/form.service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -53,9 +54,10 @@ export class PostFormComponent implements OnInit {
   selectedCategories: {}[] = [];
   categories: ICategory[] = [];
   quillEditorModules = {};
-  selectedImage: IImage = { file: null, base64: '' };
-  type: string = 'Publish';
+  selectedImage: IImage = { file: null, src: '' };
+  type: string = 'publish';
   stats: any = {};
+  loadingSelect: boolean = false;
   editPost: IPost = {
     id: '',
     title: '',
@@ -77,7 +79,8 @@ export class PostFormComponent implements OnInit {
     private _loaderService: LoaderService,
     private _postService: PostService,
     private _toastService: ToastService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _formService: FormService
   ) {
     this.quillEditorModules = {
       ...this.config
@@ -100,8 +103,8 @@ export class PostFormComponent implements OnInit {
           content: [this.editPost?.content, [Validators.required, Validators.minLength(50)]],
         });
         this.references = this.editPost.references;
-        this.selectedImage = { file: null, base64: this.editPost.image };
-        if (post) this.type = 'Update';
+        this.selectedImage = { file: null, src: this.editPost.image };
+        if (post) this.type = 'update';
       });
     });
 
@@ -141,8 +144,8 @@ export class PostFormComponent implements OnInit {
       const postData: IPost = Object.assign({}, this.editPost ?? extra, this.form.value);
 
       this._loaderService.control(true);
-      await this._postService.publishPost(this.selectedImage, postData, this.type);
-      this._toastService.success("Successfully", `Your post have been ${this.type === 'Publish' ? 'published' : 'updated'}.`);
+      await this._postService.publish(this.selectedImage, postData, this.type);
+      this._toastService.success("Successfully", `Your post have been ${this.type === 'publish' ? 'published' : 'updated'}.`);
       this.reset();
     }
     catch (err: any) {
@@ -156,7 +159,7 @@ export class PostFormComponent implements OnInit {
   onImageChange(image: IImage) {
     this.selectedImage = image;
     this.form.patchValue({
-      image: image.base64
+      image: image.src
     });
   }
 
@@ -227,7 +230,7 @@ export class PostFormComponent implements OnInit {
 
   reset() {
     this.form.reset();
-    this.selectedImage = { file: null, base64: '' };
+    this.selectedImage = { file: null, src: '' };
     this.references = [];
     this.deleteCategory(undefined);
     this.editPost = {
@@ -244,5 +247,21 @@ export class PostFormComponent implements OnInit {
       like: 0,
       isFeatured: false,
     }
+  }
+
+  addNewCategory(name: string) {
+    return new Promise(() => {
+      this._formService.controlForm(
+        'category',
+        { isDisplay: true, type: 'create', category: { logo: '', name: name, color: '' } }
+      );
+    });
+  }
+
+  deletePost() {
+    this._formService.controlForm(
+      'destroy',
+      { isDisplay: true, service: 'post', title: 'Post', destroyData: { value: this.editPost.title, id: this.editPost.id } }
+    );
   }
 }

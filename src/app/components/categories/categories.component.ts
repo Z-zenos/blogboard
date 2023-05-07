@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/models/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
+import { FormService } from 'src/app/services/form.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { OverlayService } from 'src/app/services/overlay.service';
 
 @Component({
   selector: 'board-categories',
@@ -10,18 +10,15 @@ import { OverlayService } from 'src/app/services/overlay.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  isDisplayCtgrForm: boolean = false;
-  isDisplayDestroyForm: boolean = false;
-  valueWillBeDestroyed: string = '';
   selectedCategory: ICategory = { name: '', logo: '', color: '#000000' };
   isDropDown: boolean = false;
   categories: ICategory[] = [];
   ctgrType: string = 'create';
 
   constructor(
-    private _overlayService: OverlayService,
     private _categoryService: CategoryService,
-    private _loaderService: LoaderService
+    private _loaderService: LoaderService,
+    private _formService: FormService
   ) { }
 
   ngOnInit(): void {
@@ -38,37 +35,22 @@ export class CategoriesComponent implements OnInit {
   }
 
   openForm(type: string, value?: any) {
+    this.selectedCategory = { ...value };
+
     switch (type) {
-      case 'ctgr':
-        this.isDisplayCtgrForm = true;
+      case 'category':
         this.ctgrType = 'create';
         if (value?.name) {
           this.ctgrType = 'update';
         }
+        this._formService.controlForm('category', { isDisplay: true, type: this.ctgrType, category: this.selectedCategory });
+
         break;
 
       case 'destroy':
-        this.isDisplayDestroyForm = true;
-        this.valueWillBeDestroyed = value.name;
+        this._formService.controlForm('destroy', { isDisplay: true, service: 'category', title: 'Category', destroyData: this.selectedCategory });
         break;
     }
-    this.selectedCategory = { ...value };
-    this._overlayService.control(true);
-  }
-
-  closeForm(isClose: boolean, type: string) {
-    switch (type) {
-      case 'ctgr':
-        this.isDisplayCtgrForm = isClose;
-        break;
-
-      case 'destroy':
-        this.isDisplayDestroyForm = isClose;
-        break;
-    }
-
-    this.selectedCategory = { name: '', logo: '', color: '#000000' };
-    this._overlayService.control(false);
   }
 
   copyColor(e: Event) {
@@ -116,8 +98,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   searchCategory(name: string) {
-    console.log("search: ", name);
-
     this._loaderService.control(true);
 
     this._categoryService.get(name).subscribe((data: ICategory[]) => {

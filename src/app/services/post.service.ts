@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { IImage } from '../models/image.interface';
 import { IPost } from '../models/post.interface';
-import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,12 +19,12 @@ export class PostService {
     this._posts = collection(this._firestore, 'posts');
   }
 
-  async publishPost(image: IImage, postData: IPost, type: string) {
-    if (!image.base64) {
+  async publish(image: IImage, postData: IPost, type: string) {
+    if (!image.src) {
       throw new Error("File null");
     }
 
-    if (image.file && image.base64) {
+    if (image.file && image.src) {
       const nameSplitter = image.file?.name.split('.') ?? '';
       const filePath = `post/${nameSplitter[0]}_${Date.now()}`;
 
@@ -34,10 +34,10 @@ export class PostService {
       postData.image = downloadImageURL;
     }
 
-    if (type === 'Publish') {
+    if (type === 'publish') {
       addDoc(this._posts, postData);
     }
-    else if (type === 'Update') {
+    else if (type === 'update') {
       // Current image was firebase image url
       const ctgrDocRef = doc(
         this._firestore,
@@ -61,5 +61,11 @@ export class PostService {
   getPostById(id: string) {
     const ctgrDocRef = doc(this._firestore, `posts/${id}`);
     return docData(ctgrDocRef, { idField: 'id' }) as Observable<IPost>;
+  }
+
+  delete(id: string | undefined) {
+    if (!id) throw new Error("Id undefined");
+    const ctgrDocRef = doc(this._firestore, `posts/${id}`);
+    return deleteDoc(ctgrDocRef);
   }
 }

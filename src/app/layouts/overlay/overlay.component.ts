@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { OverlayService } from 'src/app/services/overlay.service';
 
 @Component({

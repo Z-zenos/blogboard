@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="form form--destroy">
+<div *ngIf="isDisplay" [formGroup]="form" class="form form--destroy">
   <h2 class="form__header" style="background-color: red;">
     {{ title }} Destroy
   </h2>
@@ -10,8 +10,8 @@
     </div>
     <label class="form__label mt-2" style="font-size: 14px; color: #3c3c3b;">Confirm you want to delete this category by
       typing its ID:
-      <span class="value-destroy">{{ value }}</span></label>
-    <input type="text" style="width: 100%;" (input)="checkDestroyedName($any($event))" [placeholder]="title"
+      <span class="value-destroy">{{ destroyData.value }}</span></label>
+    <input type="text" style="width: 100%;" (input)="checkDestroyedValue($any($event))" [placeholder]="title"
       formControlName="destroyedThing" required class="destroyedInput" />
     <board-alert *ngIf="form.controls['destroyedThing'].touched && !formValid"
       message="You didn't enter the collection ID correctly.">

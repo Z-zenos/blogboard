@@ -1,8 +1,10 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ICategoryForm } from 'src/app/models/catefory-form.interface';
 import { ICategory } from 'src/app/models/category.interface';
 import { IImage } from 'src/app/models/image.interface';
 import { CategoryService } from 'src/app/services/category.service';
+import { FormService } from 'src/app/services/form.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -11,37 +13,40 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./category-form.component.scss']
 })
 export class CategoryFormComponent implements OnInit {
-  @ViewChild('inputFileImg', { static: false }) inputFileImg!: ElementRef;
-  @ViewChild('btnFileImg', { static: false }) btnFileImg!: ElementRef;
-  @ViewChild('dragArea', { static: false }) dropArea!: ElementRef<HTMLDivElement>;
-  @ViewChild('dragText', { static: false }) dragText!: ElementRef;
+  type: string = 'create';
+  category: ICategory = { name: '', color: '#000000', logo: '' };
+  isDisplay: boolean = false;
 
-  @Input() type: string = 'create';
-  @Input() category: ICategory = { name: '', color: '#000000', logo: '' };
-
-  file!: File | undefined;
   form!: FormGroup;
-
-  @Output() closeFormEvent = new EventEmitter<boolean>();
 
   constructor(
     private _fb: FormBuilder,
     private _categoryService: CategoryService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _formService: FormService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.category);
+    this._formService.categoryForm$.subscribe((data: ICategoryForm) => {
+      console.log(data);
 
-    // logo of image will be saved based 64
-    this.form = this._fb.group({
-      logo: [this.category?.logo ?? '', Validators.required],
-      name: [this.category?.name ?? '', Validators.required],
-      color: [this.category?.color ?? '#000000', Validators.required]
+      this.isDisplay = data.isDisplay;
+
+      if (this.isDisplay) {
+        this.type = data.type ?? 'create';
+        this.category = data.category ?? { name: '', color: '#000000', logo: '' };
+      }
+
+      // logo of image will be saved based 64
+      this.form = this._fb.group({
+        logo: [this.category?.logo, Validators.required],
+        name: [this.category?.name, Validators.required],
+        color: [this.category?.color, Validators.required]
+      });
     });
   }
 
-  get ctgrFormControl() {
+  get fc(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
@@ -51,33 +56,26 @@ export class CategoryFormComponent implements OnInit {
         throw new Error("Please fill all field.");
       }
 
-      if ((this.file?.size as number) > (1024 * 1024)) {
-        throw new Error("File size greater than 2 MB");
-      };
-
       if (this.type === 'create') {
         await this._categoryService.create(this.form.value);
         this._toastService.success("Successfully", `Welcome to category family: ${this.form.value.name}`);
       }
-      else {
+      else if (this.type === 'update') {
         await this._categoryService.update({ id: this.category.id, ...this.form.value });
         this._toastService.success("Successfully", `Updated: ${this.form.value.name}`);
       }
       this.onClose();
     }
     catch (e: any) {
-      console.log(e);
-
       this._toastService.error("Failure", `Can't add new category. Message: ${e.message}`);
     }
     finally {
       this.type === 'create' && this.form.reset();
-      this.file = undefined;
     }
   }
 
   onClose(): void {
-    this.closeFormEvent.emit(false);
+    this._formService.controlForm('category', { isDisplay: false });
   }
 
   pickColor(e: InputEvent) {
@@ -99,11 +97,9 @@ export class CategoryFormComponent implements OnInit {
   }
 
   retrieveImageSrc(image: IImage) {
-    console.log(image);
-
-    this.category.logo = image.base64;
+    this.category.logo = image.src;
     this.form.patchValue({
-      logo: image.base64
+      logo: image.src
     });
   }
 }
