@@ -54,6 +54,7 @@ export class PostFormComponent implements OnInit {
   categories: ICategory[] = [];
   quillEditorModules = {};
   selectedImage: IImage = { file: null, base64: '' };
+  type: string = 'Publish';
 
   editPost: IPost = {
     id: '',
@@ -86,7 +87,7 @@ export class PostFormComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(query => {
       this._postService.getPostById(query['id']).subscribe((post: any) => {
-        this.editPost = post;
+        this.editPost = post ?? this.editPost;
         this.form = this._fb.group({
           title: [this.editPost?.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
           permalink: [this.editPost?.permalink, Validators.required],
@@ -99,6 +100,7 @@ export class PostFormComponent implements OnInit {
 
         this.references = this.editPost.references;
         this.selectedImage = { file: null, base64: this.editPost.image };
+        if (post) this.type = 'Update';
       });
     });
 
@@ -138,8 +140,8 @@ export class PostFormComponent implements OnInit {
       }
 
       this._loaderService.control(true);
-      await this._postService.publishPost(this.selectedImage, postData);
-      this._toastService.success("Successfully", "Your post have been published.");
+      await this._postService.publishPost(this.selectedImage, postData, this.type);
+      this._toastService.success("Successfully", `Your post have been ${this.type === 'Publish' ? 'published' : 'updated'}.`);
     }
     catch (err: any) {
       this._toastService.error("Failure", `Something went wrong. Message: ${err.message}`);

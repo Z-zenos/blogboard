@@ -54,7 +54,6 @@
             <h3 class="form__label">References Links</h3>
             <board-tip
               [tipList]="['Cite the resource you referenced for the article (1 resource / 1 line).']"></board-tip>
-            <!-- <textarea formControlName="references" (input)="autoDetectLink()"></textarea> -->
             <div class="urlarea">
               <span *ngFor="let r of references; let i = index" class="urlarea__link"><a href="r"
                   class="text-haft-highlight" target="_blank">{{ r }}</a> <i class="fas fa-close"
@@ -119,8 +118,9 @@
       </div>
     </section>
 
-    <button ngClass="btn btn--green" type="submit" (click)="onSubmit()" [disabled]="form.invalid">Publish <i
-        class="fas fa-upload"></i></button>
+    <button class="btn" [ngClass]="{ 'btn--green': this.type === 'Publish', 'btn--blue': this.type === 'Update' }"
+      type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ type === 'Publish'
+      ? 'Publish' : 'Update' }} <i class="fas fa-upload"></i></button>
     <button ngClass="btn btn--purple" (click)="preview()">Preview <i class="fas fa-eye"></i></button>
   </form>
 </div>

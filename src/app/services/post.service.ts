@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Storage, UploadTask, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
+import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { IImage } from '../models/image.interface';
 import { IPost } from '../models/post.interface';
-import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, doc, docData, query, where } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class PostService {
     this._posts = collection(this._firestore, 'posts');
   }
 
-  async publishPost(image: IImage, postData: IPost) {
+  async publishPost(image: IImage, postData: IPost, type: string) {
     if (!image.file) {
       throw new Error("File null");
     }
@@ -30,7 +30,17 @@ export class PostService {
     await uploadBytesResumable(storageRef, image.file);
     const downloadImageURL = await getDownloadURL(storageRef);
     postData.image = downloadImageURL;
-    addDoc(this._posts, postData);
+
+    if (type === 'Publish') {
+      addDoc(this._posts, postData);
+    }
+    else if (type === 'Update') {
+      const ctgrDocRef = doc(
+        this._firestore,
+        `posts/${postData.id}`
+      );
+      updateDoc(ctgrDocRef, { ...postData });
+    }
   }
 
   getAll() {
