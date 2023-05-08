@@ -102,9 +102,9 @@
   z-index: 2;
   transition: $transition;
 
-  .action--edit, .action--remove {
+  .action--edit, .action--remove, .action--is-featured, .action--not-featured {
     width: 4rem;
-    height: 50%;
+    height: calc(100% / 3);
     padding: 1rem;
     @include center-item();
     transition: $transition;
@@ -112,7 +112,6 @@
 
   &--edit {
     background-color: $yellow-1;
-    border-top-right-radius: 7px;
     border: 1px solid $yellow-1;
 
     &:hover {
@@ -123,12 +122,36 @@
 
   &--remove {
     background-color: red;
-    border-bottom-right-radius: 7px;
     color: white;
     border: 1px solid red;
+    border-bottom-right-radius: 7px;
 
     &:hover {
       color: red;
+      background-color: white;
+    }
+  }
+
+  &--is-featured {
+    background-color: $primary-color;
+    color: white;
+    border-top-right-radius: 7px;
+    border: 1px solid $primary-color;
+
+    &:hover {
+      color: $primary-color;
+      background-color: white;
+    }
+  }
+
+  &--not-featured {
+    background-color: $purple-1;
+    color: white;
+    border-top-right-radius: 7px;
+    border: 1px solid $purple-1;
+
+    &:hover {
+      color: $purple-1;
       background-color: white;
     }
   }

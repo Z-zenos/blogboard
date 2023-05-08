@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPost } from 'src/app/models/post.interface';
 import { FormService } from 'src/app/services/form.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { PostService } from 'src/app/services/post.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'board-post-card',
@@ -12,7 +15,12 @@ export class PostCardComponent implements OnInit {
 
   isDisplayAction: boolean = false;
 
-  constructor(private _formService: FormService) { }
+  constructor(
+    private _formService: FormService,
+    private _postService: PostService,
+    private _toastService: ToastService,
+    private _loaderService: LoaderService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,5 +30,19 @@ export class PostCardComponent implements OnInit {
       'destroy',
       { isDisplay: true, service: 'post', title: 'Post', destroyData: { value: this.post?.title, id: this.post?.id } }
     );
+  }
+
+  async markFeatured(mark: boolean) {
+    try {
+      this._loaderService.control(true);
+      await this._postService.maskFeatured(this.post?.id, mark);
+      this._toastService.success("Succesfully", `${this.post?.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
+    }
+    catch (err: any) {
+      this._toastService.success("Failure", `Something went wrong. Message: ${err.message}`);
+    }
+    finally {
+      this._loaderService.control(false);
+    }
   }
 }

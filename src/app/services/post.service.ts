@@ -3,7 +3,7 @@ import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fir
 import { IImage } from '../models/image.interface';
 import { IPost } from '../models/post.interface';
 import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
-import { Observable, firstValueFrom, switchMap } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { deleteObject } from '@firebase/storage';
 
 @Injectable({
@@ -36,16 +36,20 @@ export class PostService {
     }
 
     if (type === 'publish') {
-      addDoc(this._posts, postData);
+      await addDoc(this._posts, postData);
     }
     else if (type === 'update') {
-      // Current image was firebase image url
       const postDocRef = doc(
         this._firestore,
         `posts/${postData.id}`
       );
-      updateDoc(postDocRef, { ...postData });
+      await updateDoc(postDocRef, { ...postData });
     }
+  }
+
+  async maskFeatured(id: string | undefined, isFeatured: boolean) {
+    const postDocRef = doc(this._firestore, `posts/${id}`);
+    await updateDoc(postDocRef, { isFeatured: isFeatured });
   }
 
   getAll() {

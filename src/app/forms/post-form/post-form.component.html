@@ -2,13 +2,20 @@
   <form *ngIf="form" [formGroup]="form" class="wf__form">
     <div class="wf__btns">
       <button class="btn btn--yellow" routerLink="/write" (click)="reset()">Write <i class="fas fa-pen"></i></button>
-      <button class="btn" [ngClass]="{ 'btn--green': this.type === 'publish', 'btn--blue': this.type === 'update' }"
-        type="submit" (click)="onSubmit()" [disabled]="form.invalid">{{ type === 'publish'
+      <button class="btn" [ngClass]="{ 'btn--green': type === 'publish', 'btn--blue': type === 'update' }" type="submit"
+        (click)="onSubmit()" [disabled]="form.invalid">{{ type === 'publish'
         ? 'Publish' : 'Update' }} <i class="fas fa-upload"></i></button>
       <button ngClass="btn btn--purple" (click)="preview()">Preview <i class="fas fa-eye"></i></button>
       <button *ngIf="type === 'update'" ngClass="btn btn--red" (click)="deletePost()">Delete <i
           class="fas fa-trash"></i></button>
+      <button *ngIf="type === 'update'" class="btn"
+        [ngClass]="{ 'btn--green': editPost.isFeatured, 'btn--blue': !editPost.isFeatured }"
+        (click)="markFeatured(editPost.isFeatured ? false : true)" [disabled]="form.invalid">
+        {{ !editPost.isFeatured ? 'Mark featured' : 'Unmark Featured' }}
+        <i [ngClass]="(editPost.isFeatured ? 'fas' : 'far') +  ' fa-star'"></i>
+      </button>
     </div>
+
     <section class="wf__head">
       <div class="wf__head--left">
         <h3 class="wf__heading">

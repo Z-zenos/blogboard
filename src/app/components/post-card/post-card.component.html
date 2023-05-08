@@ -24,6 +24,11 @@
   </div>
 
   <div class="action" [ngClass]="{ 'active': isDisplayAction }">
+    <div *ngIf="!post?.isFeatured" class="action--not-featured" (click)="markFeatured(true)"><i class="far fa-star"></i>
+    </div>
+    <div *ngIf="post?.isFeatured" class="action--is-featured" (click)="markFeatured(false)"><i class="fas fa-star"></i>
+    </div>
+
     <div class="action--edit" routerLink="/write" [queryParams]="{ 'id': post?.id }"><i class="fas fa-pen"></i></div>
     <div class="action--remove" (click)="deletePost()"><i class="fas fa-trash"></i></div>
   </div>

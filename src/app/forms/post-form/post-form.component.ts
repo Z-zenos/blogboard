@@ -264,4 +264,18 @@ export class PostFormComponent implements OnInit {
       { isDisplay: true, service: 'post', title: 'Post', destroyData: { value: this.editPost.title, id: this.editPost.id } }
     );
   }
+
+  async markFeatured(mark: boolean) {
+    try {
+      this._loaderService.control(true);
+      await this._postService.maskFeatured(this.editPost.id, mark);
+      this._toastService.success("Succesfully", `${this.editPost.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
+    }
+    catch (err: any) {
+      this._toastService.success("Failure", `Something went wrong. Message: ${err.message}`);
+    }
+    finally {
+      this._loaderService.control(false);
+    }
+  }
 }
