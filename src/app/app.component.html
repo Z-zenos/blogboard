@@ -1,13 +1,13 @@
 <board-overlay></board-overlay>
 <board-toast></board-toast>
 <board-loader></board-loader>
-<ng-container *ngIf="currentRoute !== '/login'">
+<div *ngIf="authService.isLoggedInGuard">
   <board-header></board-header>
   <div class="board__body">
     <board-sidebar></board-sidebar>
     <board-main></board-main>
   </div>
-</ng-container>
-<ng-container *ngIf="currentRoute === '/login'">
+</div>
+<div *ngIf="!authService.isLoggedInGuard">
   <board-login></board-login>
-</ng-container>
+</div>

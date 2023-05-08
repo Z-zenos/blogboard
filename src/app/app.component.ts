@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +8,14 @@ import { NavigationStart, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'blogboard';
-  routes: string[] = ['categories', 'posts', 'write', 'setting', 'login'];
 
-  currentRoute: string = '';
-
-  constructor(private _router: Router) {
+  constructor(
+    public authService: AuthService
+  ) {
 
   }
 
   ngOnInit(): void {
-    this._router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.currentRoute = event.url;
-      }
-    });
   }
 
 

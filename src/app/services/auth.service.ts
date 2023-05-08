@@ -24,8 +24,8 @@ export class AuthService {
       await signInWithEmailAndPassword(this._auth, email, password);
       this._toastService.success("Success", "Welcome back, Zenos.");
       this.isLoggedInGuard = true;
-      this.getUser();
-      this._router.navigate(['/']);
+      this.setUser();
+      this._router.navigate(['/categories']);
     }
     catch (err) {
       this._toastService.error("Failure", "There seems to be a problem with the person trying to log in.");
@@ -35,7 +35,7 @@ export class AuthService {
     }
   }
 
-  getUser() {
+  setUser() {
     authState(this._auth).subscribe((user) => {
       localStorage.setItem('user', JSON.stringify(user));
     });
@@ -44,8 +44,8 @@ export class AuthService {
   async logout(email: string) {
     try {
       this._loaderService.control(true);
-      localStorage.removeItem('user');
       await signOut(this._auth);
+      localStorage.removeItem('user');
       this.isLoggedInGuard = false;
       this._toastService.success("Success", `Bye, ${email} 👋.`);
       this._router.navigate(['/login']);

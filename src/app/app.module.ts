@@ -34,6 +34,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AlertComponent } from './components/alert/alert.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { LoginComponent } from './auth/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { LoginComponent } from './auth/login/login.component';
     ImageUploaderComponent,
     AlertComponent,
     PostCardComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

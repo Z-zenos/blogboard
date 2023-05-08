@@ -7,15 +7,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  userEmail: string = '';
 
   constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
-  }
-
-  get userEmail() {
-    if (!this._authService.isLoggedInGuard) return '';
-    return JSON.parse(localStorage.getItem('user') as string).email;
+    console.log('Header');
+    return JSON.parse(localStorage.getItem('user') as string) && JSON.parse(localStorage.getItem('user') as string).email;
   }
 
   async logout() {
