@@ -17,6 +17,7 @@ import { IImage } from 'src/app/models/image.interface';
 import { ToastService } from 'src/app/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from 'src/app/services/form.service';
+import { map, switchMap } from 'rxjs';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -57,7 +58,6 @@ export class PostFormComponent implements OnInit {
   selectedImage: IImage = { file: null, src: '' };
   type: string = 'publish';
   stats: any = {};
-  loadingSelect: boolean = false;
   editPost: IPost = {
     id: '',
     title: '',
@@ -90,8 +90,12 @@ export class PostFormComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveAllCategories();
 
-    this._activatedRoute.queryParams.subscribe(query => {
-      this._postService.getPostById(query['id']).subscribe((post: any) => {
+    this._activatedRoute.queryParams
+      .pipe(
+        switchMap(query => this._postService.getPostById(query['id']))
+      )
+      .subscribe((post: any) => {
+        console.info("post: ", post);
         this.editPost = post ?? this.editPost;
         this.form = this._fb.group({
           title: [this.editPost?.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
@@ -106,7 +110,6 @@ export class PostFormComponent implements OnInit {
         this.selectedImage = { file: null, src: this.editPost.image };
         if (post) this.type = 'update';
       });
-    });
 
   }
 

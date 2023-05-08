@@ -45,7 +45,7 @@
             <board-tip [tipList]="['Choose technologies and mentioned in the article.']"></board-tip>
             <ng-select [multiple]="true" (add)="addCategory($event)" (clear)="deleteCategory($event)"
               (remove)="deleteCategory($event)" bindLabel="name" [items]="categories" formControlName="categories"
-              addTagText="Create new category" [loading]="loadingSelect" #ctgrSelect>
+              addTagText="Create new category" #ctgrSelect>
               <ng-template ng-footer-tmp>
                 <p class="create-new" (click)="ctgrSelect.isOpen = false; addNewCategory()">Create new category <i
                     class="fas fa-wrench"></i> </p>
