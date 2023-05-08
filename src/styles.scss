@@ -199,7 +199,11 @@ html, body { height: 100%; }
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  transform: translateX(0);
 
+  &--avoid {
+    transform: translateX(27rem);
+  }
 
   &:hover {
     background-color: white !important;

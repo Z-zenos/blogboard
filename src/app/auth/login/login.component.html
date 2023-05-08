@@ -1,5 +1,5 @@
 <div class="login">
-  <form class="login__form">
+  <form [formGroup]="form" class="login__form">
     <div class="login__form--left">
 
     </div>
@@ -10,18 +10,23 @@
 
       <div class="login__input-group">
         <label class="form__label">Email</label>
-        <input type="email" placeholder="example@gmail.com" />
+        <input type="email" placeholder="example@gmail.com" formControlName="email" />
         <i class="fal fa-at" style="font-size: 2rem;"></i>
+        <board-alert *ngIf="fc['email'].touched && fc['email'].invalid" message="Email invalid."></board-alert>
       </div>
 
       <div class="login__input-group">
         <label class="form__label">Password</label>
-        <input type="password" placeholder="*****" />
-        <i class="fas fa-eye"></i>
-        <i class="fas fa-eye-slash"></i>
+        <input [type]="isShowPassword ? 'text' : 'password'" placeholder="*****" formControlName="password" />
+        <i *ngIf="!isShowPassword" class="fas fa-eye" (click)="isShowPassword = true"></i>
+        <i *ngIf="isShowPassword" class="fas fa-eye-slash" (click)="isShowPassword = false"></i>
+        <board-alert *ngIf="fc['password'].touched && fc['password'].invalid"
+          message="Password is required."></board-alert>
       </div>
 
-      <button class="btn btn--blue">Login</button>
+      <button class="btn btn--green" [disabled]="form.invalid" (click)="onSubmit()" (mouseenter)="avoidClick()"
+        #btnLogin>Login {{ form.invalid ? '😛' : '' }}</button>
+
       <div class="copyright">Copyright <i class="far fa-copyright"></i> 2023, <a href="https://github.com/Z-zenos"
           target="_blank" class="text-half-highlight">Zenos</a>. All rights reversed.</div>
     </div>

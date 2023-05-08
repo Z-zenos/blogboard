@@ -45,8 +45,6 @@ export class DestroyFormComponent implements OnInit {
     this.form = this._fb.group({
       destroyedThing: ['', Validators.required],
     });
-
-
   }
 
   async onSubmit() {
