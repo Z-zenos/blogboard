@@ -24,7 +24,6 @@ export class PostsComponent implements OnInit {
     this._loaderService.control(true);
     this._postService.getAll().subscribe(data => {
       this.posts = data;
-      console.log(data);
       this._loaderService.control(false);
     });
   }

@@ -95,7 +95,6 @@ export class PostFormComponent implements OnInit {
         switchMap(query => this._postService.getPostById(query['id']))
       )
       .subscribe((post: any) => {
-        console.info("post: ", post);
         this.editPost = post ?? this.editPost;
         this.form = this._fb.group({
           title: [this.editPost?.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],

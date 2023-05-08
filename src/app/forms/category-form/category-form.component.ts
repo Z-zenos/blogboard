@@ -28,8 +28,6 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._formService.categoryForm$.subscribe((data: ICategoryForm) => {
-      console.log(data);
-
       this.isDisplay = data.isDisplay;
 
       if (this.isDisplay) {

@@ -35,7 +35,6 @@ export class ToastComponent implements OnInit {
 
   // @HostListener('window:beforeunload', ['$event'])
   // async ngOnDestroy() {
-  //   console.log('destroy');
 
   //   if (this.toast) {
   //     this.unsubscribe$.next({});

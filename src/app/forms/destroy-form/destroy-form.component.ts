@@ -39,8 +39,6 @@ export class DestroyFormComponent implements OnInit {
         this.destroyData = data.destroyData ?? { value: '', id: '' };
         this.service = data.service ?? '';
       }
-      console.log(data.destroyData, this.destroyData);
-
       this.numberChars = this.destroyData.value.length;
     });
 

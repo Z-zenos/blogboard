@@ -11,8 +11,6 @@ export class CopyClipboardDirective {
 
   @HostListener("click", ["$event"])
   public onClick(event: MouseEvent): void {
-    console.log(this.payload);
-
     event.preventDefault();
     if (!this.payload)
       return;
