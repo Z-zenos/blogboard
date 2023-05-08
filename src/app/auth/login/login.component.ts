@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'board-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   isShowPassword: boolean = false;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(
+    private _fb: FormBuilder,
+    private _authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.form = this._fb.group({
@@ -22,9 +26,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) return;
-    console.log(this.form.value, this.form.invalid);
+    await this._authService.login(this.form.value.email, this.form.value.password);
     this.form.reset();
   }
 
