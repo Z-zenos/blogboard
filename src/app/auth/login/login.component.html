@@ -1,0 +1,29 @@
+<div class="login">
+  <form class="login__form">
+    <div class="login__form--left">
+
+    </div>
+    <div class="login__form--right">
+      <h3 class="login__logo">Blogify</h3>
+      <h2 class="login__login-text">Login</h2>
+      <board-tip [tipList]="['Fill in the information or you can\'t press the login button.']"></board-tip>
+
+      <div class="login__input-group">
+        <label class="form__label">Email</label>
+        <input type="email" placeholder="example@gmail.com" />
+        <i class="fal fa-at" style="font-size: 2rem;"></i>
+      </div>
+
+      <div class="login__input-group">
+        <label class="form__label">Password</label>
+        <input type="password" placeholder="*****" />
+        <i class="fas fa-eye"></i>
+        <i class="fas fa-eye-slash"></i>
+      </div>
+
+      <button class="btn btn--blue">Login</button>
+      <div class="copyright">Copyright <i class="far fa-copyright"></i> 2023, <a href="https://github.com/Z-zenos"
+          target="_blank" class="text-half-highlight">Zenos</a>. All rights reversed.</div>
+    </div>
+  </form>
+</div>

@@ -1,7 +1,12 @@
 <board-overlay></board-overlay>
 <board-toast></board-toast>
-<board-header></board-header>
-<div class="board__body">
-  <board-sidebar></board-sidebar>
-  <board-main></board-main>
-</div>
+<ng-container *ngIf="currentRoute !== '/login'">
+  <board-header></board-header>
+  <div class="board__body">
+    <board-sidebar></board-sidebar>
+    <board-main></board-main>
+  </div>
+</ng-container>
+<ng-container *ngIf="currentRoute === '/login'">
+  <board-login></board-login>
+</ng-container>

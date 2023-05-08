@@ -4,9 +4,11 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { SettingComponent } from './components/setting/setting.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostFormComponent } from './forms/post-form/post-form.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'write', component: PostFormComponent },

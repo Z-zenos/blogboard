@@ -1,0 +1,71 @@
+@import "../../../styles";
+
+.login {
+  background: #ffffff url("../../../assets/images/bg2.webp") no-repeat center center / cover;
+  width: 100%;
+  height: 100%;
+
+  &__form {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0,0,0, 0.4) 0px 2px 4px, rgba(0,0,0, 0.3) 0px 7px 13px -3px, rgba(0,0,0, 0.2) 0px -3px 0px inset;
+    width: 100rem;
+    height: 70rem;
+    border-radius: 1rem;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    &--left {
+      background: #ffffff url("../../../assets/images/cryptoExchange.gif") no-repeat center center / contain;
+    }
+
+    &--right {
+      padding: 4rem 6rem;
+      background-color: $secondary-color;
+      position: relative;
+    }
+  }
+
+  &__logo {
+    color: $primary-color;
+    font-size: 2.4rem;
+    margin-bottom: 10rem;
+    font-weight: 600;
+  }
+
+  &__login-text {
+    font-size: 3.2rem;
+    color: $text-color;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  &__input-group {
+    margin: 2rem 0;
+    position: relative;
+
+    input {
+      width: 100%;
+    }
+
+    i {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      font-size: 1.7rem;
+      color: $text-color;
+      opacity: .7;
+    }
+  }
+}
+
+.copyright {
+  font-size: 13px;
+  opacity: .7;
+  color: $text-color;
+  position: absolute;
+  bottom: 2rem;
+}

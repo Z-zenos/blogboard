@@ -30,6 +30,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AlertComponent } from './components/alert/alert.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     TipComponent,
     ImageUploaderComponent,
     AlertComponent,
-    PostCardComponent
+    PostCardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
