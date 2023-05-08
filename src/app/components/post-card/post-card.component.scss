@@ -5,7 +5,7 @@
   font-size: $small-text;
   border: 1px solid $primary-color;
   background-color: $secondary-color;
-  box-shadow: rgba($green-1, 0.25) 0px 2px 5px -1px, rgba($green-2, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba($green-1, 0.25) 0 2px 5px -1px, rgba($green-2, 0.3) 0px 1px 3px -1px;
   border-radius: 7px;
   cursor: pointer;
   margin: .7rem;
@@ -61,7 +61,7 @@
     @include center-item();
   }
 
-  &__experpt {
+  &__excerpt {
     font-size: 1.3rem;
     color: $black-color;
     height: 6rem;

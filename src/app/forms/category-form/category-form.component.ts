@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ICategoryForm } from 'src/app/models/catefory-form.interface';
-import { ICategory } from 'src/app/models/category.interface';
-import { IImage } from 'src/app/models/image.interface';
-import { CategoryService } from 'src/app/services/category.service';
-import { FormService } from 'src/app/services/form.service';
-import { ToastService } from 'src/app/services/toast.service';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ICategoryForm} from 'src/app/models/catefory-form.interface';
+import {ICategory} from 'src/app/models/category.interface';
+import {IImage} from 'src/app/models/image.interface';
+import {CategoryService} from 'src/app/services/category.service';
+import {FormService} from 'src/app/services/form.service';
+import {ToastService} from 'src/app/services/toast.service';
 
 @Component({
   selector: 'board-category-form',
@@ -78,20 +78,6 @@ export class CategoryFormComponent implements OnInit {
 
   pickColor(e: InputEvent) {
     this.category.color = (e.target as HTMLInputElement).value;
-  }
-
-  byteConverter(bytes: number, decimals: number, only?: string) {
-    const K_UNIT = 1024;
-    const SIZES = ["Bytes", "KB", "MB", "GB", "TB", "PB"];
-
-    if (bytes == 0) return "0 Byte";
-
-    if (only === "MB") return (bytes / (K_UNIT * K_UNIT)).toFixed(decimals) + " MB";
-
-    let i = Math.floor(Math.log(bytes) / Math.log(K_UNIT));
-    let resp = parseFloat((bytes / Math.pow(K_UNIT, i)).toFixed(decimals)) + " " + SIZES[i];
-
-    return resp;
   }
 
   retrieveImageSrc(image: IImage) {

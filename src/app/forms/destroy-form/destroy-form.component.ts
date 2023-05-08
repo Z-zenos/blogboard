@@ -13,7 +13,7 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class DestroyFormComponent implements OnInit {
   isDisplay: boolean = false;
-  title: string = ''; // title of destroy form
+  title: string = ''; // title of a destroyed form
   destroyData: any = { value: '', id: '' }; // Value for re-check if remove or not and id of value for call to backend
   service: string = ''; // category | post
 
@@ -90,10 +90,7 @@ export class DestroyFormComponent implements OnInit {
       this.count++;
     }
 
-    if (this.count === this.numberChars && (e.target as HTMLInputElement).value === this.destroyData.value) {
-      this.formValid = true;
-    }
-    else this.formValid = false;
+    this.formValid = this.count === this.numberChars && (e.target as HTMLInputElement).value === this.destroyData.value;
   }
 
 }

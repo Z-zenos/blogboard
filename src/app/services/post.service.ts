@@ -1,17 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
-import { IImage } from '../models/image.interface';
-import { IPost } from '../models/post.interface';
-import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
-import { Observable, firstValueFrom } from 'rxjs';
-import { deleteObject } from '@firebase/storage';
+import {Injectable} from '@angular/core';
+import {getDownloadURL, ref, Storage, uploadBytesResumable} from '@angular/fire/storage';
+import {IImage} from '../models/image.interface';
+import {IPost} from '../models/post.interface';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  docData,
+  DocumentData,
+  Firestore,
+  query,
+  updateDoc,
+  where
+} from '@angular/fire/firestore';
+import {firstValueFrom, Observable} from 'rxjs';
+import {deleteObject} from '@firebase/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  private _posts: CollectionReference<DocumentData>;
+  private readonly _posts: CollectionReference<DocumentData>;
 
   constructor(
     private _storage: Storage,
@@ -31,8 +44,7 @@ export class PostService {
 
       const storageRef = ref(this._storage, filePath);
       await uploadBytesResumable(storageRef, image.file);
-      const downloadImageURL = await getDownloadURL(storageRef);
-      postData.image = downloadImageURL;
+      postData.image = await getDownloadURL(storageRef);
     }
 
     if (type === 'publish') {

@@ -17,7 +17,7 @@ import { IImage } from 'src/app/models/image.interface';
 import { ToastService } from 'src/app/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from 'src/app/services/form.service';
-import { map, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -101,7 +101,7 @@ export class PostFormComponent implements OnInit {
           permalink: [this.editPost?.permalink, Validators.required],
           excerpt: [this.editPost?.excerpt, [Validators.required, Validators.minLength(50), Validators.maxLength(256)]],
           categories: [this.editPost?.categories, Validators.required],
-          image: [this.editPost?.image, [ImageValidator.permitSize(5), ImageValidator.acceptExtenstions(['image/png', 'image/jpeg', 'image/jpg'])]],
+          image: [this.editPost?.image, [ImageValidator.permitSize(5), ImageValidator.acceptExtensions(['image/png', 'image/jpeg', 'image/jpg'])]],
           references: [this.editPost?.references],
           content: [this.editPost?.content, [Validators.required, Validators.minLength(50)]],
         });
@@ -269,7 +269,7 @@ export class PostFormComponent implements OnInit {
     try {
       this._loaderService.control(true);
       await this._postService.maskFeatured(this.editPost.id, mark);
-      this._toastService.success("Succesfully", `${this.editPost.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
+      this._toastService.success("Successfully", `${this.editPost.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
     }
     catch (err: any) {
       this._toastService.success("Failure", `Something went wrong. Message: ${err.message}`);

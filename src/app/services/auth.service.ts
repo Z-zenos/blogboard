@@ -25,7 +25,7 @@ export class AuthService {
       this._toastService.success("Success", "Welcome back, Zenos.");
       this.isLoggedInGuard = true;
       this.setUser();
-      this._router.navigate(['/categories']);
+      await this._router.navigate(['/categories']);
     }
     catch (err) {
       this._toastService.error("Failure", "There seems to be a problem with the person trying to log in.");
@@ -48,7 +48,7 @@ export class AuthService {
       localStorage.removeItem('user');
       this.isLoggedInGuard = false;
       this._toastService.success("Success", `Bye, ${email} 👋.`);
-      this._router.navigate(['/login']);
+      await this._router.navigate(['/login']);
     }
     catch (err) {
       this._toastService.error("Failure", "Can't log out.");

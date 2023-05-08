@@ -17,7 +17,7 @@ export class ImageValidator {
     };
   }
 
-  static acceptExtenstions(whiteListImageExtension: string[]) {
+  static acceptExtensions(whiteListImageExtension: string[]) {
     return function (input: FormControl) {
       if (input?.value?.type) {
         return whiteListImageExtension.includes(input.value.type) ? null : { extension: true };

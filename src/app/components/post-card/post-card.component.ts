@@ -36,7 +36,7 @@ export class PostCardComponent implements OnInit {
     try {
       this._loaderService.control(true);
       await this._postService.maskFeatured(this.post?.id, mark);
-      this._toastService.success("Succesfully", `${this.post?.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
+      this._toastService.success("Successfully", `${this.post?.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
     }
     catch (err: any) {
       this._toastService.success("Failure", `Something went wrong. Message: ${err.message}`);

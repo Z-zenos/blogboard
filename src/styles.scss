@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~quill/dist/quill.bubble.css'; 
+@import '~quill/dist/quill.bubble.css';
 @import "~@ng-select/ng-select/themes/material.theme.css";
 
 
@@ -138,12 +138,12 @@ html, body { height: 100%; }
   background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
   transition: all 120ms ease-in-out 0s;
   background-size: 100% 200%;
-  background-position: 0px 0px;
+  background-position: 0 0;
   word-break: break-word;
 
   &:hover {
     background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
-    background-position: 0px 100%;
+    background-position: 0 100%;
   }
 }
 
@@ -193,7 +193,6 @@ html, body { height: 100%; }
   border-radius: 30px;
   box-shadow: $green-1 4px 4px 0 0;
   display: inline-block;
-  font-weight: 600;
   text-align: center;
   text-decoration: none;
   user-select: none;
@@ -225,7 +224,7 @@ html, body { height: 100%; }
     background-color: orange;
     border-color: orange;
     box-shadow: yellow 4px 4px 0 0;
-  
+
     &:hover {
       color: orange;
       border-color: orange;
@@ -237,7 +236,7 @@ html, body { height: 100%; }
     border-color: $yellow-1;
     box-shadow: #f48c06 4px 4px 0 0;
     color: #f48c06;
-  
+
     &:hover {
       color: #f48c06;
       border-color: $yellow-1;
@@ -248,7 +247,7 @@ html, body { height: 100%; }
     background-color: red;
     border-color: red;
     box-shadow: #fb3640 4px 4px 0 0;
-  
+
     &:hover {
       color: red;
       border-color: red;
@@ -259,7 +258,7 @@ html, body { height: 100%; }
     background-color: $blue-1;
     border-color: $blue-1;
     box-shadow: aquamarine 4px 4px 0 0;
-  
+
     &:hover {
       color: $blue-1;
       border-color: $blue-1;
@@ -270,7 +269,7 @@ html, body { height: 100%; }
     background-color: $purple-1;
     border-color: $purple-1;
     box-shadow: #c391e8 4px 4px 0 0;
-  
+
     &:hover {
       color: $purple-1;
       border-color: $purple-1;
@@ -281,7 +280,7 @@ html, body { height: 100%; }
     background-color: $gray-1;
     border-color: $gray-1;
     box-shadow: #c7c7c7 4px 4px 0 0;
-  
+
     &:hover {
       color: $gray-1;
       border-color: $gray-1;
@@ -298,10 +297,10 @@ input, select {
   outline: none;
   padding: .7rem 2rem;
   border-radius: 4px;
-  
+
   &:focus {
     border-color: $primary-color;
-    box-shadow: $green-1 0px 0px 0px 4px;
+    box-shadow: $green-1 0 0 0 4px;
   }
 
   &:focus-visible {
@@ -425,7 +424,7 @@ textarea {
     transition: opacity 1s ease-in-out;
     border: 1px solid $blue-1;
     font-size: 13px;
-  
+
     position: absolute;
     z-index: 2;
     left: 50%;

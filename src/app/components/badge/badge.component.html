@@ -1,10 +1,10 @@
 <div class="badge inline-block">
   <span class="badge__logo">
-    <img class="badge__img" [src]="src">
+    <img class="badge__img" [ngSrc]="src" alt="" fill>
   </span>
-  <span class="badge__title" [ngStyle]="{ 
+  <span class="badge__title" [ngStyle]="{
       'color': getColor(title),
-      'font-weight': 600 
+      'font-weight': 600
     }
   ">
     {{ title }}

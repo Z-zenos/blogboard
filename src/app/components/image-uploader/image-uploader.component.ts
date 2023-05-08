@@ -35,21 +35,22 @@ export class ImageUploaderComponent implements ControlValueAccessor {
   }
 
   onSelect(e: Event) {
-    // Getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    // Getting user to select file and [0] this means if a user selects multiple files,
+    // then we'll select only the first one
     // @ts-ignore
     this.file = (e.target as HTMLInputElement).files[0];
     this.dropArea.nativeElement.classList.add('active');
     this.showFile();
   }
 
-  // If user drag file over drop area
+  // If user drags file over drop area
   onDragOver(e: Event) {
     e.preventDefault();
     this.dropArea.nativeElement.classList.add('active');
     if (this.dragText) this.dragText.nativeElement.textContent = 'Release';
   }
 
-  // If user leave dragged file from droparea
+  // If user leaves dragged file from drop-area
   onDragLeave() {
     this.dropArea.nativeElement.classList.remove("active");
     if (this.dragText) this.dragText.nativeElement.textContent = "Drag & Drop";
@@ -59,7 +60,7 @@ export class ImageUploaderComponent implements ControlValueAccessor {
   onDrop(e: Event) {
     e.preventDefault();
 
-    // Getting user select file and [0] means if user select multiple files then we'll  select only the first one.
+    // Getting user to select file and [0] means, if user selects multiple files then we'll select only the first one.
     // @ts-ignore
     this.file = e.dataTransfer.files[0];
     this.showFile();
@@ -74,11 +75,11 @@ export class ImageUploaderComponent implements ControlValueAccessor {
     // adding some valid image extensions in array
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
 
-    // If user selected file is an image file
+    // If the user selected file is an image file
     if (validExtensions.includes(fileType ?? '')) {
       let fileReader = new FileReader();
       fileReader.onload = () => {
-        // Passing user file source in fileURL variable
+        // Passing a user file source in fileURL variable
         let fileURL = fileReader.result;
         this.imgUrl = fileURL as string;
         this.changeImage.emit({ file: this.file, src: this.imgUrl });

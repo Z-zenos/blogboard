@@ -35,6 +35,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { LoginComponent } from './auth/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     QuillModule.forRoot(),
     NgSelectModule,
     FormsModule,
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent]

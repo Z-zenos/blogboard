@@ -12,7 +12,7 @@
       width: 100%;
       height: 100%;
       border-radius: .7rem;
-      box-shadow: rgba($green-1, 0.27) 0px 3px 8px;
+      box-shadow: rgba($green-1, 0.27) 0 3px 8px;
     }
   }
 
@@ -141,21 +141,20 @@
   background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
   transition: all 120ms ease-in-out 0s;
   background-size: 100% 200%;
-  background-position: 0px 0px;
+  background-position: 0 0;
   word-break: break-word;
 
   &:hover {
     background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
-    background-position: 0px 100%;
+    background-position: 0 100%;
   }
 }
 
 .menu--heading, .menu--sub-heading, .menu--sub-sub-heading {
   cursor: pointer;
   display: block;
-  margin: .5rem 0;
   color: black ;
-  margin-left: 1rem;
+  margin: .5rem 0 .5rem 1rem;
 
   i {
     color: $primary-color;
@@ -165,7 +164,6 @@
 
 .menu--heading {
   font-size: $small-text;
-  font-size: 1.6rem;
 }
 
 .menu--sub-heading {
@@ -228,7 +226,7 @@
 }
 .ng-dropdown-footer{
     border-top:unset !important;
-    padding: 0px 10px !important;
+    padding: 0 10px !important;
 }
 .ng-dropdown-footer:hover {
    background-color: #f5faff;

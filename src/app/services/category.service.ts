@@ -17,7 +17,7 @@ import { ICategory } from '../models/category.interface';
   providedIn: 'root'
 })
 export class CategoryService {
-  private categories: CollectionReference<DocumentData>;
+  private readonly categories: CollectionReference<DocumentData>;
 
   constructor(private readonly firestore: Firestore) {
     this.categories = collection(this.firestore, 'categories');

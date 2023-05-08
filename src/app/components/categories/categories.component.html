@@ -18,9 +18,9 @@
     </div>
 
     <div class="category__search-box">
-      <input type="text" placeholder="Search category name..." #seachInput
-        (keyup.enter)="searchCategory(seachInput.value)" />
-      <button class="btn btn--green" (click)="searchCategory(seachInput.value)"><i class="fas fa-search"
+      <input type="text" placeholder="Search category name..." #searchInput
+        (keyup.enter)="searchCategory(searchInput.value)" />
+      <button class="btn btn--green" (click)="searchCategory(searchInput.value)"><i class="fas fa-search"
           style="margin-right: 5px;"></i>
         Search</button>
     </div>
@@ -56,7 +56,7 @@
           *ngFor="let ctgr of categories;">
           <td style="width: 5%;">
             <div class="center-checkbox" style="margin-top: 10px;">
-              <input id="checkbox-all-search" type="checkbox">
+              <input id="checkbox-search" type="checkbox">
               <label for="checkbox-all-search" class="sr-only">checkbox</label>
             </div>
           </td>
@@ -65,7 +65,7 @@
           </td>
           <td style="width: 20%;">
             <div class="table__img">
-              <img [src]="ctgr.logo" [alt]="ctgr.name + ' logo'">
+              <img [ngSrc]="ctgr.logo" [alt]="ctgr.name + ' logo'" fill>
             </div>
           </td>
           <td style="width: 15%;">
