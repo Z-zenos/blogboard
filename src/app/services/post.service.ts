@@ -3,7 +3,8 @@ import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fir
 import { IImage } from '../models/image.interface';
 import { IPost } from '../models/post.interface';
 import { CollectionReference, DocumentData, Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom, switchMap } from 'rxjs';
+import { deleteObject } from '@firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,11 @@ export class PostService {
     }
     else if (type === 'update') {
       // Current image was firebase image url
-      const ctgrDocRef = doc(
+      const postDocRef = doc(
         this._firestore,
         `posts/${postData.id}`
       );
-      updateDoc(ctgrDocRef, { ...postData });
+      updateDoc(postDocRef, { ...postData });
     }
   }
 
@@ -59,13 +60,19 @@ export class PostService {
   }
 
   getPostById(id: string) {
-    const ctgrDocRef = doc(this._firestore, `posts/${id}`);
-    return docData(ctgrDocRef, { idField: 'id' }) as Observable<IPost>;
+    const postDocRef = doc(this._firestore, `posts/${id}`);
+    return docData(postDocRef, { idField: 'id' }) as Observable<IPost>;
   }
 
-  delete(id: string | undefined) {
+  async delete(id: string | undefined) {
     if (!id) throw new Error("Id undefined");
-    const ctgrDocRef = doc(this._firestore, `posts/${id}`);
-    return deleteDoc(ctgrDocRef);
+
+    const post: IPost = await firstValueFrom(this.getPostById(id));
+    if (!post) return;
+    const imageRef = ref(this._storage, post.image);
+    await deleteObject(imageRef);
+
+    const postDocRef = doc(this._firestore, `posts/${id}`);
+    await deleteDoc(postDocRef);
   }
 }

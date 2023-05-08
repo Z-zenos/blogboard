@@ -7,7 +7,7 @@
   position: relative;
   border-right: 1px solid $green-1;
   font-size: $small-text;
-  background-color: $secondary-color;
+  background-color: #eaffe7;
 
   &::before {
     position: absolute;
@@ -16,7 +16,7 @@
     content: '';
     top: -1rem;
     left: 0;
-    background-color: $secondary-color;
+    background-color: #eaffe7;
     z-index: 2;
   }
 
