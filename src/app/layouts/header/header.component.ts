@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'board-header',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  get userEmail() {
+    if (!this._authService.isLoggedInGuard) return '';
+    return JSON.parse(localStorage.getItem('user') as string).email;
+  }
+
+  async logout() {
+    await this._authService.logout(this.userEmail);
+  }
 }

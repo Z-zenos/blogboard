@@ -9,7 +9,7 @@
 
       <label class="form__label" style="margin-top: 1rem;">Email</label>
       <div class="login__input-group">
-        <input type="email" placeholder="example@gmail.com" formControlName="email" />
+        <input type="email" placeholder="example@gmail.com" formControlName="email" (keyup.enter)="onSubmit()" />
         <i class="fal fa-at" style="font-size: 2rem;"></i>
       </div>
       <board-alert *ngIf="fc['email'].touched && fc['email'].invalid" message="Email invalid."></board-alert>
@@ -17,7 +17,7 @@
       <label class="form__label" style="margin-top: 2rem">Password</label>
       <div class="login__input-group">
         <input [type]="isShowPassword ? 'text' : 'password'" placeholder="*****" formControlName="password" />
-        <i *ngIf="!isShowPassword" class="fas fa-eye" (click)="isShowPassword = true"></i>
+        <i *ngIf="!isShowPassword" class="fas fa-eye" (click)="isShowPassword = true" (keyup.enter)="onSubmit()"></i>
         <i *ngIf="isShowPassword" class="fas fa-eye-slash" (click)="isShowPassword = false"></i>
       </div>
       <ng-container *ngIf="fc['password'].touched && fc['password'].invalid">

@@ -5,14 +5,16 @@ import { SettingComponent } from './components/setting/setting.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostFormComponent } from './forms/post-form/post-form.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: CategoriesComponent },
+  { path: '', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'categories', component: CategoriesComponent },
-  { path: 'posts', component: PostsComponent },
-  { path: 'write', component: PostFormComponent },
-  { path: 'setting', component: SettingComponent },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
+  { path: 'write', component: PostFormComponent, canActivate: [AuthGuard] },
+  { path: 'setting', component: SettingComponent, canActivate: [AuthGuard] },
+  { path: '**', component: CategoriesComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
