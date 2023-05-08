@@ -202,6 +202,7 @@ html, body { height: 100%; }
   transform: translateX(0);
 
   &--avoid {
+    transition: all .1s ease;
     transform: translateX(27rem);
   }
 

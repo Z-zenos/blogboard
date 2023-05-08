@@ -32,19 +32,12 @@
   &__logo {
     color: $primary-color;
     font-size: 2.4rem;
-    margin-bottom: 10rem;
+    margin-bottom: 7rem;
     font-weight: 600;
   }
 
-  &__login-text {
-    font-size: 3.2rem;
-    color: $text-color;
-    font-weight: 700;
-    margin-bottom: 2rem;
-  }
-
   &__input-group {
-    margin: 2rem 0;
+    margin: 1rem 0;
     position: relative;
 
     input {

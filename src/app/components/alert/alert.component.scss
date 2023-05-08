@@ -17,4 +17,10 @@
     border-color: red;
   }
 
+  &--warn {
+    background-color: rgba($yellow-1, .1);
+    color: $yellow-1; 
+    border-color: $yellow-1;
+  }
+
 }
