@@ -26,8 +26,10 @@
       </ng-container>
 
 
-      <button class="btn btn--green" style="margin-top: 1rem;" [disabled]="form.invalid" (click)="onSubmit()"
-        (mouseenter)="avoidClick()" #btnLogin>Login {{ form.invalid ? '😛' : '' }}</button>
+      <button [ngClass]="'btn btn--green ' + (form.invalid ? 'btn--avoid' : '')"
+        style="margin-top: 1rem; transition: all .1s ease;" [disabled]="form.invalid" (click)="onSubmit()"
+        (mouseenter)="avoidClick()" #btnLogin>Login {{
+        form.invalid ? '😛' : '' }}</button>
 
       <div class="copyright">Copyright <i class="far fa-copyright"></i> 2023, <a href="https://github.com/Z-zenos"
           target="_blank" class="text-half-highlight">Zenos</a>. All rights reversed.</div>

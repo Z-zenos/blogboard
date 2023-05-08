@@ -23,15 +23,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
-
+    if (this.form.invalid) return;
+    console.log(this.form.value, this.form.invalid);
+    this.form.reset();
   }
 
   avoidClick() {
-    console.log('avoid');
-    console.log(this.form.valid);
-
-
     if (this.form.invalid) {
       this.btnLogin.nativeElement.classList.toggle('btn--avoid');
     }
