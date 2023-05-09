@@ -19,11 +19,9 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-
     if (JSON.parse(localStorage.getItem('user') as string) && JSON.parse(localStorage.getItem('user') as string).email) {
       this._authService.isLoggedInGuard = true;
     }
-
 
     if (this._authService.isLoggedInGuard) {
       return true;
