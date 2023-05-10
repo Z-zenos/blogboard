@@ -9,25 +9,7 @@ import { IPreview } from '../models/preview.interface';
 })
 export class PreviewService {
 
-  private _preview = new BehaviorSubject<IPreview>({
-    isDisplay: false,
-    post: {
-      title: '',
-      permalink: '',
-      content: '',
-      references: [],
-      categories: [],
-      image: '',
-      excerpt: '',
-      comment_id: '',
-
-      view: 0,
-      like: 0,
-      isFeatured: false,
-
-      created_at: Date.now(),
-    }
-  });
+  private _preview = new BehaviorSubject<IPreview>({ isDisplay: false });
 
   readonly preview$ = this._preview.asObservable();
 

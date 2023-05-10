@@ -9,7 +9,7 @@ export class OverlayService {
   private _overlay = new BehaviorSubject<boolean>(false);
   readonly overlay$ = this._overlay.asObservable();
 
-  private overlay: boolean = false;
+  overlay: boolean = false;
 
   constructor() { }
 

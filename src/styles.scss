@@ -360,7 +360,7 @@ textarea {
   background-color: white;
   border-radius: 10px;
   overflow: scroll;
-
+  box-shadow: rgba($green-1, 0.19) 0px 10px 20px, rgba($green-1, 0.23) 0px 6px 6px;
   scrollbar-width: none !important;
 
   &::-webkit-scrollbar {

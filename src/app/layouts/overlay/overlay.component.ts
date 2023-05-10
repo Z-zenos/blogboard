@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OverlayService } from 'src/app/services/overlay.service';
+import { PreviewService } from 'src/app/services/preview.service';
 
 @Component({
   selector: 'board-overlay',
@@ -9,7 +10,9 @@ import { OverlayService } from 'src/app/services/overlay.service';
 export class OverlayComponent implements OnInit {
   overlay: boolean = false;
 
-  constructor(private _overlayService: OverlayService) { }
+  constructor(
+    private _overlayService: OverlayService,
+  ) { }
 
   ngOnInit(): void {
     this._overlayService.overlay$.subscribe((on: boolean) => {

@@ -1,4 +1,21 @@
 <div *ngIf="isDisplay" class="post">
+  <div class="post__tool">
+    <div>
+      <button class="btn btn--blue" routerLink="/write" [queryParams]="{ 'id': post!.id }" (click)="close()">Update <i
+          class="fas fa-pen"></i></button>
+      <button class="btn btn--red" (click)="deletePost()">Delete <i class="fas fa-trash"></i></button>
+      <button class="btn" [ngClass]="{ 'btn--green': post?.isFeatured, 'btn--blue': !post?.isFeatured }"
+        (click)="markFeatured(!post?.isFeatured)">
+        {{ !post?.isFeatured ? 'Mark featured' : 'Unmark Featured' }}
+        <i [ngClass]="(post?.isFeatured ? 'fas' : 'far') +  ' fa-star'"></i>
+      </button>
+    </div>
+    <div>
+      <button class="btn btn--gray" (click)="close()">Close</button>
+    </div>
+
+
+  </div>
   <!-- POST HEADER -->
   <div class="post__header">
     <div class="overview">

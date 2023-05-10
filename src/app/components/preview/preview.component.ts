@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { IPost } from 'src/app/models/post.interface';
 import { IPreview } from 'src/app/models/preview.interface';
 import { CategoryService } from 'src/app/services/category.service';
+import { FormService } from 'src/app/services/form.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { PostService } from 'src/app/services/post.service';
 import { PreviewService } from 'src/app/services/preview.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'board-preview',
@@ -21,7 +26,11 @@ export class PreviewComponent implements OnInit {
 
   constructor(
     private _previewService: PreviewService,
-    private _categoryService: CategoryService
+    private _categoryService: CategoryService,
+    private _formService: FormService,
+    private _loaderService: LoaderService,
+    private _postService: PostService,
+    private _toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -61,4 +70,30 @@ export class PreviewComponent implements OnInit {
     img.src = `http://localhost:4200/assets/icons/${newFileName}.${ext}`;
   }
 
+  close() {
+    this._previewService.controlPreview({ isDisplay: false });
+  }
+
+  deletePost() {
+    this._formService.controlForm(
+      'destroy',
+      { isDisplay: true, service: 'post', title: 'Post', destroyData: { value: this.post?.title, id: this.post?.id } }
+    );
+  }
+
+  async markFeatured(mark: boolean) {
+    try {
+      this._loaderService.control(true);
+      await this._postService.maskFeatured(this.post?.id, mark);
+      this.post = await firstValueFrom(this._postService.getPostById(this.post?.id as string));
+
+      this._toastService.success("Successfully", `${this.post?.title} was ${mark ? 'marked as featured' : 'unmarked'}`);
+    }
+    catch (err: any) {
+      this._toastService.success("Failure", `Something went wrong. Message: ${err.message}`);
+    }
+    finally {
+      this._loaderService.control(false);
+    }
+  }
 }
