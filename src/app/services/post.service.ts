@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {getDownloadURL, ref, Storage, uploadBytesResumable} from '@angular/fire/storage';
-import {IImage} from '../models/image.interface';
-import {IPost} from '../models/post.interface';
+import { Injectable } from '@angular/core';
+import { getDownloadURL, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
+import { IImage } from '../models/image.interface';
+import { IPost } from '../models/post.interface';
 import {
   addDoc,
   collection,
@@ -12,12 +12,13 @@ import {
   docData,
   DocumentData,
   Firestore,
+  orderBy,
   query,
   updateDoc,
   where
 } from '@angular/fire/firestore';
-import {firstValueFrom, Observable} from 'rxjs';
-import {deleteObject} from '@firebase/storage';
+import { firstValueFrom, Observable } from 'rxjs';
+import { deleteObject } from '@firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -64,8 +65,17 @@ export class PostService {
     await updateDoc(postDocRef, { isFeatured: isFeatured });
   }
 
-  getAll() {
-    return collectionData(this._posts, {
+  getAll(option?: any) {
+    let appQuery: any;
+    if (option) {
+      if (option.orderBy)
+        appQuery = query(this._posts, orderBy(option.orderBy, ["title", "created_at"].includes(option.orderBy) ? "asc" : 'desc'));
+    }
+
+    console.log(option);
+
+
+    return collectionData(option ? appQuery : this._posts, {
       idField: 'id'
     }) as Observable<IPost[]>;
   }

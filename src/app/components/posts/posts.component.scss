@@ -26,4 +26,30 @@
       height: 4.8rem;
     }
   }
+
+  &__sort-box {
+    position: relative;
+    display: inline-block;
+
+    .dropdown {
+      position: absolute;
+      bottom: -17rem;
+      left: 0;
+      background-color: white;
+      width: 100%;
+      z-index: 2;
+      border-radius: 6px;
+      box-shadow: rgba($green-1, 0.7) 0 3px 8px;
+    }
+
+    li {
+      padding: 1rem 2rem;
+      transition: $transition;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $secondary-color;
+      }
+    }
+  }
 }

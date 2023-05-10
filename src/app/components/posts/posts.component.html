@@ -4,16 +4,18 @@
       <button class="btn btn--green" routerLink="/write">Write Post</button>
       <button class="btn btn--yellow" (click)="reset()">Reset</button>
 
-      <!-- <div class="posts__sort-box">
-        <button class="btn btn--purple" (click)="isDropDown = !isDropDown">Sort By <i class="fas fa-chevron-down"
+      <div class="posts__sort-box inline-block">
+        <button class="btn btn--purple" (click)="isDropdown = !isDropdown">Sort By <i class="fas fa-chevron-down"
             style="margin-left: 5px;"></i></button>
-        <div class="dropdown" *ngIf="isDropDown">
-          <ul>
-            <li>Name</li>
-            <li>Date</li>
+        <div class="dropdown" *ngIf="isDropdown">
+          <ul (click)="sortPost($event)">
+            <li data-typesort="title">A-Z</li>
+            <li data-typesort="created_at">Newest</li>
+            <li data-typesort="like">Likes</li>
+            <li data-typesort="view">Views</li>
           </ul>
         </div>
-      </div> -->
+      </div>
     </div>
 
     <div class="posts__search-box">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { IPost } from 'src/app/models/post.interface';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
@@ -10,6 +11,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
+  isDropdown: boolean = false;
 
   constructor(
     private _postService: PostService,
@@ -38,5 +40,21 @@ export class PostsComponent implements OnInit {
 
   reset() {
     this.loadAllPost();
+  }
+
+  async sortPost(e: Event) {
+    try {
+      const liEl = (e.target as HTMLElement);
+      this._loaderService.control(true);
+      this.posts = await firstValueFrom(this._postService.getAll({ orderBy: liEl.dataset['typesort'] }));
+      console.log(this.posts);
+      this.isDropdown = false;
+    }
+    catch (err) {
+
+    }
+    finally {
+      this._loaderService.control(false);
+    }
   }
 }
