@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { ICategory } from 'src/app/models/category.interface';
 import { IPost } from 'src/app/models/post.interface';
@@ -15,7 +15,9 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss']
 })
-export class PreviewComponent implements OnInit, AfterViewInit {
+export class PreviewComponent implements OnInit, AfterViewChecked {
+  @ViewChild('previewEl', { static: false }) previewEl?: ElementRef<HTMLDivElement>;
+
   post?: IPost;
   isDisplay: boolean = false;
   readingTime: number = 0;
@@ -31,6 +33,7 @@ export class PreviewComponent implements OnInit, AfterViewInit {
     private _loaderService: LoaderService,
     private _postService: PostService,
     private _toastService: ToastService,
+    private _cdref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -47,9 +50,10 @@ export class PreviewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.headingList = Array.from(document.querySelectorAll('.content h1, .content h2, .content h3'));
-    console.log("View init: ", this.headingList);
+
+    this._cdref.detectChanges();
   }
 
   caculateTimeReading(): void {
@@ -101,5 +105,18 @@ export class PreviewComponent implements OnInit, AfterViewInit {
     finally {
       this._loaderService.control(false);
     }
+  }
+
+  scrollToTop() {
+    this.previewEl?.nativeElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  scrollToSection(e: Event) {
+    const heading = e.target as HTMLElement;
+    this.headingList[+(heading.dataset['headingindex'] as string)].scrollIntoView({ behavior: 'smooth' });
   }
 }

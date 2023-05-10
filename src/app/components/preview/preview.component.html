@@ -1,4 +1,4 @@
-<div *ngIf="isDisplay" class="post">
+<div *ngIf="isDisplay" class="post" #previewEl>
   <div class="post__tool">
     <div>
       <button class="btn btn--blue" routerLink="/write" [queryParams]="{ 'id': post!.id }" (click)="close()">Update <i
@@ -85,19 +85,19 @@
     <article class="content" #content>
       <div [innerHTML]="post?.content ?? '' | sanitizeHtml"></div>
       <div class="post__comment">
-        <h2 class="text-two-line mb-20">Comment</h2>
+        <h2 class="text-two-line mb-20" (click)="scrollToSection($event)">Comment</h2>
       </div>
     </article>
 
     <div class="sidebar sidebar--right">
       <div class="menu">
         <h3 class="sidebar__header">Menu</h3>
-        <div *ngFor="let hd of headingList">
-          <p
+        <div *ngFor="let hd of headingList; let i = index">
+          <p (click)="scrollToSection($event)"
             [ngClass]="{'menu--heading': hd.nodeName === 'H1', 'menu--sub-heading': hd.nodeName === 'H2', 'menu--sub-sub-heading': hd.nodeName === 'H3'}">
             <span><i
                 [ngClass]="'fas ' + (hd.nodeName === 'H1' ?  'fa-plus' : (hd.nodeName !== 'H2' ? 'fa-caret-right' : 'fa-stop'))"></i></span>
-            <span [innerHTML]="hd.innerHTML"></span>
+            <span [attr.data-headingIndex]="i" [innerHTML]="hd.innerHTML"></span>
           </p>
         </div>
       </div>
@@ -109,5 +109,8 @@
       </div>
     </div>
 
+  </div>
+  <div class="btn--scroll-to-top">
+    <button class="btn btn--purple" (click)="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
   </div>
 </div>
