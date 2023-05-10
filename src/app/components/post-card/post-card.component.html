@@ -1,35 +1,35 @@
 <div class="post-card" (mouseenter)="isDisplayAction = true" (mouseleave)="isDisplayAction = false">
   <div class="post-card__img">
-    <img [src]="post?.image"  alt=""/>
+    <img [src]="post!.image" alt="" />
     <div class="post-card__stats">
-      <span style="display: block;"><i class="fas fa-eye" style="color: orangered;"></i> {{ post?.view }} </span>
-      <span style="display: block;"><i class="fas fa-thumbs-up" style="color: rgb(14, 165, 233);"></i> {{ post?.like }}
+      <span style="display: block;"><i class="fas fa-eye" style="color: orangered;"></i> {{ post!.view }} </span>
+      <span style="display: block;"><i class="fas fa-thumbs-up" style="color: rgb(14, 165, 233);"></i> {{ post!.like }}
       </span>
     </div>
   </div>
   <div class="post-card__info text-left">
-    <h3 class="post-card__title">{{ post?.title }}</h3>
+    <h3 class="post-card__title" (click)="preview()">{{ post!.title }}</h3>
     <div style="margin: .7rem 0; opacity: .6; font-size: 12px;">
-      <span>{{ post?.created_at | date }} <i class="far fa-clock"></i> | </span>
+      <span>{{ post!.created_at | date }} <i class="far fa-clock"></i> | </span>
       <div class="post-card__tags">
-        <a class="text-half-highlight tag" *ngFor="let tag of post?.categories; let last = last">#{{ tag.name }}{{ last
+        <a class="text-half-highlight tag" *ngFor="let tag of post!.categories; let last = last">#{{ tag.name }}{{ last
           ? ''
           :',' }}
         </a>
       </div>
     </div>
     <p class="post-card__excerpt">
-      {{ post?.excerpt }}
+      {{ post!.excerpt }}
     </p>
   </div>
 
   <div class="action" [ngClass]="{ 'active': isDisplayAction }">
-    <div *ngIf="!post?.isFeatured" class="action--not-featured" (click)="markFeatured(true)"><i class="far fa-star"></i>
+    <div *ngIf="!post!.isFeatured" class="action--not-featured" (click)="markFeatured(true)"><i class="far fa-star"></i>
     </div>
-    <div *ngIf="post?.isFeatured" class="action--is-featured" (click)="markFeatured(false)"><i class="fas fa-star"></i>
+    <div *ngIf="post!.isFeatured" class="action--is-featured" (click)="markFeatured(false)"><i class="fas fa-star"></i>
     </div>
 
-    <div class="action--edit" routerLink="/write" [queryParams]="{ 'id': post?.id }"><i class="fas fa-pen"></i></div>
+    <div class="action--edit" routerLink="/write" [queryParams]="{ 'id': post!.id }"><i class="fas fa-pen"></i></div>
     <div class="action--remove" (click)="deletePost()"><i class="fas fa-trash"></i></div>
   </div>
 </div>

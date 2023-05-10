@@ -1,0 +1,284 @@
+@import "../../../styles";
+
+@mixin stickyElement() {
+  position: sticky;
+  top: 25rem;
+  height: auto;
+  z-index: 1;
+}
+
+.post {
+  width: 140rem;
+  height: 80rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: white;
+  border-radius: 10px;
+  overflow: scroll;
+
+  scrollbar-width: none !important;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+  padding: 7rem 4rem;
+  transition: $transition;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 50% 45%;
+    column-gap: 5%;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba($green-1, .3);
+
+    mat-icon {
+      font-size: $small-text;
+      @include center-item();
+    }
+  }
+
+  &__img {
+    width: 100%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 1rem;
+    height: 30rem;
+
+    &:hover {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+    img {
+      width: 100%;
+      height: 30rem;
+      border-radius: 1rem;
+    }
+  }
+
+
+  &__body {
+    margin: 8rem 0;
+    font-size: 1.7rem;
+    display: grid;
+    grid-template-columns: 15% 60% 25%;
+    place-items: start;
+    position: relative;
+
+    p {
+      line-height: 3rem;
+    }
+  }
+
+  ::selection {
+    background-color: $primary-color;
+    color: white;
+  }
+
+  &__comment {
+    width: 100%;
+    margin: 10rem 0 4rem;
+  }
+}
+
+.overview {
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+  }
+
+  &__date, &__reading-time  {
+    opacity: .7;
+    @include center-item();
+  }
+
+  &__react {
+    opacity: .7;
+    span {
+      @include center-item();
+    }
+  }
+  
+  &__summary {
+    margin: 2.4rem 0;
+    opacity: .9;
+    font-size: $small-text;
+  }
+
+  &__tags {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: $big-text;
+    line-height: 4rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: .5rem;
+      top: 0;
+      left: -2rem;
+      display: block;
+      background-color: $primary-color;
+      border-radius: 20px;
+    }
+  
+  }
+
+  .quick-summary {
+    font-size: 2rem;
+    color: $primary-color;
+    font-weight: 700;
+  }
+
+  .author {
+    display: grid;
+    grid-template-columns: 6% 92%;
+    place-items: center start;
+    column-gap: 2%;
+    font-size: 1.4rem;
+
+    &__avatar {
+      img {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+      }
+    }
+
+    &__info {
+      width: 100%;
+    }
+
+    &__name {
+      color: black;
+      font-size: 1.5rem;
+    }
+
+    &__profession {
+      opacity: .7;
+    }
+  }
+}
+
+.tool {
+  &__box {
+    place-self: start center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    gap: 2rem;
+    text-align: center;
+    row-gap: 2rem;
+  }
+}
+
+.awards {
+  &__box {
+    place-self: start center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    gap: 1rem;
+    text-align: center;
+    row-gap: 2rem;
+
+    img {
+      width: 2.4rem;
+      height: 2.4rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.post .content {
+  width: 70rem;
+  color: $text-color;
+}
+
+.post .sidebar {
+  &--left {
+    left: 5rem;
+    margin-left: 5rem;
+
+    img {
+      transition: $transition;
+
+      &:hover {
+        border: 1px solid $primary-color;
+        padding: 2px;
+      }
+    }
+  }
+
+  .menu {
+    mat-icon {
+      font-size: 1.4rem;
+      @include center-item();
+      color: $green-1;
+      transform: translateY(2px);
+    }
+
+    
+  }
+
+  @include stickyElement();
+
+  &__header {
+    color: $text-color;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-left: -2rem;
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+      content: "";
+      display: inline-block;
+      height: 0.5em;
+      vertical-align: bottom;
+      width: 100%;
+      margin-right: -100%;
+      margin-left: 10px;
+      border-top: 1px solid $text-color;
+    }
+  }
+}
+
+.menu--heading, .menu--sub-heading, .menu--sub-sub-heading {
+  cursor: pointer;
+  display: block;
+  color: black ;
+  margin: .5rem 0 .5rem 1rem;
+
+  i {
+    color: $primary-color;
+    margin-right: .7rem;
+  }
+}
+
+.menu--heading {
+  font-size: $small-text;
+}
+
+.menu--sub-heading {
+  font-size: 1.4rem;
+  margin-left: 3rem;
+}
+
+.menu--sub-sub-heading {
+  font-size: 1.2rem;
+  margin-left: 5rem;
+}

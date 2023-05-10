@@ -1,7 +1,7 @@
 @import "../../../styles";
 
 .login {
-  background: url('../../../assets/images/bg2.webp') no-repeat center center fixed;
+  background: url('../../../assets/images/bg2.webp') no-repeat center center / contain;
   width: 100%;
   height: 100%;
 
@@ -19,7 +19,7 @@
     grid-template-columns: 50% 50%;
 
     &--left {
-      background: #ffffff url("../../../assets/images/cryptoExchange.gif") no-repeat center center / contain;
+      background: url("../../../assets/images/cryptoExchange.gif") no-repeat center center / contain;
     }
 
     &--right {

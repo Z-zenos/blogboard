@@ -3,6 +3,7 @@ import { IPost } from 'src/app/models/post.interface';
 import { FormService } from 'src/app/services/form.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
+import { PreviewService } from 'src/app/services/preview.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
-  @Input() post?: IPost;
+  @Input() post!: IPost;
 
   isDisplayAction: boolean = false;
 
@@ -19,7 +20,8 @@ export class PostCardComponent implements OnInit {
     private _formService: FormService,
     private _postService: PostService,
     private _toastService: ToastService,
-    private _loaderService: LoaderService
+    private _loaderService: LoaderService,
+    private _previewService: PreviewService
   ) { }
 
   ngOnInit(): void {
@@ -44,5 +46,9 @@ export class PostCardComponent implements OnInit {
     finally {
       this._loaderService.control(false);
     }
+  }
+
+  preview() {
+    this._previewService.controlPreview({ isDisplay: true, post: this.post });
   }
 }

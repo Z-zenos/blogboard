@@ -19,7 +19,7 @@ export interface IPost {
   status?: string;
 
 
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: number;
+  updated_at?: number;
   deleted?: boolean;
 }

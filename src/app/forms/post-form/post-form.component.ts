@@ -18,6 +18,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from 'src/app/services/form.service';
 import { switchMap } from 'rxjs';
+import { PreviewService } from 'src/app/services/preview.service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -58,6 +59,20 @@ export class PostFormComponent implements OnInit {
   selectedImage: IImage = { file: null, src: '' };
   type: string = 'publish';
   stats: any = {};
+
+  extra = {
+    speakable: false,
+    comment_id: '',
+    view: 0,
+    awards: [],
+    like: 0,
+    isFeatured: false,
+    status: '',
+    created_at: Date.now(),
+    updated_at: Date.now(),
+    deleted: false,
+  }
+
   editPost: IPost = {
     id: '',
     title: '',
@@ -67,10 +82,7 @@ export class PostFormComponent implements OnInit {
     categories: [],
     image: '',
     excerpt: '',
-    comment_id: '',
-    view: 0,
-    like: 0,
-    isFeatured: false,
+    ...this.extra
   };
 
   constructor(
@@ -80,7 +92,8 @@ export class PostFormComponent implements OnInit {
     private _postService: PostService,
     private _toastService: ToastService,
     private _activatedRoute: ActivatedRoute,
-    private _formService: FormService
+    private _formService: FormService,
+    private _previewService: PreviewService
   ) {
     this.quillEditorModules = {
       ...this.config
@@ -130,20 +143,7 @@ export class PostFormComponent implements OnInit {
         throw new Error("Please fill all field.");
       }
 
-      const extra = {
-        speakable: false,
-        comment_id: '',
-        view: 0,
-        awards: [],
-        like: 0,
-        isFeatured: false,
-        status: '',
-        created_at: Date.now(),
-        updated_at: Date.now(),
-        deleted: false,
-      }
-
-      const postData: IPost = Object.assign({}, this.editPost ?? extra, this.form.value);
+      const postData: IPost = Object.assign({}, this.editPost ?? this.extra, this.form.value);
 
       this._loaderService.control(true);
       await this._postService.publish(this.selectedImage, postData, this.type);
@@ -220,10 +220,6 @@ export class PostFormComponent implements OnInit {
     });
   }
 
-  preview() {
-
-  }
-
   onTitleChanged(e: InputEvent) {
     this.form.patchValue({
       permalink: (e.target as HTMLInputElement).value?.trim()?.replace(/\s+/g, '-')
@@ -277,5 +273,9 @@ export class PostFormComponent implements OnInit {
     finally {
       this._loaderService.control(false);
     }
+  }
+
+  preview() {
+    this._previewService.controlPreview({ isDisplay: true, post: this.type === 'publish' ? { ...this.form.value, ...this.extra } : this.editPost });
   }
 }

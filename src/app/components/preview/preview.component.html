@@ -1,0 +1,93 @@
+<div *ngIf="isDisplay" class="post">
+  <!-- POST HEADER -->
+  <div class="post__header">
+    <div class="overview">
+      <div class="overview__info">
+        <span class="overview__date">{{ post?.created_at | date }} <i class="fas fa-time"></i></span>
+        <span class="overview__reading-time">{{ readingTime }} min</span>
+        <div class="overview__react">
+          <div>
+            <span>{{ post?.view }} <i class="fas fa-eye"></i></span>
+            <span class="ml-4">{{ post?.like }} <i class="fas fa-thumbs-up"
+                style="color: rgb(14, 165, 233);"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview__tags mt-5 mb-10">
+        <board-tag *ngFor="let t of post?.categories" [tagName]="t.name"></board-tag>
+      </div>
+
+      <h1 class="overview__title">{{ post?.title }}</h1>
+      <p class="overview__summary">
+        <span class="quick-summary">Quick summary &rarrw;</span>
+        {{ post?.excerpt }}
+      </p>
+
+      <div class="author">
+        <div class="author__avatar">
+          <img src="../../../assets/images/programmer.jpeg" alt="zenos avatar">
+        </div>
+        <div class="author__info">
+          <p class="author__name primary-text text-half-highlight">
+            Zenos
+          </p>
+          <p class="author__profession">
+            Web Creator
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="post__img post__img--main">
+      <img [src]="post?.image" [alt]="post?.title + 'image'" />
+    </div>
+  </div>
+
+  <!-- POST BODY -->
+  <div class="post__body">
+    <div class="sidebar sidebar--left">
+      <div class="tool">
+        <h3 class="sidebar__header">Tools</h3>
+        <div class="tool__box">
+          <board-icon name="bookmark" extra="svg" size="big"></board-icon>
+          <board-icon name="printer" extra="svg" size="big"></board-icon>
+          <board-icon name="share" extra="svg" size="big"></board-icon>
+          <board-icon name="terminal-read" extra="svg" size="big"></board-icon>
+          <board-icon name="comment" extra="svg" size="big"></board-icon>
+        </div>
+      </div>
+      <div class="awards">
+        <h3 class="sidebar__header">Awards</h3>
+        <div class="awards__box">
+          <img *ngFor="let a of awards" [src]="'../../../assets/icons/' + a + '.png'" [alt]="a"
+            (click)="toggleSrcImage($event)" />
+        </div>
+      </div>
+    </div>
+    <article class="content" #content>
+      <div [innerHTML]="post?.content"></div>
+      <div class="post__comment">
+        <h2 class="text-two-line mb-20">Comment</h2>
+      </div>
+    </article>
+
+    <div class="sidebar sidebar--right">
+      <div class="menu">
+        <ng-container *ngFor="let hd of headingList">
+          <p
+            [ngClass]="{'menu--heading': hd.nodeName === 'H1', 'menu--sub-heading': hd.nodeName === 'H2', 'menu--sub-sub-heading': hd.nodeName === 'H3'}">
+            <span><i
+                [ngClass]="'fas ' + (hd.nodeName === 'H1' ?  'fa-plus' : (hd.nodeName !== 'H2' ? 'fa-caret-right' : 'fa-stop'))"></i></span>
+            <span [innerHTML]="hd.innerHTML"></span>
+          </p>
+        </ng-container>
+      </div>
+      <div class="stacked-post">
+        <h3 class="sidebar__header">References</h3>
+        <p class="text-haft-highlight" *ngFor="let r of post!.references">{{ r }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

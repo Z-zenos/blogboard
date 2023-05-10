@@ -36,6 +36,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { LoginComponent } from './auth/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {NgOptimizedImage} from "@angular/common";
+import { PreviewComponent } from './components/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {NgOptimizedImage} from "@angular/common";
     AlertComponent,
     PostCardComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
