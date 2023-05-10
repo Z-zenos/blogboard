@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'board-pagination',
@@ -8,6 +8,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/co
 export class PaginationComponent implements OnInit, AfterViewInit {
 
   @Input() totalPages!: number;
+  @Output() nextPage: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   pageArr: number[] = [];
   currentPage: number = 1;

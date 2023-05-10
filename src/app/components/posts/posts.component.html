@@ -28,4 +28,4 @@
 
   <board-post-card *ngFor="let p of posts" [post]="p"></board-post-card>
 </div>
-<board-pagination *ngIf="pages" [totalPages]="pages"></board-pagination>
+<board-pagination *ngIf="pages" [totalPages]="pages" (nextPage)="paginate()"></board-pagination>

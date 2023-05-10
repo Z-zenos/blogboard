@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit {
 
   async loadAllPost() {
     this._loaderService.control(true);
-    this.posts = await firstValueFrom(await this._postService.getAll({ paginate: true }));
+    this.posts = await firstValueFrom(await this._postService.getAll());
     this.pages = Math.ceil(await this._postService.totalPosts() / 7);
     console.log(this.pages);
 
@@ -58,5 +58,10 @@ export class PostsComponent implements OnInit {
     finally {
       this._loaderService.control(false);
     }
+  }
+
+  async paginate() {
+    this.posts = await firstValueFrom(await this._postService.getAll({ paginate: true }));
+
   }
 }
