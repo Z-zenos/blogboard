@@ -32,7 +32,7 @@
       </div>
 
       <div class="overview__tags mt-5 mb-10">
-        <board-tag *ngFor="let t of post?.categories" [tagName]="t.name"></board-tag>
+        <board-tag *ngFor="let t of post?.categories" [tagName]="t.name" [color]="getColor(t.name)"></board-tag>
       </div>
 
       <h1 class="overview__title">{{ post?.title }}</h1>
@@ -91,18 +91,21 @@
 
     <div class="sidebar sidebar--right">
       <div class="menu">
-        <ng-container *ngFor="let hd of headingList">
+        <h3 class="sidebar__header">Menu</h3>
+        <div *ngFor="let hd of headingList">
           <p
             [ngClass]="{'menu--heading': hd.nodeName === 'H1', 'menu--sub-heading': hd.nodeName === 'H2', 'menu--sub-sub-heading': hd.nodeName === 'H3'}">
             <span><i
                 [ngClass]="'fas ' + (hd.nodeName === 'H1' ?  'fa-plus' : (hd.nodeName !== 'H2' ? 'fa-caret-right' : 'fa-stop'))"></i></span>
             <span [innerHTML]="hd.innerHTML"></span>
           </p>
-        </ng-container>
+        </div>
       </div>
       <div class="stacked-post">
         <h3 class="sidebar__header">References</h3>
-        <p class="text-haft-highlight" *ngFor="let r of post!.references">{{ r }}</p>
+        <a class="text-haft-highlight" style="display: block; margin-bottom: 1rem;" [href]="r" target="_blank"
+          *ngFor="let r of post!.references"><i class="fas fa-link"
+            style="margin-right: 5px; color: rgb(0, 255, 0);"></i> {{ r }}</a>
       </div>
     </div>
 

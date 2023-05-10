@@ -176,6 +176,10 @@
       opacity: .7;
     }
   }
+
+  i {
+    margin: 0 .5rem;
+  }
 }
 
 .tool {
@@ -211,6 +215,20 @@
 .post .content {
   width: 70rem;
   color: $text-color;
+
+  h1, h2, h3 {
+    font-weight: 600;
+    color: $text-color;
+  }
+
+  h1 { font-size: 4rem !important; }
+  h2 { font-size: 3rem !important; }
+  h3 { font-size: 2rem !important; }
+}
+
+:host ::ng-deep .ql-syntax {
+  background-color: black;
+  overflow-x: scroll;
 }
 
 .post .sidebar {
@@ -288,4 +306,18 @@
 .menu--sub-sub-heading {
   font-size: 1.2rem;
   margin-left: 5rem;
+}
+
+a {
+  display: inline-block;
+  background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), rgba($green-1, 0.35) calc(50% - 9px), rgba($green-1, 0.35) 100%);
+  transition: all 120ms ease-in-out 0s;
+  background-size: 100% 200%;
+  background-position: 0 0;
+  word-break: break-word;
+
+  &:hover {
+    background-image: linear-gradient(transparent 0%, transparent calc(50% - 9px), $green-1 calc(50% - 9px), $green-1 100%);
+    background-position: 0 100%;
+  }
 }

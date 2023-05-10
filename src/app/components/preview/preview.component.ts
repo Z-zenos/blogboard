@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, SimpleChanges } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { ICategory } from 'src/app/models/category.interface';
 import { IPost } from 'src/app/models/post.interface';
 import { IPreview } from 'src/app/models/preview.interface';
 import { CategoryService } from 'src/app/services/category.service';
@@ -14,15 +15,14 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss']
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent implements OnInit, AfterViewInit {
   post?: IPost;
   isDisplay: boolean = false;
   readingTime: number = 0;
   headingList: Element[] = [];
+  categories: ICategory[] = [];
 
   awards = ['clap', 'heart', 'star', 'light', 'money', 'rocket', 'gift', 'crown', 'trophy', 'sprout', 'time'];
-
-  // headingList$?: Observable<HTMLHeadingElement[]>;
 
   constructor(
     private _previewService: PreviewService,
@@ -30,24 +30,26 @@ export class PreviewComponent implements OnInit {
     private _formService: FormService,
     private _loaderService: LoaderService,
     private _postService: PostService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
   ) { }
 
   ngOnInit(): void {
+    this._categoryService.getAll().subscribe((data: ICategory[]) => {
+      this.categories = data;
+    })
+
     this._previewService.preview$.subscribe((data: IPreview) => {
       this.isDisplay = data.isDisplay;
       if (this.isDisplay) {
         this.post = data.post;
         this.caculateTimeReading();
-        this.headingList = Array.from(document.querySelectorAll('.ql-editor h1, .ql-editor h2, .ql-editor h3'));
       }
     });
   }
 
   ngAfterViewInit() {
-    // this.headingList$ = this._contentService.headingList$;
-    // this._cdref.detectChanges();
-
+    this.headingList = Array.from(document.querySelectorAll('.content h1, .content h2, .content h3'));
+    console.log("View init: ", this.headingList);
   }
 
   caculateTimeReading(): void {
@@ -56,6 +58,10 @@ export class PreviewComponent implements OnInit {
     const words = text?.trim().split(/\s+/).length;
     const time = Math.ceil((words ?? 0) / wpm);
     this.readingTime = time;
+  }
+
+  getColor(tag: string) {
+    return this.categories.find((c: ICategory) => c.name === tag)?.color ?? '';
   }
 
   toggleSrcImage(e: Event): void {
