@@ -12,8 +12,14 @@ import {
   docData,
   DocumentData,
   Firestore,
+  getCountFromServer,
+  getDocs,
+  limit,
   orderBy,
+  Query,
   query,
+  QueryConstraint,
+  startAfter,
   updateDoc,
   where
 } from '@angular/fire/firestore';
@@ -65,19 +71,36 @@ export class PostService {
     await updateDoc(postDocRef, { isFeatured: isFeatured });
   }
 
-  getAll(option?: any) {
-    let appQuery: any;
+  async getAll(option?: any) {
+    const queryList: QueryConstraint[] = [limit(7)];
+    let appQuery: Query<DocumentData>;
     if (option) {
       if (option.orderBy)
-        appQuery = query(this._posts, orderBy(option.orderBy, ["title", "created_at"].includes(option.orderBy) ? "asc" : 'desc'));
+        queryList.unshift(orderBy(option.orderBy, ["title", "created_at"].includes(option.orderBy) ? "asc" : 'desc'));
+
+      if (option.paginate) {
+        const first = query(this._posts, ...queryList);
+        const documentSnapshots = await getDocs(first);
+
+        const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+        console.log("last", lastVisible);
+
+        queryList.unshift(startAfter(lastVisible));
+      }
     }
 
-    console.log(option);
+    appQuery = query(this._posts, ...queryList);
 
-
-    return collectionData(option ? appQuery : this._posts, {
+    return collectionData(appQuery, {
       idField: 'id'
     }) as Observable<IPost[]>;
+  }
+
+  async totalPosts() {
+    const coll = collection(this._firestore, "posts");
+    const snapshot = await getCountFromServer(coll);
+    console.log('count: ', snapshot.data().count);
+    return snapshot.data().count;
   }
 
   getPostByTitle(title: string) {

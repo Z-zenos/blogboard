@@ -1,0 +1,12 @@
+<div class="pagination">
+  <ul (click)="changePage($event)">
+    <li [ngClass]="{ 'inactive': currentPage === 1 }">&larr;</li>
+    <ng-container *ngFor="let p of pageArr">
+      <li [ngClass]="p === currentPage ? 'active' : ''">
+        {{ p }}
+      </li>
+    </ng-container>
+
+    <li [ngClass]="{ 'inactive': currentPage === totalPages }">&rarr;</li>
+  </ul>
+</div>

@@ -12,22 +12,24 @@ import { PostService } from 'src/app/services/post.service';
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   isDropdown: boolean = false;
+  pages: number = 0;
 
   constructor(
     private _postService: PostService,
     private _loaderService: LoaderService
   ) { }
 
-  ngOnInit(): void {
-    this.loadAllPost();
+  async ngOnInit() {
+    await this.loadAllPost();
   }
 
-  loadAllPost() {
+  async loadAllPost() {
     this._loaderService.control(true);
-    this._postService.getAll().subscribe(data => {
-      this.posts = data;
-      this._loaderService.control(false);
-    });
+    this.posts = await firstValueFrom(await this._postService.getAll({ paginate: true }));
+    this.pages = Math.ceil(await this._postService.totalPosts() / 7);
+    console.log(this.pages);
+
+    this._loaderService.control(false);
   }
 
   searchPost(title: string) {
@@ -46,7 +48,7 @@ export class PostsComponent implements OnInit {
     try {
       const liEl = (e.target as HTMLElement);
       this._loaderService.control(true);
-      this.posts = await firstValueFrom(this._postService.getAll({ orderBy: liEl.dataset['typesort'] }));
+      this.posts = await firstValueFrom(await this._postService.getAll({ orderBy: liEl.dataset['typesort'] }));
       console.log(this.posts);
       this.isDropdown = false;
     }

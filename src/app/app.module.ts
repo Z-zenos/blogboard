@@ -38,6 +38,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import {NgOptimizedImage} from "@angular/common";
 import { PreviewComponent } from './components/preview/preview.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     LoginComponent,
     NotFoundComponent,
     PreviewComponent,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
