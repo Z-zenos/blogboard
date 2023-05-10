@@ -83,7 +83,7 @@
       </div>
     </div>
     <article class="content" #content>
-      <div [innerHTML]="post?.content"></div>
+      <div [innerHTML]="post?.content ?? '' | sanitizeHtml"></div>
       <div class="post__comment">
         <h2 class="text-two-line mb-20">Comment</h2>
       </div>

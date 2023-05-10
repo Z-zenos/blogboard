@@ -37,6 +37,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import {NgOptimizedImage} from "@angular/common";
 import { PreviewComponent } from './components/preview/preview.component';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { PreviewComponent } from './components/preview/preview.component';
     PostCardComponent,
     LoginComponent,
     NotFoundComponent,
-    PreviewComponent
+    PreviewComponent,
+    SanitizeHtmlPipe
   ],
   imports: [
     BrowserModule,
