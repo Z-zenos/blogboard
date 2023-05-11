@@ -8,7 +8,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 export class PaginationComponent implements OnInit, AfterViewInit {
 
   @Input() totalPages!: number;
-  @Output() nextPage: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() onPage: EventEmitter<number> = new EventEmitter<number>();
 
   pageArr: number[] = [];
   currentPage: number = 1;
@@ -42,11 +42,13 @@ export class PaginationComponent implements OnInit, AfterViewInit {
       }
 
       let minPage = 1;
-      if (this.currentPage > this.totalPages - 3) {
-        minPage = this.totalPages - 6;
-      }
-      else if (this.currentPage > Math.ceil(this.maxPage / 2)) {
-        minPage = this.currentPage - 3;
+      if (this.totalPages > 7) {
+        if (this.currentPage > this.totalPages - 3) {
+          minPage = this.totalPages - 6;
+        }
+        else if (this.currentPage > Math.ceil(this.maxPage / 2)) {
+          minPage = this.currentPage - 3;
+        }
       }
 
       this.pageArr = Array.from({ length: this.maxPage }, (_, i) => i + minPage);
@@ -56,6 +58,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
         p.classList.remove('active');
         if (p.textContent == this.currentPage) p.classList.add('active');
       });
+
+      this.onPage.emit(this.currentPage);
     }
   }
 

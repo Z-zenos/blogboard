@@ -60,8 +60,8 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  async paginate() {
+  async paginate(page: number) {
+    console.log("Current page: ", page);
     this.posts = await firstValueFrom(await this._postService.getAll({ paginate: true }));
-
   }
 }
