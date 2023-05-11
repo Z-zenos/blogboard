@@ -27,8 +27,6 @@ export class PostsComponent implements OnInit {
     this._loaderService.control(true);
     this.posts = await firstValueFrom(await this._postService.getAll());
     this.pages = Math.ceil(await this._postService.totalPosts() / 7);
-    console.log(this.pages);
-
     this._loaderService.control(false);
   }
 
@@ -60,8 +58,14 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  async paginate(page: number) {
-    console.log("Current page: ", page);
-    this.posts = await firstValueFrom(await this._postService.getAll({ paginate: true }));
+  async paginate(direction: string) {
+    this.posts = await firstValueFrom(
+      await this._postService.getAll({
+        paginate: direction,
+        title: direction === "next"
+          ? this.posts[this.posts.length - 1].title
+          : this.posts[0].title
+      }
+      ));
   }
 }

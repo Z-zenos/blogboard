@@ -11,15 +11,18 @@ import {
   doc,
   docData,
   DocumentData,
+  endBefore,
   Firestore,
   getCountFromServer,
   getDocs,
   limit,
+  limitToLast,
   orderBy,
   Query,
   query,
   QueryConstraint,
   startAfter,
+  startAt,
   updateDoc,
   where
 } from '@angular/fire/firestore';
@@ -72,20 +75,27 @@ export class PostService {
   }
 
   async getAll(option?: any) {
-    const queryList: QueryConstraint[] = [limit(7)];
+    // List of query to database
+    const queryList: QueryConstraint[] = [orderBy("title"), startAt(0), limit(7)];
+
+    // Main query
     let appQuery: Query<DocumentData>;
+
     if (option) {
       if (option.orderBy)
-        queryList.unshift(orderBy(option.orderBy, ["title", "created_at"].includes(option.orderBy) ? "asc" : 'desc'));
+        queryList[0] = orderBy(option.orderBy, ["title", "created_at"].includes(option.orderBy) ? "asc" : 'desc');
 
       if (option.paginate) {
-        const first = query(this._posts, ...queryList);
-        const documentSnapshots = await getDocs(first);
+        const doc = await getDocs(query(this._posts, where("title", "==", option.title)));
+        const lastVisible = doc.docs[0];
 
-        const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-        console.log("last", lastVisible);
-
-        queryList.unshift(startAfter(lastVisible));
+        if (option.paginate === 'next') {
+          queryList[1] = startAfter(lastVisible);
+        }
+        else {
+          queryList[1] = endBefore(lastVisible);
+          queryList[2] = limitToLast(7);
+        }
       }
     }
 

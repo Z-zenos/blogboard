@@ -8,7 +8,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 export class PaginationComponent implements OnInit, AfterViewInit {
 
   @Input() totalPages!: number;
-  @Output() onPage: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onPage: EventEmitter<string> = new EventEmitter<string>();
 
   pageArr: number[] = [];
   currentPage: number = 1;
@@ -32,9 +32,11 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     if (liEl.nodeName === 'LI' && !liEl.classList.contains('active')) {
       if (liEl.textContent === '→') {
         this.currentPage++;
+        this.onPage.emit("next");
       }
       else if (liEl.textContent === '←') {
         this.currentPage--;
+        this.onPage.emit("prev");
       }
       else {
         // @ts-ignore
@@ -59,7 +61,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
         if (p.textContent == this.currentPage) p.classList.add('active');
       });
 
-      this.onPage.emit(this.currentPage);
     }
   }
 
