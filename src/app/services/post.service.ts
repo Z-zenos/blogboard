@@ -109,7 +109,6 @@ export class PostService {
   async totalPosts() {
     const coll = collection(this._firestore, "posts");
     const snapshot = await getCountFromServer(coll);
-    console.log('count: ', snapshot.data().count);
     return snapshot.data().count;
   }
 

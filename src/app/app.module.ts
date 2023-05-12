@@ -39,6 +39,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { PreviewComponent } from './components/preview/preview.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { StrShortenerPipe } from './pipes/str-shortener.pipe';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     NotFoundComponent,
     PreviewComponent,
     SanitizeHtmlPipe,
-    PaginationComponent
+    PaginationComponent,
+    StrShortenerPipe
   ],
   imports: [
     BrowserModule,

@@ -12,8 +12,8 @@ export class HeaderComponent implements OnInit {
   constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
-    console.log('Header');
-    return JSON.parse(localStorage.getItem('user') as string) && JSON.parse(localStorage.getItem('user') as string).email;
+    const user = JSON.parse(localStorage.getItem('user') ?? '');
+    this.userEmail = user ? user.email : 'zenos';
   }
 
   async logout() {
