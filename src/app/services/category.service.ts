@@ -32,9 +32,6 @@ export class CategoryService {
   get(name: string) {
     const appQuery = query(this.categories, where('name', '==', name));
     return collectionData(appQuery) as Observable<ICategory[]>;
-
-    // const ctgrDocRef = doc(this.firestore, `categories/${id}`);
-    // return docData(ctgrDocRef, { idField: 'id' });
   }
 
   create(category: ICategory) {

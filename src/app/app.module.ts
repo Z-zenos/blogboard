@@ -14,7 +14,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 
 import { environment } from 'src/environments/environment.prod';
-import { CategoriesComponent } from './components/categories/categories.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { CategoryFormComponent } from './forms/category-form/category-form.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -26,7 +26,7 @@ import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
 import { DestroyFormComponent } from './forms/destroy-form/destroy-form.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { PostFormComponent } from './forms/post-form/post-form.component';
-import { PostsComponent } from './components/posts/posts.component';
+import { PostsComponent } from './pages/posts/posts.component';
 import { TipComponent } from './components/tip/tip.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { QuillModule } from 'ngx-quill';
@@ -69,7 +69,7 @@ import { StrShortenerPipe } from './pipes/str-shortener.pipe';
     PreviewComponent,
     SanitizeHtmlPipe,
     PaginationComponent,
-    StrShortenerPipe
+    StrShortenerPipe,
   ],
   imports: [
     BrowserModule,

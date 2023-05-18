@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoriesComponent } from './components/categories/categories.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 import { SettingComponent } from './components/setting/setting.component';
-import { PostsComponent } from './components/posts/posts.component';
+import { PostsComponent } from './pages/posts/posts.component';
 import { PostFormComponent } from './forms/post-form/post-form.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './services/auth.guard';

@@ -47,7 +47,6 @@ export class PostsComponent implements OnInit {
       const liEl = (e.target as HTMLElement);
       this._loaderService.control(true);
       this.posts = await firstValueFrom(await this._postService.getAll({ orderBy: liEl.dataset['typesort'] }));
-      console.log(this.posts);
       this.isDropdown = false;
     }
     catch (err) {
